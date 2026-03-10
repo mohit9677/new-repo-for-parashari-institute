@@ -1,10 +1,36 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-24: 24px;
+
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-strong: 0 12px 32px rgba(0, 0, 0, 0.12);
+
+  --bg-light: #f8f9fa;
+  --bg-white: #ffffff;
+  --text-main: #213547;
+  --text-muted: #718096;
+  --primary-gold: #D4AF37;
+  --sidebar-width: 240px;
+  --header-height: 72px;
+  --bottom-nav-height: 64px;
+
+  font-family: var(--font-main);
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color-scheme: light;
+  color: var(--text-main);
+  background-color: var(--bg-light);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -12,10 +38,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-html {
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
+  min-height: 100vh;
+  font-family: var(--font-main);
+  background: var(--bg-light);
   overflow-x: hidden;
 }
 
@@ -23,70 +57,98 @@ html {
   margin: 0;
   padding: 0;
   width: 100%;
-  min-height: 100vh;
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #FFF5E6 0%, #FFE8D1 100%);
-  min-height: 100vh;
-  width: 100%;
-  overflow-x: hidden;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 button {
-  border-radius: 8px;
+  border-radius: var(--radius-8);
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.2s ease;
 }
 
-button:hover {
-  border-color: #646cff;
+/* Global Grid Helpers */
+.modern-grid-category {
+  display: grid;
+  gap: var(--spacing-24);
 }
 
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@media (min-width: 1200px) {
+  .modern-grid-category {
+    grid-template-columns: repeat(5, 1fr);
   }
+}
 
-  a:hover {
-    color: #747bff;
+@media (min-width: 768px) and (max-width: 1199px) {
+  .modern-grid-category {
+    grid-template-columns: repeat(3, 1fr);
   }
+}
 
-  button {
-    background-color: #f9f9f9;
+@media (max-width: 767px) {
+  .modern-grid-category {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-16);
+  }
+}
+
+.modern-grid-courses {
+  display: grid;
+  gap: var(--spacing-24);
+}
+
+@media (min-width: 1200px) {
+  .modern-grid-courses {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .modern-grid-courses {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .modern-grid-courses {
+    grid-template-columns: 1fr;
+  }
+}
+
+.portal-container {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.main-content {
+  flex: 1;
+  width: 100%;
+  transition: padding-left 0.3s ease;
+  padding-bottom: var(--bottom-nav-height);
+  /* For mobile nav */
+  background: var(--bg-light);
+}
+
+@media (min-width: 768px) {
+  .main-content {
+    padding-left: var(--sidebar-width);
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .main-content {
+    padding-left: 0;
   }
 }

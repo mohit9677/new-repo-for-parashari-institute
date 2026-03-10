@@ -1,0 +1,55 @@
+.portal-layout {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--bg-light);
+}
+
+.portal-body {
+    display: flex;
+    flex: 1;
+    width: 100%;
+}
+
+.portal-footer-wrapper {
+    position: relative;
+    z-index: 1100;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-wrapper {
+    flex: 1;
+    padding: var(--spacing-24);
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        padding-left: var(--sidebar-width);
+    }
+
+    .main-content.sidebar-collapsed {
+        padding-left: 80px;
+    }
+}
+
+@media (max-width: 767px) {
+    .main-content {
+        padding-left: 0;
+        padding-bottom: var(--bottom-nav-height);
+    }
+
+    .page-wrapper {
+        padding: var(--spacing-16);
+    }
+}

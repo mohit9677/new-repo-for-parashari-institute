@@ -1,13 +1,12 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AIGuideBot from '../components/AIGuideBot';
-import '../styles/Dashboard.css';
+import '../styles/Categories.css';
 
-export default function Categories() {
+const Categories = () => {
     const navigate = useNavigate();
     const [activeCategory, setActiveCategory] = useState(null);
 
-    // The 5 Categories as requested
     const categories = [
         { id: 'beginner', title: 'Beginner', icon: '🌱', desc: 'Start your journey here' },
         { id: 'foundation', title: 'Foundation', icon: '🏛️', desc: 'Build solid basics' },
@@ -17,7 +16,6 @@ export default function Categories() {
     ];
 
     const handleCategoryClick = (catId) => {
-        // Navigate to Course List with category filter
         navigate('/courses', { state: { category: catId } });
     };
 
@@ -29,57 +27,40 @@ export default function Categories() {
         setActiveCategory(null);
     };
 
-    // Handle tap for mobile
-    const handleCategoryTap = (e, catId) => {
-        e.stopPropagation();
-        if (activeCategory === catId) {
-            // Second tap - navigate
-            handleCategoryClick(catId);
-        } else {
-            // First tap - show guide
-            setActiveCategory(catId);
-        }
-    };
-
     return (
-        <div className="welcome-page-container" onClick={handleCategoryLeave}>
+        <div className="categories-page" onClick={handleCategoryLeave}>
+            <header className="page-header">
+                <h2 className="page-title">Learning Categories</h2>
+                <p className="page-subtitle">Select a path to begin your astrological education</p>
+            </header>
 
-            {/* Main Content */}
-            <main className="welcome-content" style={{ paddingTop: '1rem' }}>
-                <section className="path-selection-section">
-
-                    <div className="category-grid">
-                        {categories.map((cat) => (
-                            <div
-                                key={cat.id}
-                                className="category-card"
-                                onMouseEnter={() => handleCategoryHover(cat.id)}
-                                onMouseLeave={handleCategoryLeave}
-                                onClick={(e) => {
-                                    // For mobile: use tap logic
-                                    if (window.innerWidth <= 768) {
-                                        handleCategoryTap(e, cat.id);
-                                    } else {
-                                        // For desktop: direct click
-                                        handleCategoryClick(cat.id);
-                                    }
-                                }}
-                            >
-                                <div className="cat-icon">{cat.icon}</div>
-                                <h3>{cat.title}</h3>
-                                <p>{cat.desc}</p>
-                                <span className="arrow-btn">➜</span>
-                            </div>
-                        ))}
+            <div className="modern-grid-category">
+                {categories.map((cat) => (
+                    <div
+                        key={cat.id}
+                        className={`modern-category-card ${activeCategory === cat.id ? 'active' : ''}`}
+                        onMouseEnter={() => handleCategoryHover(cat.id)}
+                        onMouseLeave={handleCategoryLeave}
+                        onClick={() => handleCategoryClick(cat.id)}
+                    >
+                        <div className="card-icon-wrapper">
+                            <span className="card-icon">{cat.icon}</span>
+                        </div>
+                        <h3 className="card-title">{cat.title}</h3>
+                        <p className="card-subtitle">{cat.desc}</p>
+                        <div className="card-arrow">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </div>
                     </div>
-                </section>
-            </main>
+                ))}
+            </div>
 
-            {/* AI Guide Bot - Global, bottom-right */}
             <AIGuideBot
                 activeCategory={activeCategory}
                 onClose={handleCategoryLeave}
             />
         </div>
     );
-}
+};
+
+export default Categories;

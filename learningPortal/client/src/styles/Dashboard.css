@@ -1,245 +1,188 @@
-/* Dashboard.css - Welcome Page Style */
-
-.welcome-page-container {
-    min-height: 100vh;
-    background: #f8f9fa;
-    /* Light, clean background */
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    color: #333;
-}
-
-/* Header */
-.categories-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.5rem 2rem;
-    background: #fff;
-    border-bottom: 1px solid #eee;
-}
-
-.back-btn {
-    background: transparent;
-    border: none;
-    font-size: 1rem;
-    color: #555;
-    cursor: pointer;
-    font-weight: 500;
-}
-
-.back-btn:hover {
-    color: #8B0000;
-}
-
-.spacer {
-    width: 60px;
-}
-
-
-
-/* Main Content */
-.welcome-content {
-    max-width: 1400px;
-    /* Wider container for 5 items */
-    margin: 0 auto;
-    padding: 4rem 2rem;
-    text-align: center;
-}
-
-.intro-text {
-    margin-bottom: 3rem;
-}
-
-.intro-text h2 {
-    font-size: 2.5rem;
-    color: #2d3748;
-    margin-bottom: 0.5rem;
-}
-
-.intro-text p {
-    color: #718096;
-    font-size: 1.1rem;
-}
-
-/* Grid - Responsive Logic */
-.category-grid {
-    display: grid;
-    /* Desktop: 5 items fits in one row if screen > 1200px */
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2rem;
-    justify-content: center;
-}
-
-/* Cards */
-.category-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 2rem;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* BORDER COLOR MUST MATCH LOGO (#8B0000) */
-    border: 1px solid rgba(139, 0, 0, 0.3);
-    position: relative;
-    overflow: hidden;
-    text-align: center;
+.dashboard-page {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: var(--spacing-32);
 }
 
-.category-card:hover {
-    box-shadow: 0 12px 30px rgba(139, 0, 0, 0.15);
+.dashboard-section {
+    margin-bottom: var(--spacing-32);
+}
+
+.section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-24);
+    gap: var(--spacing-24);
+    flex-wrap: wrap;
+}
+
+.section-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+
+.section-subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-16);
+}
+
+/* Course Path Grid */
+.course-path-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--spacing-24);
+}
+
+.path-card {
+    background: var(--bg-white);
+    padding: var(--spacing-24);
+    border-radius: var(--radius-24);
+    box-shadow: var(--shadow-soft);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-12);
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.path-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Specific Card Colors */
+.path-card.all {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+    border-left: 4px solid #3182ce;
+}
+
+.path-card.all:hover {
+    border-color: #3182ce;
+}
+
+.path-card.premium {
+    background: linear-gradient(135deg, #ffffff 0%, #fffaf0 100%);
+    border-left: 4px solid #d4af37;
+}
+
+.path-card.premium:hover {
+    border-color: #d4af37;
+}
+
+.path-card.enrolled {
+    background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%);
+    border-left: 4px solid #8B0000;
+}
+
+.path-card.enrolled:hover {
     border-color: #8B0000;
 }
 
-.cat-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    background: #fff5f5;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: transform 0.3s;
+.path-card.completed {
+    background: linear-gradient(135deg, #ffffff 0%, #f0fff4 100%);
+    border-left: 4px solid #38a169;
 }
 
-.category-card:hover .cat-icon {
-    transform: scale(1.1);
+.path-card.completed:hover {
+    border-color: #38a169;
 }
 
-.category-card h3 {
-    font-size: 1.25rem;
-    color: #2d3748;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
+.path-card.locked {
+    background: #f8f9fa;
+    opacity: 0.7;
+    cursor: not-allowed;
+    border-left: 4px solid #a0aec0;
 }
 
-.category-card p {
-    font-size: 0.9rem;
-    color: #a0aec0;
-    margin-bottom: 1.5rem;
+.path-icon {
+    font-size: 2rem;
+    margin-bottom: 4px;
 }
 
-.arrow-btn {
-    margin-top: auto;
-    /* Push to bottom */
-    font-size: 1.2rem;
-    color: #8B0000;
-    opacity: 0;
-    transform: translateX(-10px);
+.path-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.path-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* Tilted Badges */
+.path-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 0.6rem;
+    font-weight: 900;
+    padding: 4px 12px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transform: rotate(8deg);
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 2;
     transition: all 0.3s ease;
 }
 
-.category-card:hover .arrow-btn {
-    opacity: 1;
-    transform: translateX(0);
+.path-card:hover .path-badge {
+    transform: rotate(0deg) scale(1.1);
 }
 
-.header-logo .logo-image {
-    /* Responsive logo - Controlled by CSS now */
-    max-height: 90px;
-    width: auto;
-    transition: max-height 0.3s ease;
+.path-card.all .path-badge {
+    background: #ebf8ff;
+    color: #2b6cb0;
+    border: 1px solid #bee3f8;
 }
 
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .welcome-header {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1rem;
-    }
-
-    /* ... exisiting mobile styles ... */
-    .header-user {
-        position: static;
-        width: 100%;
-        justify-content: center;
-    }
-
-    .category-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .intro-text h2 {
-        font-size: 2rem;
-    }
+.path-card.premium .path-badge {
+    background: #ff7e5f;
+    background: linear-gradient(to right, #feb47b, #ff7e5f);
+    color: #ffffff;
+    border: none;
+    box-shadow: 0 4px 15px rgba(255, 126, 95, 0.3);
 }
 
-/* AB_AI Intro Section */
-.ab-ai-intro-section {
-    margin-top: 5rem;
-    text-align: center;
-    animation: fadeIn 1s ease-in-out;
+/* Locked States */
+.lock-icon {
+    position: absolute;
+    top: var(--spacing-16);
+    right: var(--spacing-16);
+    font-size: 1.25rem;
 }
 
-.intro-divider {
-    height: 4px;
-    width: 60px;
-    background: #8B0000;
-    margin: 0 auto 3rem auto;
-    border-radius: 2px;
-    opacity: 0.2;
-}
-
-.ab-ai-content h2 {
-    font-size: 2.2rem;
-    color: #2d3748;
-    margin-bottom: 2rem;
-}
-
-.welcome-video-wrapper {
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
+/* Video Section Card */
 .video-card {
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    background: #000;
-    aspect-ratio: 16/9;
-    border: 1px solid #e2e8f0;
-    /* Subtle border */
+    background: var(--bg-white);
+    border-radius: var(--radius-24);
+    padding: var(--spacing-32);
+    box-shadow: var(--shadow-soft);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* Video Metadata */
-.video-metadata {
-    text-align: left;
-    /* Reader friendly */
-    padding: 1rem;
-    background: #fff;
-    border-radius: 12px;
-    border: 1px solid rgba(139, 0, 0, 0.1);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
-}
-
-.video-metadata h3 {
-    font-size: 1.5rem;
-    color: #8B0000;
-    margin-bottom: 1rem;
-}
-
-.ab-ai-description {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #555;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
+@media (max-width: 767px) {
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .video-card {
+        padding: var(--spacing-16);
     }
 }

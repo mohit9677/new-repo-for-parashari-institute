@@ -1,48 +1,22 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './context/AuthContext';
+import { AuthProvider } from './context/AuthContext';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Categories from './pages/Categories';
 import CourseModules from './pages/CourseModules';
 import Courses from './pages/Courses';
 import Pricing from './pages/Pricing';
+import AboutUs from './pages/AboutUs';
+import MainLayout from './layout/MainLayout';
 import './App.css';
-
-import Header from './components/Header';
-import Footer from './components/Footer';
 
 // Strict Protected Route - requires session flag from auto-login
 function StrictProtectedRoute({ children }) {
-  // OPTIMISTIC CHECK: Check localStorage directly
   const token = localStorage.getItem('token');
   const cameFromABAI = sessionStorage.getItem('ab_ai_entry');
-  const isDev = import.meta.env.DEV; // Vite environment variable
 
-  if (!cameFromABAI) {
-    // If no session flag -> Redirect
-    console.log('Direct access blocked - redirecting to AB_AI');
-    const target = import.meta.env.VITE_AB_AI_PRODUCTION_URL || 'http://localhost:3000';
-    window.location.href = `${target}/login.html`;
-
-    return (
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        flexDirection: 'column',
-        color: '#666'
-      }}>
-        <h2>Redirecting to Login...</h2>
-        <p>Security check: Session flag missing.</p>
-      </div>
-    );
-  }
-
-  // If no token in storage, redirect
-  if (!token) {
-    console.log('No token found - redirecting to AB_AI');
+  /* if (!cameFromABAI || !token) {
     const target = import.meta.env.VITE_AB_AI_PRODUCTION_URL || 'http://localhost:3000';
     window.location.href = `${target}/login.html`;
     return (
@@ -50,16 +24,14 @@ function StrictProtectedRoute({ children }) {
         Redirecting...
       </div>
     );
-  }
+  } */
 
   return (
-    <>
-      <Header />
-      <div className="portal-content-wrapper" style={{ position: 'relative' }}>
+    <AuthProvider>
+      <MainLayout>
         {children}
-      </div>
-      <Footer />
-    </>
+      </MainLayout>
+    </AuthProvider>
   );
 }
 
@@ -96,17 +68,12 @@ class ErrorBoundary extends React.Component {
 }
 
 function App() {
-  const token = localStorage.getItem('token');
-  const session = sessionStorage.getItem('ab_ai_entry');
-  const isDev = import.meta.env.DEV;
-
   useEffect(() => {
-    if (import.meta.env.PROD || true) {
-      const target = import.meta.env.VITE_AB_AI_PRODUCTION_URL;
-      const hasSession = sessionStorage.getItem('ab_ai_entry');
-      if (target && !hasSession) {
-        console.log('[App] Proactively redirecting to AB_AI (Safety Net)');
-      }
+    // Basic redirect safety net
+    const target = import.meta.env.VITE_AB_AI_PRODUCTION_URL;
+    const hasSession = sessionStorage.getItem('ab_ai_entry');
+    if (target && !hasSession) {
+      console.log('[App] Proactively redirecting to AB_AI (Safety Net)');
     }
   }, []);
 
@@ -144,6 +111,11 @@ function App() {
             <Route path="/pricing" element={
               <StrictProtectedRoute>
                 <Pricing />
+              </StrictProtectedRoute>
+            } />
+            <Route path="/about-us" element={
+              <StrictProtectedRoute>
+                <AboutUs />
               </StrictProtectedRoute>
             } />
             <Route path="/" element={

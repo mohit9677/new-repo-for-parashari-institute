@@ -1,44 +1,47 @@
-import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Loader from '../components/Loader';
-import '../styles/Courses.css'; // New CSS file
+import '../styles/Courses.css';
 
-export default function Courses() {
-    const { token } = useAuth();
-    const location = useLocation();
+const Courses = () => {
     const navigate = useNavigate();
-
+    const location = useLocation();
+    const [searchParams] = useSearchParams();
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedCategory, setSelectedCategory] = useState('All');
 
-    // Get category from navigation state
+    const titleMap = {
+        'beginner': 'Beginner',
+        'foundation': 'Foundation',
+        'master': 'Master',
+        'phd': 'PhD',
+        'crash-course': 'Crash Course'
+    };
+
     useEffect(() => {
-        if (location.state?.category) {
-            const catId = location.state.category;
-
-            // Map slugs to exact Titles expected by Backend/Seed
-            const titleMap = {
-                'beginner': 'Beginner',
-                'foundation': 'Foundation',
-                'master': 'Master',
-                'phd': 'PhD',
-                'crash-course': 'Crash Course'
-            };
-
-            setSelectedCategory(titleMap[catId] || 'All');
+        const catId = location.state?.category || searchParams.get('category');
+        if (catId) {
+            setSelectedCategory(titleMap[catId.toLowerCase()] || catId || 'All');
         }
-    }, [location.state]);
+    }, [location.state, searchParams]);
 
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                // Use PUBLIC endpoint to ensure all courses (free/paid) are visible
                 const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/courses`);
                 if (response.ok) {
                     const data = await response.json();
-                    setCourses(data.courses || []);
+                    const raw = data.courses || [];
+                    const seen = new Set();
+                    const unique = raw.filter(c => {
+                        const key = c.title?.toLowerCase();
+                        if (seen.has(key)) return false;
+                        seen.add(key);
+                        return true;
+                    });
+                    setCourses(unique);
                 }
             } catch (error) {
                 console.error("Error fetching courses", error);
@@ -47,56 +50,82 @@ export default function Courses() {
             }
         };
         fetchCourses();
-    }, []); // No token dependency needed for public endpoint
+    }, []);
 
-    // TEMPORARY OVERRIDE: User requested to show ALL courses regardless of category
-    const filteredCourses = courses;
+    const filteredCourses = useMemo(() => {
+        if (selectedCategory === 'All') return courses;
+        return courses.filter(course =>
+            course.level?.toLowerCase() === selectedCategory.toLowerCase()
+        );
+    }, [courses, selectedCategory]);
 
     return (
-        <div className="courses-page-container">
-            <div className="courses-content">
-                <h2 style={{ marginBottom: '2rem', color: '#2d3748' }}>
-                    {selectedCategory === 'All' ? 'All Courses' : `${selectedCategory} Courses`}
-                </h2>
+        <div className="courses-page">
+            <header className="page-header">
+                <h2 className="page-title">{selectedCategory === 'All' ? 'All Courses' : `${selectedCategory} Courses`}</h2>
+                <p className="page-subtitle">Master ancient wisdom with our certified Vedic programs</p>
+            </header>
 
-                {loading ? (
-                    <Loader />
-                ) : filteredCourses.length > 0 ? (
-                    <div className="course-grid">
-                        {filteredCourses.map(course => (
-                            <div key={course._id} className="course-card-item">
-                                <span className="premium-ribbon" data-label={course.price > 0 || !course.isFree ? "PREMIUM" : "FREE"}></span>
-                                <div className="course-thumb">
-                                    {course.thumbnail ? (
-                                        <img src={course.thumbnail} alt={course.title} />
-                                    ) : (
-                                        <div className="thumb-placeholder">{course.title[0]}</div>
-                                    )}
-                                </div>
-                                <div className="course-info">
-                                    <div className="course-cats">
-                                        <span className="badge">{course.level}</span>
-                                    </div>
-                                    <h3>{course.title}</h3>
-                                    <p className="duration">⏱ {course.duration || 'Flexible'}</p>
-                                    <button
-                                        className="start-btn"
-                                        onClick={() => navigate(`/course/${course._id}`)}
-                                    >
-                                        Start Learning
-                                    </button>
+            {loading ? (
+                <Loader />
+            ) : filteredCourses.length > 0 ? (
+                <div className="modern-grid-courses">
+                    {filteredCourses.map(course => (
+                        <div key={course._id} className="modern-course-card">
+                            <div className="card-top">
+                                <div className="premium-ribbon">PREMIUM</div>
+                                {course.thumbnail ? (
+                                    <img src={course.thumbnail} alt={course.title} className="course-banner" />
+                                ) : (
+                                    <div className="banner-placeholder">{course.title}</div>
+                                )}
+                            </div>
+
+                            <div className="card-middle">
+                                <h3 className="course-title">{course.title}</h3>
+                                <p className="course-desc">
+                                    Enroll in the {course.title} program to master the concepts and gain deep insights.
+                                </p>
+                                <div className="course-tags">
+                                    <span className="tag-level">{course.level}</span>
+                                    <span className="tag-cert">✓ Certification</span>
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                ) : (
-                    <div className="empty-state">
-                        <h3>No Valid Courses Found</h3>
-                        <p>We couldn't find any courses in the "{selectedCategory}" category.</p>
-                        <button onClick={() => setSelectedCategory('All')}>View All Courses</button>
-                    </div>
-                )}
-            </div>
+
+                            <div className="card-price-section">
+                                {course.price > 0 || !course.isFree ? (
+                                    <div className="price-box">
+                                        <span className="old-price">₹{Math.round((course.price || 2999) * 2.5)}</span>
+                                        <span className="current-price">₹{course.price || 2999}</span>
+                                    </div>
+                                ) : (
+                                    <div className="price-box">
+                                        <span className="current-price">FREE</span>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="card-bottom">
+                                <button
+                                    className="start-learning-btn"
+                                    onClick={() => navigate(`/course/${course._id}`)}
+                                >
+                                    Start Learning
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            ) : (
+                <div className="empty-state">
+                    <h3>No Valid Courses Found</h3>
+                    <p>We couldn't find any courses in the "{selectedCategory}" category.</p>
+                    <button className="primary-btn" onClick={() => setSelectedCategory('All')}>View All Courses</button>
+                </div>
+            )}
         </div>
     );
-}
+};
+
+export default Courses;
