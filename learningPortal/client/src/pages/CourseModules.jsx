@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Loader from '../components/Loader';
 import { useAuth } from '../context/AuthContext';
 import HLSPlayer from '../components/HLSPlayer';
 import SimpleErrorBoundary from '../components/SimpleErrorBoundary';
@@ -90,9 +89,6 @@ export default function CourseModules() {
                 [contentId]: { ...prev[contentId], ...data }
             };
             if (data && data.status === 'COMPLETED') {
-                // We need 'course' from state here, but if called from useEffect, 'course' might be stale or not yet set?
-                // Actually calculateOverallProgress is called with fresh 'fetchedCourse' in useEffect.
-                // Here it uses state 'course'.
                 if (course) calculateOverallProgress(course, next);
             }
             return next;
@@ -138,7 +134,8 @@ export default function CourseModules() {
     // ------------------------------------------------------------------
     useEffect(() => {
         if (!token) {
-            navigate('/login');
+            setError("Authentication required: Please log in from the main website to access course materials.");
+            setLoading(false);
             return;
         }
 
@@ -190,7 +187,7 @@ export default function CourseModules() {
         };
 
         fetchData();
-    }, [courseId, token, navigate]);
+    }, [courseId, token]);
 
     // Flush on Unload / Hidden
     useEffect(() => {
@@ -217,13 +214,13 @@ export default function CourseModules() {
         };
     }, [token]);
 
-    if (loading) return <Loader />;
+    if (loading) return <div className="loading-container">Loading course...</div>;
 
     if (error) return (
         <div className="error-container">
             <h3>Error Loading Course</h3>
             <p>{error}</p>
-            <button onClick={() => navigate('/dashboard')}>Home</button>
+            <button onClick={() => navigate('/courses')}>Back to Courses</button>
         </div>
     );
 
@@ -274,14 +271,14 @@ export default function CourseModules() {
         if (hasNext && nextVideo) handleVideoClick(nextVideo);
     };
 
-    if (loading) return <div className="loading-container">Loading course...</div>;
-    if (!course) return <div className="error-container">Course not found</div>;
-
     return (
         <SimpleErrorBoundary>
             <div className="course-modules-container">
                 {/* Header */}
                 <div className="modules-header">
+                    <button className="back-btn" onClick={() => navigate('/courses')}>
+                        ← Back to Courses
+                    </button>
                     <h1>{course.title}</h1>
                     <p className="course-description">{course.description}</p>
                     <div className="progress-indicator">

@@ -47,6 +47,42 @@ router.get('/:courseId', authMiddleware, async (req, res) => {
         const { courseId } = req.params;
         const ACCESS_MODE = process.env.ACCESS_MODE || 'OPEN';
 
+        // Handle static dummy courses
+        if (courseId.startsWith('abai_course_')) {
+            const mockTitleMap = {
+                'abai_course_001': 'Vedic Astrology',
+                'abai_course_002': 'Palmistry',
+                'abai_course_003': 'Nadi Jyotish',
+                'abai_course_004': 'Gemstone Science',
+                'abai_course_005': 'Lal Kitab'
+            };
+            
+            const course = {
+                _id: courseId,
+                title: mockTitleMap[courseId] || 'Demo Course Content',
+                description: 'Content for this course is currently syncing.',
+            };
+            
+            const v1MockModules = [
+                {
+                    _id: 'mod1', title: 'Introduction & Basics', orderIndex: 1, moduleId: 'mod1',
+                    videos: [
+                        { _id: 'item1', title: 'Welcome Video', url: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4', active: true, orderIndex: 1 }
+                    ]
+                },
+                {
+                    _id: 'mod2', title: 'Core Concepts', orderIndex: 2, moduleId: 'mod2',
+                    videos: []
+                },
+                {
+                    _id: 'mod3', title: 'Advanced Application', orderIndex: 2, moduleId: 'mod3',
+                    videos: []
+                }
+            ];
+            
+            return res.json({ course: { ...course, modules: v1MockModules } });
+        }
+
         // 1. Fetch Course
         const course = await Course.findById(courseId);
         if (!course) {

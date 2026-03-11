@@ -14,6 +14,44 @@ router.get('/:courseId', authenticate, async (req, res) => {
     try {
         const { courseId } = req.params;
 
+        // Handle static dummy courses
+        if (courseId.startsWith('abai_course_')) {
+            const mockTitleMap = {
+                'abai_course_001': 'Vedic Astrology',
+                'abai_course_002': 'Palmistry',
+                'abai_course_003': 'Nadi Jyotish',
+                'abai_course_004': 'Gemstone Science',
+                'abai_course_005': 'Lal Kitab'
+            };
+            
+            const course = {
+                _id: courseId,
+                title: mockTitleMap[courseId] || 'Demo Course Content',
+                description: 'Content for this course is currently syncing.',
+                level: 'Beginner',
+                totalDuration: 120,
+                isPublished: true
+            };
+            
+            const mockHierarchy = [
+                {
+                    _id: 'mod1', title: 'Foundation Module',
+                    sections: [{ _id: 'sec1', title: 'Getting Started', contentItems: [
+                        { _id: 'item1', title: 'Welcome Video', type: 'VIDEO' },
+                        { _id: 'item2', title: 'Course Details', type: 'PDF' }
+                    ]}]
+                },
+                {
+                    _id: 'mod2', title: 'Advanced Module',
+                    sections: [{ _id: 'sec2', title: 'Deep Concepts', contentItems: [
+                        { _id: 'item3', title: 'Advanced Notes', type: 'NOTE' }
+                    ]}]
+                }
+            ];
+            
+            return res.json({ course, hierarchy: mockHierarchy });
+        }
+
         // 1. Fetch Course Metadata
         const course = await Course.findById(courseId)
             .select('title description thumbnail level totalDuration isPublished')

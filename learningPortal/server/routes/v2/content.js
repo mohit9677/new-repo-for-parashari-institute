@@ -13,6 +13,15 @@ router.get('/:contentId/access', authenticate, async (req, res) => {
         const { contentId } = req.params;
         const userId = req.userId;
 
+        // Mock content for static dummy courses
+        if (['item1', 'item2', 'item3'].includes(contentId)) {
+            return res.json({
+                accessUrl: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4',
+                expiresAt: new Date(Date.now() + 3600000).toISOString(),
+                type: contentId === 'item1' ? 'VIDEO' : contentId === 'item2' ? 'PDF' : 'NOTE'
+            });
+        }
+
         const contentItem = await ContentItem.findById(contentId).populate('sectionId');
         if (!contentItem) {
             return res.status(404).json({ error: 'Content not found' });

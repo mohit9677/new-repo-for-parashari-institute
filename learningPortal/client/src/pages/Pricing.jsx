@@ -5,35 +5,35 @@ import '../styles/Pricing.css';
 const Pricing = () => {
     const pricingData = [
         {
-            title: "Beginner",
+            title: "Crash Course",
             price: "4,999",
             description: "Perfect for those starting their journey into the world of Vedic Astrology.",
             features: ["Intro to Planets", "Basic Chart Reading", "Zodiac Fundamentals", "Standard Support"],
             isPopular: false
         },
         {
-            title: "Foundation",
+            title: "Diploma",
             price: "9,999",
             description: "Deepen your knowledge with core principles and predictive techniques.",
             features: ["Nakshatra Study", "Dasha Systems", "Transits Explained", "Q&A Sessions"],
             isPopular: false
         },
         {
-            title: "Master",
+            title: "Bachelor",
             price: "19,999",
             description: "Advanced concepts for becoming a professional astrological consultant.",
             features: ["Advanced Prediction", "Varshphal Mastery", "Medical Astrology", "Priority Support"],
             isPopular: true
         },
         {
-            title: "PhD",
+            title: "Master",
             price: "34,999",
             description: "The ultimate level of scholarly expertise and research-based learning.",
             features: ["Research Methods", "Nadi Astrology", "Remedial Measures", "Lifetime Access"],
             isPopular: false
         },
         {
-            title: "Crash Course",
+            title: "Grand Master",
             price: "2,499",
             description: "Quick-start guide to the essentials of practical astrology applications.",
             features: ["Fast-Track Learning", "Hands-on Workshop", "Essential Cheat-sheets", "Digital Certificate"],

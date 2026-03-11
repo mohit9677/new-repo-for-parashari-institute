@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Sidebar from '../components/Sidebar';
+import ClassroomSidebar from '../components/ClassroomSidebar';
 import Loader from '../components/Loader';
 import { useAuth } from '../context/AuthContext';
 import ContentRenderer from '../components/ContentRenderer';
@@ -25,7 +25,8 @@ export default function CourseDetail() {
     // Fetch Course & Progress
     useEffect(() => {
         if (!token) {
-            navigate('/login');
+            setError("Authentication required: Please log in from the main website to access course materials.");
+            setLoading(false);
             return;
         }
 
@@ -133,7 +134,7 @@ export default function CourseDetail() {
             {/* Sidebar (Drawer on mobile) */}
             <div className={`classroom-sidebar ${mobileDrawerOpen ? 'open' : ''}`}>
                 <div className="sidebar-close-btn" onClick={() => setMobileDrawerOpen(false)}>×</div>
-                <Sidebar
+                <ClassroomSidebar
                     hierarchy={hierarchy}
                     progress={progress}
                     currentItem={selectedItem}

@@ -5,6 +5,8 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Categories from './pages/Categories';
 import CourseModules from './pages/CourseModules';
+import CourseDetail from './pages/CourseDetail';
+import CoursePlayer from './pages/CoursePlayer';
 import Courses from './pages/Courses';
 import Pricing from './pages/Pricing';
 import AboutUs from './pages/AboutUs';
@@ -106,6 +108,16 @@ function App() {
             <Route path="/course/:id" element={
               <StrictProtectedRoute>
                 <CourseModules />
+              </StrictProtectedRoute>
+            } />
+            <Route path="/course-v1/:id" element={
+              <StrictProtectedRoute>
+                <CourseDetail />
+              </StrictProtectedRoute>
+            } />
+            <Route path="/course-player/:courseId" element={
+              <StrictProtectedRoute>
+                <CoursePlayer />
               </StrictProtectedRoute>
             } />
             <Route path="/pricing" element={
