@@ -18,10 +18,6 @@ class FormValidator {
     const form = e.target;
     let isValid = true;
 
-    // Always prevent default to let custom submit handlers (auth.js) take control
-    // Without this, the browser does a native GET submit that reloads the page
-    e.preventDefault();
-
     // Get all form inputs
     const inputs = form.querySelectorAll('input, textarea, select');
 
@@ -32,11 +28,21 @@ class FormValidator {
     });
 
     if (!isValid) {
+      // Prevent submit only when invalid
+      e.preventDefault();
       this.showError(form, 'Please fill all required fields correctly.');
     } else {
-      // Form is valid — dispatch a custom event so auth.js can handle the login
-      console.log('Form is valid, dispatching to auth handler');
-      form.dispatchEvent(new CustomEvent('validSubmit', { bubbles: true }));
+      const action = form.getAttribute('action') || '';
+      if (action.includes('formsubmit.co')) {
+        // Allow native browser POST to FormSubmit — do NOT preventDefault
+        console.log('FormSubmit form is valid, allowing native submission...');
+        // Let the form submit naturally
+      } else {
+        // For auth/custom forms, prevent default and dispatch custom event
+        e.preventDefault();
+        console.log('Form is valid, dispatching to auth handler');
+        form.dispatchEvent(new CustomEvent('validSubmit', { bubbles: true }));
+      }
     }
   }
 

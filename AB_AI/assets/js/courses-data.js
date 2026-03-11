@@ -4,7 +4,7 @@
  *
  * isCategory values and their meaning:
  * ─────────────────────────────────────────────────────
- *  "Intro Course"  → Beginner   (entry-level programs)
+ *  "Crash Course"  → Beginner   (entry-level programs)
  *  "Diploma"       → Popular    (most-enrolled programs)
  *  "Bachelor"      → Pro        (professional programs)
  *  "Master"        → Advanced   (advanced programs)
@@ -20,7 +20,7 @@ const coursesData = [
     {
         id: 1,
         title: "Vedic Astrology",
-        isCategory: "Intro Course",   // Beginner
+        isCategory: "Crash Course",   // Beginner
         icon: "♈",
         image: "assets/images/aries-card.png",
         description: "Master the ancient science of Vedic Astrology. Learn natal charts, planetary movements, and predictions.",
@@ -31,7 +31,7 @@ const coursesData = [
     {
         id: 2,
         title: "Nadi Jyotish",
-        isCategory: "Intro Course",   // Beginner
+        isCategory: "Crash Course",   // Beginner
         icon: "📜",
         image: "assets/images/taurus-card.png",
         description: "Learn precise prediction techniques using Nadi astrology principles and leaf reading concepts.",
@@ -42,7 +42,7 @@ const coursesData = [
     {
         id: 3,
         title: "Palmistry",
-        isCategory: "Intro Course",   // Beginner
+        isCategory: "Crash Course",   // Beginner
         icon: "✋",
         image: "assets/images/pisces-card.png",
         description: "Decode destiny through palm lines and understand personality traits.",
@@ -115,7 +115,7 @@ const coursesData = [
         isCategory: "Bachelor",       // Pro
         icon: "🔢",
         image: "assets/images/virgo-card.jpg",
-        description: "Discover the mystical relationship between numbers and life events.",
+        description: "Numerology studies how numbers connected to your name and birthdate reveal personality, life path, and opportunities. ✨",
         price: "₹3,999",
         badges: ["✓ Certification"],
         link: "numerology.html"
@@ -198,7 +198,7 @@ const coursesData = [
  * Maps each isCategory value to its badge label and style tier.
  */
 const categoryMeta = {
-    "Intro Course": { label: "Beginner", tier: 1, color: "#4CAF50" },
+    "Crash Course": { label: "Beginner", tier: 1, color: "#4CAF50" },
     "Diploma": { label: "Popular", tier: 2, color: "#2196F3" },
     "Bachelor": { label: "Pro", tier: 3, color: "#9C27B0" },
     "Master": { label: "Advanced", tier: 4, color: "#FF9800" },

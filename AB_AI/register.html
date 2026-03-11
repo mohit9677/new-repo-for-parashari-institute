@@ -13,9 +13,11 @@
   <link rel="stylesheet" href="assets/css/loader.css">
   <link rel="stylesheet" href="assets/css/search.css">
   <link rel="stylesheet" href="assets/css/chatbot.css">
+  <link rel="stylesheet" href="assets/css/urgency.css">
 </head>
 
 <body class="auth-page-background">
+
 
   <div class="header-top">
     <div class="header-top-content">
@@ -78,6 +80,8 @@
         <li class="nav-item"><a href="fee-structure.html">Fee Structure</a></li>
 
         <li class="nav-item"><a href="courses.html">Explore</a></li>
+        <li class="nav-item"><a href="blog.html">Blog</a></li>
+        <li class="nav-item"><a href="6-stairs.html">6 Stairs</a></li>
         <li class="nav-item"><a href="gallery.html">Gallery</a></li>
         <li class="nav-item"><a href="contact.html">Contact</a></li>
       </ul>
@@ -104,6 +108,8 @@
         <li class="nav-item w-full"><a href="courses.html">Courses</a></li>
         <li class="nav-item w-full"><a href="fee-structure.html">Fee Structure</a></li>
         <li class="nav-item w-full"><a href="courses.html">Explore</a></li>
+        <li class="nav-item w-full"><a href="blog.html">Blog</a></li>
+<li class="nav-item w-full"><a href="6-stairs.html">6 Stairs</a></li>
         <li class="nav-item w-full"><a href="gallery.html">Gallery</a></li>
         <li class="nav-item w-full"><a href="contact.html">Contact</a></li>
       </ul>
@@ -115,23 +121,21 @@
       </div>
     </div>
 
-    <!-- Tablet Search Bar (Visible < 900px) -->
-
-    </div>
-
-    <div class="tablet-search-container">
+    
+  
+        <div class="tablet-search-container">
       <div class="search-container">
         <div class="container-input">
-          <input type="text" placeholder="Search all courses" name="text" class="input">
-          <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z"
-              fill-rule="evenodd"></path>
+          <input type="text" placeholder="Search all courses" name="text" class="input" id="courseSearchInput">
+          <svg fill="#666" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
+            <path d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z" fill-rule="evenodd"></path>
           </svg>
         </div>
         <div class="search-results"></div>
       </div>
+    </div>
   </header>
+  
 
 
   <section class="auth-register-container">
@@ -197,7 +201,7 @@
                 <option value="1-on-1-mentorship">1-on-1 Mentorship</option>
               </select>
             </div>
-
++
             <div class="form-group">
               <label class="form-label">Password *</label>
               <input type="password" name="password" id="password" class="form-control"
@@ -238,38 +242,81 @@
     </div>
   </section>
 
+  <!-- TOP URGENCY MARQUEE -->
+  <div class="urgency-marquee-container">
+    <div class="urgency-marquee-content">
+      <div class="marquee-item">
+        <span class="marquee-icon">🎓</span> Admissions Open! Register Now for Upcoming Batches — Limited Seats Available! <div class="marquee-timer timer-pulse">Ends in: <span class="marquee-timer-val">47:59:59</span></div> <a href="register.html" class="marquee-btn">Fast Register</a>
+      </div>
+      <div class="marquee-item">
+        <span class="marquee-icon">🔥</span> Fast Track Your Career with 100% Placement Assistance 
+        <a href="courses.html" class="marquee-btn">View Courses</a>
+      </div>
+      <div class="marquee-item">
+        <span class="marquee-icon">⭐</span> Join Parashari Institute Today — Scholarship Available for Top Performers! 
+        <a href="register.html" class="marquee-btn">Apply Now</a>
+      </div>
+      <!-- Duplicate for seamless scrolling -->
+      <div class="marquee-item">
+        <span class="marquee-icon">🎓</span> Admissions Open! Register Now for Upcoming Batches — Limited Seats Available! <div class="marquee-timer timer-pulse">Ends in: <span class="marquee-timer-val">47:59:59</span></div> <a href="register.html" class="marquee-btn">Fast Register</a>
+      </div>
+      <div class="marquee-item">
+        <span class="marquee-icon">🔥</span> Fast Track Your Career with 100% Placement Assistance 
+        <a href="courses.html" class="marquee-btn">View Courses</a>
+      </div>
+      <div class="marquee-item">
+        <span class="marquee-icon">⭐</span> Join Parashari Institute Today — Scholarship Available for Top Performers! 
+        <a href="register.html" class="marquee-btn">Apply Now</a>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <div class="footer-content">
       <div class="footer-section">
         <h4>About Parashari</h4>
         <p>Preserving and promoting authentic Vedic wisdom since 1998.</p>
-        <div class="social-links">
-          <a href="#" class="social-link" title="Visit our Facebook" aria-label="Visit our Facebook"><i
-              class="fab fa-facebook-f"></i></a>
-          <a href="#" class="social-link" title="Visit our Twitter" aria-label="Visit our Twitter"><i
-              class="fab fa-twitter"></i></a>
-          <a href="#" class="social-link" title="Visit our Instagram" aria-label="Visit our Instagram"><i
-              class="fab fa-instagram"></i></a>
-          <a href="#" class="social-link" title="Visit our YouTube" aria-label="Visit our YouTube"><i
-              class="fab fa-youtube"></i></a>
+        <div class="social-wrapper">
+          <a href="https://www.instagram.com/astrobharatai?igsh=Z2M2ZW82OXBxaGNr" target="_blank" rel="noopener noreferrer" class="icon instagram">
+            <span class="tooltip">Instagram</span>
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.youtube.com/@astrobharatai" target="_blank" rel="noopener noreferrer" class="icon youtube">
+            <span class="tooltip">YouTube</span>
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="https://x.com/AstroBharatAI" target="_blank" rel="noopener noreferrer" class="icon twitter">
+            <span class="tooltip">Twitter</span>
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.linkedin.com/company/astrobharatai/" target="_blank" rel="noopener noreferrer" class="icon linkedin">
+            <span class="tooltip">LinkedIn</span>
+            <i class="fab fa-linkedin-in"></i>
+          </a>
         </div>
       </div>
       <div class="footer-section">
         <h4>Quick Links</h4>
         <ul class="footer-links">
           <li><a href="index.html">Home</a></li>
-          <li><a href="profile.html">About</a></li>
-          <li><a href="courses.html">Courses</a></li>
+          <li><a href="profile.html">About Us</a></li>
+          <li><a href="fee-structure.html">Fee Structure</a></li>
+          <li><a href="courses.html">Explore</a></li>
+          <li><a href="6-stairs.html">6 Stairs</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="blog.html">Blog</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-section">
         <h4>Programs</h4>
         <ul class="footer-links">
-          <li><a href="astrology.html">Astrology</a></li>
-          <li><a href="palmistry.html">Palmistry</a></li>
-          <li><a href="vastu.html">Vastu</a></li>
-          <li><a href="fee-structure.html">Fee Structure</a></li>
+          <li><a href="courses.html">Crash Course</a></li>
+          <li><a href="courses.html">Diploma</a></li>
+          <li><a href="courses.html">Bachelor</a></li>
+          <li><a href="courses.html">Master</a></li>
+          <li><a href="courses.html">Grand Master</a></li>
+          <li><a href="6-stairs.html">6 Stairs</a></li>
         </ul>
       </div>
       <div class="footer-section">
@@ -338,6 +385,48 @@
   <script src="assets/js/loader.js"></script>
   <script src="assets/js/search.js"></script>
   <script src="assets/js/chatbot.js"></script>
+
+  <!-- URGENCY TIMER JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set end date to 2 days from now for consistent urgency
+      let endDate = new Date();
+      endDate.setDate(endDate.getDate() + 2);
+      endDate.setHours(23, 59, 59);
+
+      const timerElements = document.querySelectorAll('.marquee-timer-val');
+      
+      if(timerElements.length > 0) {
+        setInterval(function() {
+          const now = new Date().getTime();
+          const distance = endDate.getTime() - now;
+
+          if (distance < 0) {
+             // Reset timer to 2 days if it expires
+             endDate = new Date();
+             endDate.setDate(endDate.getDate() + 2);
+             return;
+          }
+
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          const timeString = 
+            (hours < 10 ? "0" + hours : hours) + ":" + 
+            (minutes < 10 ? "0" + minutes : minutes) + ":" + 
+            (seconds < 10 ? "0" + seconds : seconds);
+
+          timerElements.forEach(el => {
+              el.innerText = timeString;
+          });
+        }, 250);
+      }
+    });
+  </script>
+
+  
+
 </body>
 
 </html>

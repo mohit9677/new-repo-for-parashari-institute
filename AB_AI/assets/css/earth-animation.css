@@ -1,0 +1,184 @@
+/* earth-animation.css */
+
+.about-split-image {
+    perspective: 1500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-bg);
+    overflow: hidden;
+    position: relative;
+    background-image: none !important;
+    min-height: 600px;
+}
+
+.earth-scene {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    /* Tilt the entire scene slightly so we see the building from a nice top-down isometric angle */
+    transform: rotateX(-15deg) rotateY(25deg);
+    z-index: 10;
+}
+
+.earth {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* TranslateZ to keep Earth in front of the building center */
+    transform: translateZ(100px);
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Land_ocean_ice_2048.jpg/1024px-Land_ocean_ice_2048.jpg') repeat-x;
+    background-size: cover;
+    box-shadow:
+        inset 20px 0 50px rgba(0, 0, 0, 0.6),
+        inset -20px 0 50px rgba(255, 255, 255, 0.4),
+        0 10px 40px rgba(0, 0, 0, 0.5);
+    animation: rotate-earth 20s linear infinite;
+    z-index: 5;
+}
+
+.earth::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: inset 0 0 20px rgba(135, 206, 235, 0.5);
+    pointer-events: none;
+}
+
+@keyframes rotate-earth {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 1024px 0;
+    }
+}
+
+/* ========================================= */
+/*            3D BUILDING STYLES             */
+/* ========================================= */
+.b3d-wrapper {
+    position: absolute;
+    /* Center the 400x200 building behind the 300x300 earth scene */
+    top: 50px;
+    /* (300 - 200) / 2 */
+    left: -50px;
+    /* (300 - 400) / 2 */
+    width: 400px;
+    height: 200px;
+    transform-style: preserve-3d;
+    z-index: 1;
+    /* Behind Earth */
+    animation: popup-building-3d 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation: popup-building-3d 3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation-delay: 0.5s;
+    /* Opacity removed to prevent preserve-3d flattening bug */
+}
+
+.b3d-face {
+    position: absolute;
+    box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.6);
+    background-color: #1a4f76;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    flex-direction: column;
+}
+
+/* W: 400, H: 200, D: 100 */
+.b3d-front,
+.b3d-back {
+    width: 400px;
+    height: 200px;
+}
+
+.b3d-front {
+    transform: translateZ(50px);
+}
+
+.b3d-back {
+    transform: rotateY(180deg) translateZ(50px);
+}
+
+/* Left/Right: 100x200. Placed at left: 150px to center it in the 400px wrapper */
+.b3d-left,
+.b3d-right {
+    width: 100px;
+    height: 200px;
+    left: 150px;
+    /* (400 - 100) / 2 */
+}
+
+.b3d-left {
+    transform: rotateY(-90deg) translateZ(200px);
+    background-color: #113450;
+}
+
+.b3d-right {
+    transform: rotateY(90deg) translateZ(200px);
+    background-color: #113450;
+}
+
+/* Top: 400x100. Placed at top: 50px */
+.b3d-top {
+    width: 400px;
+    height: 100px;
+    top: 50px;
+    /* (200 - 100) / 2 */
+    transform: rotateX(90deg) translateZ(100px);
+    background-color: #0b2438;
+}
+
+/* Logo Banner and Windows */
+.b3d-logo-banner {
+    background: white;
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    border-bottom: 5px solid #8B5A3C;
+    /* Parashari primary color */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 5;
+}
+
+.b3d-logo-banner img {
+    height: 40px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.b3d-windows {
+    flex: 1;
+    width: 100%;
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.1) 2px, transparent 2px);
+    background-size: 20px 30px;
+}
+
+/* Popping out animation */
+@keyframes popup-building-3d {
+    0% {
+        transform: translateY(150px) scale(0.6);
+    }
+
+    100% {
+        transform: translateY(0px) scale(0.70);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .earth-scene {
+        transform: scale(0.7) rotateX(-15deg) rotateY(25deg);
+    }
+}

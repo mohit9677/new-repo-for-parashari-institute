@@ -349,21 +349,12 @@
 
     // --- Floating & Drag Logic ---
     function updateContainerPosition() {
-        // Disable custom positioning on mobile to let CSS handle it
-        if (window.innerWidth <= 600) {
-            container.style.left = '';
-            container.style.top = '';
-            container.style.right = '';
-            container.style.bottom = '';
-            container.style.transform = ''; // Clear JS transform if any
-            return;
-        }
-
         const tRect = toggle.getBoundingClientRect();
         const cRect = container.getBoundingClientRect();
         const gap = 20;
         const padding = 20;
-        const headerClearance = 280; // Clearance for header + search bar
+        const topHeaderHeight = 100;
+        const headerClearance = window.innerWidth <= 600 ? topHeaderHeight : 280; // Adaptive clearance for mobile vs desktop
 
         // Default: Bottom aligned, side based on toggle position
         // If toggle is on right half: Container to left
@@ -387,7 +378,9 @@
         // Align bottoms
         let targetTop = tRect.bottom - cRect.height;
         // Prevent going off-screen top
-        if (targetTop < headerClearance) targetTop = headerClearance;
+        if (targetTop < headerClearance) {
+            targetTop = headerClearance;
+        }
         // Prevent going off-screen bottom
         if (targetTop + cRect.height > window.innerHeight - padding) {
             targetTop = window.innerHeight - cRect.height - padding;
@@ -406,7 +399,6 @@
         handle.style.cursor = 'move';
 
         const onStart = (e) => {
-            if (window.innerWidth <= 600) return;
             isDragging = true;
             const event = e.type.includes('touch') ? e.touches[0] : e;
             startX = event.clientX;
@@ -418,6 +410,10 @@
                 // When dragging toggle, update container too (smooth)
                 container.style.transition = 'none';
             }
+            // Explicitly lock the current left and top position before unsetting bottom and right. 
+            // This prevents the element from jumping back to 0,0.
+            el.style.left = initialX + 'px';
+            el.style.top = initialY + 'px';
             el.style.bottom = 'auto';
             el.style.right = 'auto';
             if (!e.type.includes('touch')) e.preventDefault();
@@ -426,15 +422,23 @@
         const onMove = (e) => {
             if (!isDragging) return;
             const event = e.type.includes('touch') ? e.touches[0] : e;
+
+            // Prevent scrolling while dragging on touch devices
+            if (e.type.includes('touch')) {
+                e.preventDefault();
+            }
+
             const dx = event.clientX - startX;
             const dy = event.clientY - startY;
 
             let x = initialX + dx;
             let y = initialY + dy;
 
-            // Strict Vertical Constraints (Below Header, Above Footer)
-            const minTop = 280;
-            const maxTop = window.innerHeight - el.offsetHeight - 50;
+            // Adaptive Vertical Constraints
+            const topHeaderHeight = 100; // Account for mobile header thickness
+            const minTop = window.innerWidth <= 600 ? topHeaderHeight : 280;
+            const maxBottomPadding = window.innerWidth <= 600 ? 20 : 50;
+            const maxTop = window.innerHeight - el.offsetHeight - maxBottomPadding;
 
             y = Math.max(minTop, Math.min(y, maxTop));
             x = Math.max(0, Math.min(x, window.innerWidth - el.offsetWidth));
@@ -510,22 +514,6 @@
     }
 
     function restorePositions() {
-        if (window.innerWidth <= 600) {
-            // Mobile: Clear all inline positioning to let CSS handle it
-            toggle.style.left = '';
-            toggle.style.top = '';
-            toggle.style.right = '';
-            toggle.style.bottom = '';
-            toggle.style.transform = '';
-
-            container.style.left = '';
-            container.style.top = '';
-            container.style.right = '';
-            container.style.bottom = '';
-            container.style.transform = '';
-            return;
-        }
-
         // Disable transitions to prevent layout thrashing and ensure getBoundingClientRect is correct immediately
         toggle.style.transition = 'none';
         container.style.transition = 'none';
@@ -533,9 +521,11 @@
         // Restore Toggle Position
         const data = JSON.parse(sessionStorage.getItem('astroChat_toggle_pos_v2'));
         if (data) {
-            const sidePadding = 40;
+            const sidePadding = window.innerWidth <= 600 ? 20 : 40;
             const x = data.side === 'left' ? sidePadding : window.innerWidth - toggle.offsetWidth - sidePadding;
-            const y = Math.max(280, Math.min(data.y, window.innerHeight - toggle.offsetHeight - 100));
+            const topHeaderHeight = 100;
+            const minAllowedTop = window.innerWidth <= 600 ? topHeaderHeight : 280;
+            const y = Math.max(minAllowedTop, Math.min(data.y, window.innerHeight - toggle.offsetHeight - 100));
 
             toggle.style.left = x + 'px';
             toggle.style.top = y + 'px';
@@ -628,4 +618,59 @@
     };
 
     restorePositions();
+
+    // --- Floating Ticket Spawner ---
+    function spawnTicket() {
+        const tRect = toggle.getBoundingClientRect();
+
+        // Ensure toggle is actually visible/mounted
+        if (tRect.width === 0 && tRect.height === 0) return;
+
+        const ticket = document.createElement('a');
+        ticket.href = 'register.html';
+        ticket.className = 'astro-floating-ticket';
+
+        ticket.innerHTML = `
+            <div class="ticket-text">REGISTER NOW</div>
+        `;
+
+        // Spawn from the center-top of the toggle
+        const spawnX = tRect.left + (tRect.width / 2) - 65; // 65 is half of ticket width
+        // Calculate bottom position based on the toggle's top
+        const spawnBottom = window.innerHeight - tRect.top;
+
+        ticket.style.setProperty('--start-x', spawnX + 'px');
+        ticket.style.setProperty('--start-y', spawnBottom + 'px');
+
+        // Add random horizontal drift (-40px to 40px)
+        const drift = (Math.random() - 0.5) * 80;
+        ticket.style.setProperty('--drift-x', drift + 'px');
+
+        // Target Y: stop and fade out BELOW the navbar bottom
+        // Measure actual header/navbar height so this works on all screen sizes
+        const header = document.querySelector('header') || document.querySelector('nav');
+        const navbarBottom = header ? header.getBoundingClientRect().bottom : 120;
+        // End bottom position = distance from bottom of screen to navbar bottom, with 30px buffer
+        const targetBottom = window.innerHeight - navbarBottom - 30;
+        ticket.style.setProperty('--end-y', targetBottom + 'px');
+
+        document.body.appendChild(ticket);
+
+        // Remove after animation (7 seconds)
+        setTimeout(() => {
+            if (ticket.parentNode) ticket.remove();
+        }, 7000);
+    }
+
+    // Spawn a ticket every 3 to 7 seconds randomly
+    function scheduleNextTicket() {
+        setTimeout(() => {
+            spawnTicket();
+            scheduleNextTicket();
+        }, 3000 + Math.random() * 4000);
+    }
+
+    // Start Spawner
+    scheduleNextTicket();
+
 })();

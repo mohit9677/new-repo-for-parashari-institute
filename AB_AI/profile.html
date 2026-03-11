@@ -13,9 +13,11 @@
   <link rel="stylesheet" href="assets/css/loader.css">
   <link rel="stylesheet" href="assets/css/search.css">
   <link rel="stylesheet" href="assets/css/chatbot.css">
+  <link rel="stylesheet" href="assets/css/urgency.css">
 </head>
 
 <body>
+
 
   <div class="header-top">
     <div class="header-top-content">
@@ -78,6 +80,8 @@
         <li class="nav-item"><a href="fee-structure.html">Fee Structure</a></li>
 
         <li class="nav-item"><a href="courses.html">Explore</a></li>
+        <li class="nav-item"><a href="blog.html">Blog</a></li>
+        <li class="nav-item"><a href="6-stairs.html">6 Stairs</a></li>
         <li class="nav-item"><a href="gallery.html">Gallery</a></li>
         <li class="nav-item"><a href="contact.html">Contact</a></li>
       </ul>
@@ -120,6 +124,8 @@
         <li class="nav-item w-full"><a href="courses.html">Courses</a></li>
         <li class="nav-item w-full"><a href="fee-structure.html">Fee Structure</a></li>
         <li class="nav-item w-full"><a href="courses.html">Explore</a></li>
+        <li class="nav-item w-full"><a href="blog.html">Blog</a></li>
+        <li class="nav-item w-full"><a href="6-stairs.html">6 Stairs</a></li>
         <li class="nav-item w-full"><a href="gallery.html">Gallery</a></li>
         <li class="nav-item w-full"><a href="contact.html">Contact</a></li>
       </ul>
@@ -133,22 +139,11 @@
 
     </div>
     </div>
-  </header>
-  </header>
 
-
-  <!-- Linked Profile CSS -->
-  <link rel="stylesheet" href="assets/css/profile.css">
-
-  <!-- Cosmic Hero Section -->
-  <section class="about-hero">
-    <!-- Tablet Search Bar (Visible < 900px) -->
-    <div class="tablet-search-container"
-      style="position: absolute; top: 15px; left: 15px; z-index: 10; margin: 0; padding: 0;">
+    <div class="tablet-search-container">
       <div class="search-container">
         <div class="container-input">
-          <input type="text" placeholder="Search all courses" name="text" class="input"
-            style="background: #f8f9fa; color: #333; border: 1px solid #ccc;">
+          <input type="text" placeholder="Search all courses" name="text" class="input" id="courseSearchInput">
           <svg fill="#666" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z"
@@ -158,9 +153,20 @@
         <div class="search-results"></div>
       </div>
     </div>
-    <div class="about-hero-content" data-animate>
-      <h1 class="about-hero-title">About Us</h1>
-      <p class="about-hero-subtitle">The Gold Standard in Vedic Education Since 1998</p>
+  </header>
+
+
+
+
+
+  <!-- Linked Profile CSS -->
+  <link rel="stylesheet" href="assets/css/profile.css">
+
+  <!-- Cosmic Hero Section -->
+  <section class="shared-page-hero about-hero">
+    <div class="container" data-animate>
+      <h1 class="shared-page-hero-title">Discover Our Journey</h1>
+      <p class="shared-page-hero-subtitle">Preserving Vedic Wisdom Since 1998</p>
     </div>
   </section>
 
@@ -169,8 +175,7 @@
     <div class="container">
       <div class="broken-grid">
         <div class="story-image-wrapper" data-animate>
-          <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?q=80&w=1000&auto=format&fit=crop"
-            alt="Ancient Manuscripts" class="story-image">
+          <img src="assets/images/harshit-sir-politician.jpeg" alt="Harshit Sir" class="story-image">
         </div>
         <div class="story-content-box" data-animate>
           <h2 class="card-section-title text-left mb-1-5">Our Legacy</h2>
@@ -193,28 +198,52 @@
       <h2 class="card-section-title text-center text-maroon">Our Core Values</h2>
       <div class="values-grid">
         <!-- Authenticity -->
-        <div class="value-card-item" data-animate>
-          <div class="value-emoji">🔎</div>
-          <h4 class="value-title-text">Authenticity</h4>
-          <p class="value-description">Preserving the original teachings without dilution or distortion.</p>
+        <div class="value-card-item" data-animate
+          style="background: url('assets/images/authenticity.jpg') center/cover no-repeat; position: relative; overflow: hidden; min-height: 220px; display: flex; flex-direction: column; justify-content: flex-end; padding: 0;">
+          <div
+            style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(20,5,5,0.6) 30%, rgba(0,0,0,0.05) 100%);">
+          </div>
+          <div style="position: relative; z-index: 1; padding: 1.25rem;">
+            <h4 class="value-title-text" style="color: #FFD700; margin-bottom: 0.4rem;">Authenticity</h4>
+            <p class="value-description" style="color: rgba(255,255,255,0.88); margin: 0;">Preserving the original
+              teachings without dilution or distortion.</p>
+          </div>
         </div>
         <!-- Excellence -->
-        <div class="value-card-item" data-animate>
-          <div class="value-emoji">🏆</div>
-          <h4 class="value-title-text">Excellence</h4>
-          <p class="value-description">Striving for the highest standards in every aspect of our work.</p>
+        <div class="value-card-item" data-animate
+          style="background: url('assets/images/excellence.jpg') center/cover no-repeat; position: relative; overflow: hidden; min-height: 220px; display: flex; flex-direction: column; justify-content: flex-end; padding: 0;">
+          <div
+            style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(20,5,5,0.6) 30%, rgba(0,0,0,0.05) 100%);">
+          </div>
+          <div style="position: relative; z-index: 1; padding: 1.25rem;">
+            <h4 class="value-title-text" style="color: #FFD700; margin-bottom: 0.4rem;">Excellence</h4>
+            <p class="value-description" style="color: rgba(255,255,255,0.88); margin: 0;">Striving for the highest
+              standards in every aspect of our work.</p>
+          </div>
         </div>
         <!-- Integrity -->
-        <div class="value-card-item" data-animate>
-          <div class="value-emoji">🤝</div>
-          <h4 class="value-title-text">Integrity</h4>
-          <p class="value-description">Acting with honesty and ethical principles in all dealings.</p>
+        <div class="value-card-item" data-animate
+          style="background: url('assets/images/integrity.jpeg') center/cover no-repeat; position: relative; overflow: hidden; min-height: 220px; display: flex; flex-direction: column; justify-content: flex-end; padding: 0;">
+          <div
+            style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(20,5,5,0.6) 30%, rgba(0,0,0,0.05) 100%);">
+          </div>
+          <div style="position: relative; z-index: 1; padding: 1.25rem;">
+            <h4 class="value-title-text" style="color: #FFD700; margin-bottom: 0.4rem;">Integrity</h4>
+            <p class="value-description" style="color: rgba(255,255,255,0.88); margin: 0;">Acting with honesty and
+              ethical principles in all dealings.</p>
+          </div>
         </div>
         <!-- Growth -->
-        <div class="value-card-item" data-animate>
-          <div class="value-emoji">🌱</div>
-          <h4 class="value-title-text">Growth</h4>
-          <p class="value-description">Continuous learning and development for students and faculty.</p>
+        <div class="value-card-item" data-animate
+          style="background: url('assets/images/growth.jpeg') center/cover no-repeat; position: relative; overflow: hidden; min-height: 220px; display: flex; flex-direction: column; justify-content: flex-end; padding: 0;">
+          <div
+            style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(20,5,5,0.6) 30%, rgba(0,0,0,0.05) 100%);">
+          </div>
+          <div style="position: relative; z-index: 1; padding: 1.25rem;">
+            <h4 class="value-title-text" style="color: #FFD700; margin-bottom: 0.4rem;">Growth</h4>
+            <p class="value-description" style="color: rgba(255,255,255,0.88); margin: 0;">Continuous learning and
+              development for students and faculty.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -235,15 +264,14 @@
           <p class="mb-1">Whether you are a seeker looking for answers or a professional looking for a career, you are
             welcome here.</p>
           <div class="mt-2 signature-block">
-            <h4 class="mb-0 signature-text">Dr. Rajesh Sharma</h4>
+            <h4 class="mb-0 signature-text">Astro. Kunwar Harshit Rajveer</h4>
             <p class="color-primary font-serif">Dean & Head of Vedic Sciences</p>
-            <p class="card-small-text">PhD in Vedic Astrology | 25+ Years Experience</p>
+            <p class="card-small-text">PhD in Vedic Astrology | 10+ Years Experience</p>
           </div>
         </div>
         <div class="dean-image-container" data-animate>
           <div class="dean-image-border"></div>
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop"
-            alt="Dr. Rajesh Sharma" class="dean-image">
+          <img src="assets/images/dean-profile.jpg" alt="Dean - Parashari Institute" class="dean-image">
         </div>
       </div>
     </div>
@@ -563,18 +591,18 @@
     <div class="container">
       <h2 class="card-section-title">Recognition & Accreditations</h2>
       <div class="grid grid-3 grid-gap-2">
-        <div class="card text-center card-auto" data-animate>
+        <div class="premium-gold-card" data-animate>
           <div class="font-3xl mb-1">🏆</div>
           <h4 class="color-primary">ISO 9001:2015 Certified</h4>
           <p class="card-small-text">Quality Management System certification for excellence in education and service
             delivery.</p>
         </div>
-        <div class="card text-center card-auto" data-animate>
+        <div class="premium-gold-card" data-animate>
           <div class="font-3xl mb-1">🎓</div>
           <h4 class="color-primary">Government Recognized</h4>
           <p class="card-small-text">Registered with Ministry of Education and government educational bodies.</p>
         </div>
-        <div class="card text-center card-auto" data-animate>
+        <div class="premium-gold-card" data-animate>
           <div class="font-3xl mb-1">🌟</div>
           <h4 class="color-primary">Industry Awards</h4>
           <p class="card-small-text">Multiple awards for educational excellence and innovation in learning.</p>
@@ -583,38 +611,88 @@
     </div>
   </section>
 
+  <!-- TOP URGENCY MARQUEE -->
+  <div class="urgency-marquee-container">
+    <div class="urgency-marquee-content">
+      <div class="marquee-item">
+        <span class="marquee-icon">🎓</span> Admissions Open! Register Now for Upcoming Batches — Limited Seats
+        Available! <div class="marquee-timer timer-pulse">Ends in: <span class="marquee-timer-val">47:59:59</span></div>
+        <a href="register.html" class="marquee-btn">Fast Register</a>
+      </div>
+      <div class="marquee-item">
+        <span class="marquee-icon">🔥</span> Fast Track Your Career with 100% Placement Assistance
+        <a href="courses.html" class="marquee-btn">View Courses</a>
+      </div>
+      <div class="marquee-item">
+        <span class="marquee-icon">⭐</span> Join Parashari Institute Today — Scholarship Available for Top Performers!
+        <a href="register.html" class="marquee-btn">Apply Now</a>
+      </div>
+      <!-- Duplicate for seamless scrolling -->
+      <div class="marquee-item">
+        <span class="marquee-icon">🎓</span> Admissions Open! Register Now for Upcoming Batches — Limited Seats
+        Available! <div class="marquee-timer timer-pulse">Ends in: <span class="marquee-timer-val">47:59:59</span></div>
+        <a href="register.html" class="marquee-btn">Fast Register</a>
+      </div>
+      <div class="marquee-item">
+        <span class="marquee-icon">🔥</span> Fast Track Your Career with 100% Placement Assistance
+        <a href="courses.html" class="marquee-btn">View Courses</a>
+      </div>
+      <div class="marquee-item">
+        <span class="marquee-icon">⭐</span> Join Parashari Institute Today — Scholarship Available for Top Performers!
+        <a href="register.html" class="marquee-btn">Apply Now</a>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <div class="footer-content">
       <div class="footer-section">
         <h4>About Parashari</h4>
         <p>Preserving and promoting authentic Vedic wisdom since 1998.</p>
-        <div class="social-links">
-          <a href="#" class="social-link" title="Visit our Facebook" aria-label="Visit our Facebook"><i
-              class="fab fa-facebook-f"></i></a>
-          <a href="#" class="social-link" title="Visit our Twitter" aria-label="Visit our Twitter"><i
-              class="fab fa-twitter"></i></a>
-          <a href="#" class="social-link" title="Visit our Instagram" aria-label="Visit our Instagram"><i
-              class="fab fa-instagram"></i></a>
-          <a href="#" class="social-link" title="Visit our YouTube" aria-label="Visit our YouTube"><i
-              class="fab fa-youtube"></i></a>
+        <div class="social-wrapper">
+          <a href="https://www.instagram.com/astrobharatai?igsh=Z2M2ZW82OXBxaGNr" target="_blank"
+            rel="noopener noreferrer" class="icon instagram">
+            <span class="tooltip">Instagram</span>
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.youtube.com/@astrobharatai" target="_blank" rel="noopener noreferrer"
+            class="icon youtube">
+            <span class="tooltip">YouTube</span>
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="https://x.com/AstroBharatAI" target="_blank" rel="noopener noreferrer" class="icon twitter">
+            <span class="tooltip">Twitter</span>
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://www.linkedin.com/company/astrobharatai/" target="_blank" rel="noopener noreferrer"
+            class="icon linkedin">
+            <span class="tooltip">LinkedIn</span>
+            <i class="fab fa-linkedin-in"></i>
+          </a>
         </div>
       </div>
       <div class="footer-section">
         <h4>Quick Links</h4>
         <ul class="footer-links">
           <li><a href="index.html">Home</a></li>
-          <li><a href="profile.html">About</a></li>
-          <li><a href="courses.html">Courses</a></li>
+          <li><a href="profile.html">About Us</a></li>
+          <li><a href="fee-structure.html">Fee Structure</a></li>
+          <li><a href="courses.html">Explore</a></li>
+          <li><a href="6-stairs.html">6 Stairs</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="blog.html">Blog</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-section">
         <h4>Programs</h4>
         <ul class="footer-links">
-          <li><a href="astrology.html">Astrology</a></li>
-          <li><a href="palmistry.html">Palmistry</a></li>
-          <li><a href="vastu.html">Vastu</a></li>
-          <li><a href="fee-structure.html">Fee Structure</a></li>
+          <li><a href="courses.html">Crash Course</a></li>
+          <li><a href="courses.html">Diploma</a></li>
+          <li><a href="courses.html">Bachelor</a></li>
+          <li><a href="courses.html">Master</a></li>
+          <li><a href="courses.html">Grand Master</a></li>
+          <li><a href="6-stairs.html">6 Stairs</a></li>
         </ul>
       </div>
       <div class="footer-section">
@@ -622,13 +700,14 @@
         <div class="contact-info">
           <div class="contact-icon">📍</div>
           <div class="contact-text">
-            <p class="p-reset">123 Vedic Street, Delhi</p>
+            <p class="p-reset">1/344, near Kathauta Chauraha Road, Vinamra Khand, Gomti Nagar, Lucknow, Uttar Pradesh
+              226010</p>
           </div>
         </div>
         <div class="contact-info">
           <div class="contact-icon">📞</div>
           <div class="contact-text">
-            <p class="p-reset"><a href="tel:+919999999999">+91 9999-999-999</a></p>
+            <p class="p-reset"><a href="tel:+919005703159">+91 9005703159</a></p>
           </div>
         </div>
       </div>
@@ -649,6 +728,50 @@
   <script src="assets/js/loader.js"></script>
   <script src="assets/js/search.js"></script>
   <script src="assets/js/chatbot.js"></script>
+
+  <!-- URGENCY TIMER JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Set end date to 2 days from now for consistent urgency
+      let endDate = new Date();
+      endDate.setDate(endDate.getDate() + 2);
+      endDate.setHours(23, 59, 59);
+
+      const timerElements = document.querySelectorAll('.marquee-timer-val');
+
+      if (timerElements.length > 0) {
+        setInterval(function () {
+          const now = new Date().getTime();
+          const distance = endDate.getTime() - now;
+
+          if (distance < 0) {
+            // Reset timer to 2 days if it expires
+            endDate = new Date();
+            endDate.setDate(endDate.getDate() + 2);
+            return;
+          }
+
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          const timeString =
+            (hours < 10 ? "0" + hours : hours) + ":" +
+            (minutes < 10 ? "0" + minutes : minutes) + ":" +
+            (seconds < 10 ? "0" + seconds : seconds);
+
+          timerElements.forEach(el => {
+            el.innerText = timeString;
+          });
+        }, 250);
+      }
+    });
+  </script>
+
+
+
+
+
 </body>
 
 </html>

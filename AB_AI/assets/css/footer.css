@@ -171,21 +171,23 @@ footer {
 /* ============ RESPONSIVE ============ */
 @media (max-width: 1024px) {
   .footer-content {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--spacing-lg);
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-md);
   }
 }
 
 @media (max-width: 768px) {
   .footer-content {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-lg);
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    padding: 0 var(--spacing-sm);
   }
 
   .footer-bottom-content {
     flex-direction: column;
     text-align: center;
+    gap: var(--spacing-sm);
   }
 
   .certifications {
@@ -193,29 +195,121 @@ footer {
   }
 
   footer {
-    padding: var(--spacing-lg) 0;
+    padding: var(--spacing-md) 0;
+  }
+
+  /* Fix Mobile Indentation & Spacing */
+  .footer-links {
+    padding-left: 0;
+  }
+
+  .footer-links li {
+    margin-bottom: 0.25rem;
+  }
+
+  .footer-section p {
+    margin-bottom: 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    word-wrap: break-word;
+  }
+
+  .footer-section h4 {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-links a {
+    font-size: 0.75rem;
+    word-wrap: break-word;
+  }
+
+  .contact-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-icon {
+    font-size: 0.9rem;
+    min-width: 14px;
+    margin-top: 0;
+  }
+
+  .contact-text a,
+  .contact-text p {
+    font-size: 0.75rem;
+    line-height: 1.2;
+    word-wrap: break-word;
+  }
+
+  .social-links {
+    gap: 6px;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    width: 24px;
+    height: 24px;
+    font-size: 0.8rem;
+  }
+
+  .social-link i {
+    font-size: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
   .footer-content {
-    padding: 0 var(--spacing-md);
+    padding: 0 8px;
+    gap: 6px;
+    /* Very tight gap for ultra small screens */
   }
 
   .footer-bottom-content {
-    padding: 0 var(--spacing-md);
-  }
-
-  .contact-info {
-    gap: var(--spacing-sm);
+    padding: 0 8px;
   }
 
   .footer-section h4 {
-    font-size: 1rem;
+    font-size: 0.65rem;
+    /* Make headers tiny */
+    margin-bottom: 0.3rem;
   }
 
+  .footer-section p,
   .footer-links a,
-  .footer-section p {
-    font-size: 0.9rem;
+  .contact-text a,
+  .contact-text p {
+    font-size: 0.55rem;
+    /* Make text tiny */
+    line-height: 1.1;
+  }
+
+  .footer-links a::before {
+    margin-right: 2px;
+  }
+
+  .contact-info {
+    margin-bottom: 0.3rem;
+  }
+
+  .contact-icon {
+    font-size: 0.7rem;
+  }
+
+  .social-link {
+    width: 18px;
+    height: 18px;
+    font-size: 0.65rem;
+  }
+
+  .social-link i {
+    font-size: 0.65rem;
+  }
+
+  .social-links {
+    gap: 3px;
   }
 }

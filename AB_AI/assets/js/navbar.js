@@ -45,32 +45,59 @@ document.addEventListener('DOMContentLoaded', function () {
       link.classList.add('active');
     }
   });
+
+  // Adding scroll effect for search bar
+  window.addEventListener('scroll', function () {
+    const searchContainer = document.querySelector('.tablet-search-container');
+    if (searchContainer) {
+      if (window.scrollY > 50) {
+        searchContainer.classList.add('scrolled');
+      } else {
+        searchContainer.classList.remove('scrolled');
+      }
+    }
+  });
 });
 
 /* ============ MEGA MENU LOGIC ============ */
 const allCoursesList = [
   { name: 'Vedic Astrology', meta: 'Vedic Analysis', url: 'astrology.html', icon: 'fas fa-om' },
-  { name: 'Nadi Jyotish', meta: 'Precision Timing', url: 'nadi-jyotish.html', icon: 'fas fa-om' },
-  { name: 'Lal Kitab Remedies', meta: 'Practical Solutions', url: 'lal-kitab.html', icon: 'fas fa-book' },
-  { name: 'Remedy Course', meta: 'Upaay Gyaan', url: 'remedy-course.html', icon: 'fas fa-hand-holding-heart' },
+  { name: 'Numerology', meta: 'Number Science', url: 'numerology.html', icon: 'fas fa-sort-numeric-up' },
   { name: 'KP Astrology', meta: 'Stellar Astrology', url: 'kp-astrology.html', icon: 'fas fa-star' },
-  { name: 'BNN (Advanced)', meta: 'Bhrigu Nandi Nadi', url: 'bnn-astrology.html', icon: 'fas fa-code-branch' },
-  { name: 'Crystal Healing', meta: 'Energy Balancing', url: 'crystal-healing.html', icon: 'fas fa-gem' },
-  { name: 'Medical Astrology', meta: 'Health & Wellness', url: 'medical-astrology.html', icon: 'fas fa-heartbeat' },
-  { name: 'Complete Astrology', meta: 'Comprehensive Mastery', url: 'complete-astrology.html', icon: 'fas fa-globe' },
-  { name: 'Rudraksha Remedies', meta: 'Sacred Beads', url: 'rudraksha.html', icon: 'fas fa-seedling' },
+  { name: 'Gemstone Science', meta: 'Precious Stones', url: 'gemstone.html', icon: 'fas fa-gem' },
   { name: 'Vastu Shastra', meta: 'Space Harmony', url: 'vastu.html', icon: 'fas fa-home' },
+  { name: 'Lal Kitab', meta: 'Practical Solutions', url: 'lal-kitab.html', icon: 'fas fa-book' },
+  { name: 'Face Reading', meta: 'Physiognomy', url: 'face-reading.html', icon: 'fas fa-user' },
+  { name: 'Reiki Healing', meta: 'Energy Healing', url: 'reiki.html', icon: 'fas fa-hand-holding-medical' },
+  { name: 'Tarot Reading', meta: 'Card Divination', url: 'tarot.html', icon: 'fas fa-clone' },
+  { name: 'Nakshatra', meta: 'Constellations', url: 'nakshatra.html', icon: 'fas fa-moon' },
+  { name: 'Crystal', meta: 'Energy Balancing', url: 'crystal-healing.html', icon: 'fas fa-gem' },
+  { name: 'Rudraksha', meta: 'Sacred Beads', url: 'rudraksha.html', icon: 'fas fa-seedling' },
+  { name: 'Palmistry', meta: 'Hand Analysis', url: 'palmistry.html', icon: 'fas fa-hand-paper' },
+  { name: 'Nadi Jyotish', meta: 'Precision Timing', url: 'nadi-jyotish.html', icon: 'fas fa-scroll' },
+  { name: 'Remedy Course', meta: 'Upaay Gyaan', url: 'remedy-course.html', icon: 'fas fa-hand-holding-heart' },
+  { name: 'Medical Astrology', meta: 'Health & Wellness', url: 'medical-astrology.html', icon: 'fas fa-heartbeat' },
+  { name: 'BNN Advance', meta: 'Bhrigu Nandi Nadi', url: 'bnn-astrology.html', icon: 'fas fa-code-branch' },
+  { name: 'Healing', meta: 'Holistic Wellness', url: 'healing.html', icon: 'fas fa-leaf' },
+  { name: 'Feng Shui', meta: 'Energy Flow', url: 'feng-shui.html', icon: 'fas fa-yin-yang' },
+  { name: 'Past Life Prediction', meta: 'Karma Analysis', url: 'plrt.html', icon: 'fas fa-hourglass-half' },
+  { name: 'Gemini Jyotish', meta: 'Twin Logic', url: 'gemini-jyotish.html', icon: 'fas fa-users' }
+];
+
+const crashCourseList = [
+  { name: 'Past Life', meta: 'Karma Analysis', url: 'plrt.html', icon: 'fas fa-hourglass-half' },
   { name: 'Palmistry', meta: 'Hand Analysis', url: 'palmistry.html', icon: 'fas fa-hand-paper' },
   { name: 'Face Reading', meta: 'Physiognomy', url: 'face-reading.html', icon: 'fas fa-user' },
-  { name: 'Tarot Reading', meta: 'Card Divination', url: 'tarot.html', icon: 'fas fa-clone' },
   { name: 'Numerology', meta: 'Number Science', url: 'numerology.html', icon: 'fas fa-sort-numeric-up' },
-  { name: '1-on-1 Mentorship', meta: 'Personal Guidance', url: 'mentorship.html', icon: 'fas fa-chalkboard-teacher' }
+  { name: 'Rudraksha', meta: 'Sacred Beads', url: 'rudraksha.html', icon: 'fas fa-seedling' },
+  { name: 'Vedic Astrology', meta: 'Vedic Analysis', url: 'astrology.html', icon: 'fas fa-om' },
+  { name: 'Tarot Reading', meta: 'Card Divination', url: 'tarot.html', icon: 'fas fa-clone' }
 ];
 
 const courseDomains = [
   {
     id: 'level-intro',
-    label: 'Intro Course',
+    label: 'Crash Course',
     icon: 'fas fa-seedling',
     description: 'Beginner foundations and awareness across all our core disciplines.',
     specialContent: {
@@ -89,7 +116,7 @@ const courseDomains = [
         "Confidence to move into professional learning paths"
       ]
     },
-    courses: allCoursesList
+    courses: crashCourseList
   },
   {
     id: 'level-diploma',
@@ -185,6 +212,38 @@ const courseDomains = [
       ]
     },
     courses: allCoursesList
+  },
+  {
+    id: 'level-6stairs',
+    label: '6 Stairs',
+    icon: 'fas fa-om',
+    description: 'Explore Yantra, Mantra, Tantra, Chakra Balancing, Remedies, and PLRT.',
+    specialContent: {
+      title: "6 Stairs to Mastery",
+      whoItIsFor: "Seekers of mystic and energetic sciences",
+      objective: "Master the profound practices to achieve spiritual and life elevation",
+      whatYouWillLearn: [
+        "<b>Yantra:</b> Sacred geometrical diagrams for worship and cosmic energy",
+        "<b>Mantra:</b> Science of sacred sounds and vibrations",
+        "<b>Tantra:</b> Ancient esoteric practices for expanding consciousness",
+        "<b>Chakra Balancing:</b> Cleansing and aligning the 7 vital energy centers",
+        "<b>Remedies:</b> Astrological and spiritual solutions for complex problems",
+        "<b>PLRT:</b> Healing present traumas via past lives"
+      ],
+      learningOutcome: [
+        "Deep understanding of spiritual and occult practices",
+        "Ability to practically apply remedies for healing",
+        "Elevation of personal consciousness"
+      ]
+    },
+    courses: [
+      { name: 'Yantra', meta: 'Sacred Geometry', url: 'yantra.html', icon: 'fas fa-star-of-david' },
+      { name: 'Mantra', meta: 'Vibrational Science', url: 'mantra.html', icon: 'fas fa-om' },
+      { name: 'Tantra', meta: 'Esoteric Practices', url: 'tantra.html', icon: 'fas fa-pray' },
+      { name: 'Chakra Balancing', meta: 'Energy Centers', url: 'chakra-balancing.html', icon: 'fas fa-yin-yang' },
+      { name: 'Remedies', meta: 'Astrological Solutions', url: '6-stairs-remedies.html', icon: 'fas fa-leaf' },
+      { name: 'PLRT', meta: 'Past Life Regression', url: 'plrt.html', icon: 'fas fa-hourglass-half' }
+    ]
   }
 ];
 

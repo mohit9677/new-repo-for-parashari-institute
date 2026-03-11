@@ -99,12 +99,11 @@
 }
 
 .tag-level {
-    background: #f0f7f0;
-    color: #2e7d32;
     padding: 4px 10px;
     border-radius: 20px;
     font-size: 0.7rem;
     font-weight: 700;
+    /* color & background-color set inline per tier */
 }
 
 .tag-cert {
@@ -115,12 +114,26 @@
 
 .card-price-section {
     padding: 0 var(--spacing-20) var(--spacing-20);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-8);
 }
 
 .price-box {
     display: flex;
     align-items: center;
     gap: var(--spacing-12);
+}
+
+.price-duration {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #8B0000;
+    background: rgba(139, 0, 0, 0.08);
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
 }
 
 .old-price {
@@ -215,3 +228,152 @@
         line-clamp: 3;
     }
 }
+
+/* ─── Category Filter Tabs ────────────────────────────────────────────── */
+.category-filter-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 0 0 var(--spacing-24);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    margin-bottom: var(--spacing-32);
+}
+
+.filter-tab {
+    background: transparent;
+    border: 1.5px solid rgba(139, 0, 0, 0.25);
+    color: var(--text-muted, #555);
+    padding: 6px 18px;
+    border-radius: 30px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.filter-tab:hover {
+    border-color: #8B0000;
+    color: #8B0000;
+    background: rgba(139, 0, 0, 0.05);
+}
+
+.filter-tab.active {
+    background: #8B0000;
+    border-color: #8B0000;
+    color: #fff;
+    box-shadow: 0 3px 12px rgba(139, 0, 0, 0.3);
+}
+
+/* Tiered tabs (all except "All") */
+.filter-tab--tiered {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px 5px 14px;
+}
+
+.tab-course-name {
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.tab-tier-badge {
+    font-size: 0.62rem;
+    font-weight: 800;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 10px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    opacity: 0.95;
+}
+
+.filter-tab--tiered.active .tab-tier-badge {
+    background: rgba(255,255,255,0.25) !important;
+}
+
+/* ─── All-Categories Grouped View ────────────────────────────────────── */
+.all-categories-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-48, 3rem);
+}
+
+.category-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-20, 1.25rem);
+}
+
+.category-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-left: 4px solid #8B0000;
+    padding-left: 12px;
+}
+
+.category-section-title-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.category-tier-badge {
+    font-size: 0.62rem;
+    font-weight: 900;
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.category-section-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-main, #1a1a1a);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.category-duration-pill {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #8B0000;
+    background: rgba(139, 0, 0, 0.08);
+    padding: 3px 10px;
+    border-radius: 20px;
+}
+
+.view-all-link {
+    background: none;
+    border: none;
+    color: #8B0000;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+}
+
+.view-all-link:hover {
+    background: rgba(139, 0, 0, 0.07);
+}
+
+@media (max-width: 480px) {
+    .category-filter-tabs {
+        gap: 6px;
+    }
+    .filter-tab {
+        padding: 5px 12px;
+        font-size: 0.75rem;
+    }
+    .category-section-title {
+        font-size: 1rem;
+    }
+}

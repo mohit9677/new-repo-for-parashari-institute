@@ -370,6 +370,8 @@
     display: none;
     align-items: center;
     gap: 10px;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .astro-chat-input-wrapper.active {
@@ -384,6 +386,9 @@
     outline: none;
     font-size: 0.9rem;
     font-family: inherit;
+    box-sizing: border-box;
+    width: 0;
+    /* Let flex-grow handle the width */
 }
 
 .astro-chat-send {
@@ -392,12 +397,15 @@
     border: none;
     width: 40px;
     height: 40px;
+    min-width: 40px;
+    min-height: 40px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.2s;
+    flex-shrink: 0;
 }
 
 .astro-chat-send:active {
@@ -426,23 +434,23 @@
 /* Mobile (5" - 7") */
 @media screen and (max-width: 600px) {
     .astro-chat-container {
-        width: 75%;
-        height: 50vh;
-        bottom: 75px;
-        /* Reduced specific spacing */
-        right: 2.5%;
-        left: 2.5%;
-        margin: auto;
+        width: 85%;
+        height: auto;
+        max-height: calc(100vh - 120px);
+        /* Leave room for mobile header */
+        bottom: 90px;
+        right: 20px;
+        /* Default starting position */
         transform-origin: bottom center;
         border-radius: 12px;
     }
 
     .astro-chat-toggle {
-        bottom: 30px;
+        bottom: 20px;
         /* Keep above navigation bars/floating buttons */
-        right: 20px;
-        width: 75px;
-        height: 75px;
+        right: 15px;
+        width: 55px;
+        height: 55px;
     }
 }
 
@@ -528,5 +536,112 @@
 @media screen and (max-width: 600px) {
     .astro-chat-container.open {
         transform: translateY(-80px) scale(1);
+    }
+}
+
+/* ============================================
+   FLOATING TICKETS (From Chatbot)
+   ============================================ */
+.astro-floating-ticket {
+    position: fixed;
+    z-index: 100000;
+    width: 100px;
+    background: #591C21;
+    /* Maroon */
+    color: #FFD700;
+    /* Golden */
+    padding: 4px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none !important;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    /* Simulate the inner dashed border via box-shadow/outline isn't always easy, we'll use a pseudo element */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 2px solid #FFD700;
+    /* Golden Outer Border */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    opacity: 0;
+    animation: floatTicketUp 7s linear forwards;
+
+    /* Ticket cutouts */
+    -webkit-mask-image: radial-gradient(circle at 0 50%, transparent 6px, black 7px), radial-gradient(circle at 100% 50%, transparent 6px, black 7px);
+    -webkit-mask-position: left, right;
+    -webkit-mask-size: 51% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-image: radial-gradient(circle at 0 50%, transparent 6px, black 7px), radial-gradient(circle at 100% 50%, transparent 6px, black 7px);
+    mask-position: left, right;
+    mask-size: 51% 100%;
+    mask-repeat: no-repeat;
+}
+
+.astro-floating-ticket::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: 8px;
+    right: 8px;
+    border: 1px dashed rgba(255, 215, 0, 0.6);
+    /* Golden dashed inner border */
+    pointer-events: none;
+}
+
+.astro-floating-ticket:hover {
+    filter: brightness(1.1) drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+    animation-play-state: paused;
+}
+
+.astro-floating-ticket .ticket-stars {
+    font-size: 11px;
+    line-height: 1;
+    color: #000;
+    letter-spacing: 2px;
+}
+
+.astro-floating-ticket .ticket-text {
+    font-size: 14px;
+    line-height: 1.1;
+    letter-spacing: 0.5px;
+}
+
+@keyframes floatTicketUp {
+    0% {
+        opacity: 0;
+        bottom: var(--start-y);
+        left: var(--start-x);
+        transform: scale(0.5);
+    }
+
+    5% {
+        opacity: 1;
+        bottom: calc(var(--start-y) + 20px);
+        left: var(--start-x);
+        transform: scale(1) rotate(-5deg);
+    }
+
+    65% {
+        opacity: 1;
+        bottom: calc(var(--start-y) + (var(--end-y) - var(--start-y)) * 0.7);
+        left: calc(var(--start-x) + var(--drift-x) * 0.7);
+        transform: scale(1) rotate(3deg);
+    }
+
+    90% {
+        opacity: 0;
+        bottom: var(--end-y);
+        left: calc(var(--start-x) + var(--drift-x));
+        transform: scale(0.7) rotate(5deg);
+    }
+
+    100% {
+        opacity: 0;
+        bottom: calc(var(--end-y) + 20px);
+        left: calc(var(--start-x) + var(--drift-x));
+        transform: scale(0.5);
     }
 }

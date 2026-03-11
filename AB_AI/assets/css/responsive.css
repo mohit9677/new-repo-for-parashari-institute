@@ -64,11 +64,13 @@
   }
 
   /* Cards */
-  .card {
+  .card,
+  .premium-gold-card {
     padding: var(--spacing-md);
   }
 
-  .card-image {
+  .card-image,
+  .premium-gold-card .card-image-container {
     height: 200px;
   }
 
@@ -119,16 +121,129 @@
   }
 
   /* Cards */
-  .card {
+  .card,
+  .premium-gold-card {
     padding: var(--spacing-md);
   }
 
-  .card-image {
+  .card-image,
+  .premium-gold-card .card-image-container {
     height: 180px;
   }
 
-  .card-title {
-    font-size: 1.1rem;
+  .card-title,
+  .premium-gold-card .card-title {
+    font-size: 1rem !important;
+  }
+
+  /* Compact Course Grid */
+  .grid-responsive {
+    grid-template-columns: repeat(auto-fit, minmax(145px, 1fr)) !important;
+    gap: 0.75rem !important;
+  }
+
+  .premium-gold-card {
+    padding: 1rem !important;
+  }
+
+  .premium-gold-card .card-image-container {
+    height: 120px !important;
+  }
+
+  .premium-gold-card .card-body {
+    padding: 0.75rem !important;
+  }
+
+  .premium-gold-card .card-header {
+    min-height: auto !important;
+    margin-bottom: 0.3rem !important;
+    gap: 0.3rem !important;
+  }
+
+  .premium-gold-card .card-header-icon {
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 0.8rem !important;
+  }
+
+  .premium-gold-card .card-title {
+    font-size: 0.95rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .premium-gold-card .card-body>p {
+    font-size: 0.75rem !important;
+    min-height: 3.4rem !important;
+    margin-bottom: 0.5rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .premium-gold-card .mb-1 {
+    min-height: auto !important;
+    margin-bottom: 0.4rem !important;
+    gap: 0.2rem !important;
+  }
+
+  .category-badge {
+    font-size: 0.65rem !important;
+    padding: 0.15rem 0.4rem !important;
+  }
+
+  .certification-badge {
+    font-size: 0.65rem !important;
+  }
+
+  .premium-gold-card h4.text-center {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  .premium-gold-card h4.text-center del {
+    margin-right: 0 !important;
+    font-size: 0.75rem !important;
+  }
+
+  .premium-gold-card h4.text-center strong {
+    font-size: 0.9rem !important;
+  }
+
+  .premium-gold-card .course-footer {
+    padding-top: 0.5rem !important;
+    margin-top: 0.3rem !important;
+  }
+
+  .premium-gold-card .learn-more .button-text {
+    font-size: 0.8rem !important;
+  }
+
+  /* Shrink Discount Ribbon for Mobile */
+  .discount-tag {
+    width: 80px !important;
+    height: 80px !important;
+    top: -5px !important;
+    left: -5px !important;
+  }
+
+  .discount-tag::before {
+    height: 24px !important;
+    font-size: 0.55rem !important;
+    transform: rotate(-45deg) translateY(-12px) !important;
+  }
+
+  /* 6. Special padding override for the Course Gallery cards (which have images) */
+  .grid-responsive .premium-gold-card {
+    padding: 0 !important;
+  }
+
+  /* Grid 2 Columns on Mobile */
+  @media (min-width: 320px) {
+    .grid-responsive {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 0.6rem !important;
+    }
   }
 
   /* Forms */
@@ -244,16 +359,19 @@
   }
 
   /* Cards */
-  .card {
+  .card,
+  .premium-gold-card {
     padding: var(--spacing-md);
   }
 
-  .card-image {
+  .card-image,
+  .premium-gold-card .card-image-container {
     height: 160px;
   }
 
-  .card-title {
-    font-size: 1rem;
+  .card-title,
+  .premium-gold-card .card-title {
+    font-size: 1rem !important;
   }
 
   /* Buttons */
@@ -298,6 +416,12 @@
   /* Flex */
   .flex {
     flex-direction: column;
+  }
+
+  /* Keep social media icons horizontal on mobile */
+  .flex:has(> .social-icon-link) {
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 
   .flex-between {

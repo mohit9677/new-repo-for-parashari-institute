@@ -1,0 +1,916 @@
+/* Blog Page Styles for Parashari Institute */
+
+.blog-page {
+    background-color: var(--light-bg);
+    padding: 4rem 0;
+}
+
+.blog-header-section {
+    text-align: center;
+    padding: 3rem 1rem;
+    background: white;
+    margin-bottom: 2rem;
+}
+
+.blog-header-title {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+/* Featured Blog / Carousel */
+.blog-carousel-container {
+    overflow: hidden;
+    position: relative;
+    border-radius: 12px;
+}
+
+.blog-carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    /* Keep existing featured styles but make them full width */
+    background: white;
+    overflow: hidden;
+    display: flex;
+    box-shadow: 0 12px 30px rgba(89, 28, 33, 0.08);
+    /* Maroon tint */
+    border: 1px solid rgba(89, 28, 33, 0.05);
+}
+
+/* Featured Blog / Hero */
+.blog-featured {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    margin-bottom: 4rem;
+    box-shadow: 0 12px 30px rgba(89, 28, 33, 0.08);
+    /* Maroon tint */
+    border: 1px solid rgba(89, 28, 33, 0.05);
+}
+
+.blog-featured:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 48px rgba(89, 28, 33, 0.18);
+}
+
+.blog-featured-img {
+    flex: 1;
+    min-height: 350px;
+    overflow: hidden;
+}
+
+.blog-featured-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.blog-featured:hover .blog-featured-img img {
+    transform: scale(1.05);
+}
+
+.blog-featured-content {
+    flex: 1;
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.blog-meta-top {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--light-text);
+    margin-bottom: 1rem;
+}
+
+.blog-category-tag {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.blog-meta-divider {
+    color: #ccc;
+    margin: 0 0.25rem;
+}
+
+.blog-featured-title {
+    font-size: 2rem;
+    color: var(--dark-text);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.blog-featured-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.blog-featured-desc {
+    color: var(--light-text);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+}
+
+.blog-author-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+.blog-author-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.blog-author-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.blog-author-name {
+    font-weight: 600;
+    color: var(--dark-text);
+    font-size: 0.95rem;
+}
+
+/* Carousel Controls */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: 1px solid rgba(89, 28, 33, 0.1);
+    color: var(--primary-color);
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn {
+    left: 20px;
+}
+
+.next-btn {
+    right: 20px;
+}
+
+/* Discover Section Layout */
+.blog-discover-header {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.blog-discover-title {
+    font-size: 2.2rem;
+    color: var(--dark-text);
+}
+
+.blog-discover-title span {
+    color: var(--primary-color);
+}
+
+.blog-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+}
+
+/* Sidebar Categories */
+.blog-sidebar {
+    background: white;
+    padding: 0;
+    position: sticky;
+    top: 100px;
+    z-index: 10;
+}
+
+.blog-category-toggle-container {
+    display: none;
+}
+
+.blog-category-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.blog-category-item {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.blog-category-item:last-child {
+    border-bottom: none;
+}
+
+.blog-category-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    color: var(--dark-text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-left: 4px solid transparent;
+}
+
+.blog-category-link:hover {
+    background: #fafafa;
+    color: var(--primary-color);
+}
+
+.blog-category-link.active {
+    background: rgba(89, 28, 33, 0.05);
+    /* very light maroon */
+    color: var(--primary-color);
+    border-left-color: var(--primary-color);
+}
+
+.blog-category-link i {
+    color: #aaa;
+    font-size: 0.8rem;
+    transition: transform 0.2s;
+}
+
+.blog-category-link:hover i,
+.blog-category-link.active i {
+    color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+/* Blog Grid */
+.blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    /* Changed to 1 column for horizontal cards */
+    gap: 2rem;
+}
+
+.blog-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(89, 28, 33, 0.08);
+    /* Stronger base shadow */
+    border: 1px solid rgba(89, 28, 33, 0.04);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: row;
+    /* Changed to row for horizontal layout */
+    align-items: stretch;
+    height: 100%;
+    position: relative;
+    min-height: 160px;
+}
+
+.blog-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 20px 40px rgba(89, 28, 33, 0.2);
+    /* Deep vibrant shadow */
+}
+
+.blog-card-img-wrapper {
+    position: relative;
+    width: 35%;
+    /* Fixed percentage for image */
+    min-width: 250px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.blog-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.blog-card:hover .blog-card-img {
+    transform: scale(1.08);
+}
+
+.blog-card-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--primary-color);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 2;
+    box-shadow: 0 4px 10px rgba(89, 28, 33, 0.3);
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.blog-card:hover .blog-card-badge {
+    background: var(--primary-color);
+    color: white;
+    transform: scale(1.1);
+}
+
+.blog-card:hover .blog-card-badge i {
+    color: white;
+}
+
+.blog-card-badge i {
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+.blog-card-content {
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.blog-card-content p {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.blog-card-meta {
+    font-size: 0.75rem;
+    color: var(--light-text);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+}
+
+.blog-card-title {
+    font-size: 1.15rem;
+    color: var(--dark-text);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+    font-weight: 600;
+}
+
+.blog-card-title a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.blog-card-title a:hover {
+    color: var(--primary-color);
+}
+
+.blog-card-bottom {
+    margin-top: auto;
+    font-size: 0.85rem;
+    color: var(--light-text);
+}
+
+.blog-card-author-name {
+    color: var(--dark-text);
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.blog-card-date {
+    color: var(--light-text);
+}
+
+/* Free Courses Section */
+.free-courses-section {
+    padding: 4rem 0;
+    background: white;
+    margin-top: 4rem;
+}
+
+.free-courses-header {
+    margin-bottom: 2rem;
+}
+
+.free-courses-title {
+    font-size: 2.2rem;
+    color: var(--dark-text);
+    margin-bottom: 0.5rem;
+}
+
+.free-courses-title span {
+    color: var(--primary-color);
+}
+
+.free-courses-tabs {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    /* Hide scrollbar */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.free-courses-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.free-course-tab {
+    white-space: nowrap;
+    font-weight: 600;
+    color: var(--light-text);
+    cursor: pointer;
+    padding-bottom: 0.75rem;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.free-course-tab:hover {
+    color: var(--dark-text);
+}
+
+.free-course-tab.active {
+    color: var(--primary-color);
+}
+
+.free-course-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--primary-color);
+    border-radius: 3px 3px 0 0;
+}
+
+.free-course-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.free-course-card {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.free-course-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.free-course-img {
+    height: 180px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.free-course-content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.free-course-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dark-text);
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    height: 3rem;
+    /* Two lines */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.free-course-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--light-text);
+    margin-bottom: 1.5rem;
+    margin-top: auto;
+}
+
+.free-course-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.free-course-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-course-outline {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    background: white;
+    color: var(--dark-text);
+    text-align: center;
+    border-radius: 6px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-course-outline:hover {
+    background: #f8f8f8;
+    border-color: #ccc;
+}
+
+.btn-course-primary {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Uiverse Styles - Customized */
+    position: relative;
+    padding: 12px 35px;
+    background: #591C21;
+    /* Maroon */
+    font-size: 17px;
+    font-weight: 600;
+    color: #ffffff;
+    /* White text */
+    border: 3px solid #D4AF37;
+    /* Gold border */
+    border-radius: 8px;
+    box-shadow: 0 0 0 rgba(212, 175, 55, 0.5);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.btn-course-primary .star-1 {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 25px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 1s cubic-bezier(0.05, 0.83, 0.43, 0.96);
+}
+
+.btn-course-primary .star-2 {
+    position: absolute;
+    top: 45%;
+    left: 45%;
+    width: 15px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 1s cubic-bezier(0, 0.4, 0, 1.01);
+}
+
+.btn-course-primary .star-3 {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 5px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 1s cubic-bezier(0, 0.4, 0, 1.01);
+}
+
+.btn-course-primary .star-4 {
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    width: 8px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
+}
+
+.btn-course-primary .star-5 {
+    position: absolute;
+    top: 25%;
+    left: 45%;
+    width: 15px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 0.6s cubic-bezier(0, 0.4, 0, 1.01);
+}
+
+.btn-course-primary .star-6 {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    width: 5px;
+    height: auto;
+    filter: drop-shadow(0 0 0 #fffdef);
+    z-index: -5;
+    transition: all 0.8s ease;
+}
+
+.btn-course-primary:hover {
+    background: #D4AF37;
+    /* Gold on hover */
+    color: #591C21;
+    /* Maroon text on hover */
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+}
+
+.btn-course-primary:hover .star-1 {
+    position: absolute;
+    top: -80%;
+    left: -30%;
+    width: 25px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+}
+
+.btn-course-primary:hover .star-2 {
+    position: absolute;
+    top: -25%;
+    left: 10%;
+    width: 15px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+}
+
+.btn-course-primary:hover .star-3 {
+    position: absolute;
+    top: 55%;
+    left: 25%;
+    width: 5px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+}
+
+.btn-course-primary:hover .star-4 {
+    position: absolute;
+    top: 30%;
+    left: 80%;
+    width: 8px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+}
+
+.btn-course-primary:hover .star-5 {
+    position: absolute;
+    top: 25%;
+    left: 115%;
+    width: 15px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+}
+
+.btn-course-primary:hover .star-6 {
+    position: absolute;
+    top: 5%;
+    left: 60%;
+    width: 5px;
+    height: auto;
+    filter: drop-shadow(0 0 10px #fffdef);
+    z-index: 2;
+}
+
+.btn-course-primary .fil0 {
+    fill: #D4AF37;
+    /* Gold stars */
+}
+
+/* Pagination Dots */
+.blog-pagination-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.pagination-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background: white;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pagination-dot.active {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    width: 24px;
+    border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .blog-featured {
+        flex-direction: column;
+    }
+
+    .blog-featured-img {
+        min-height: 250px;
+    }
+
+    .blog-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .blog-discover-header {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .blog-category-toggle-container {
+        display: block;
+        position: relative;
+        margin-bottom: 1.5rem;
+        width: 100%;
+    }
+
+    .desktop-only-sidebar {
+        display: none;
+    }
+
+    .blog-sidebar {
+        position: relative;
+        padding: 0;
+        margin-bottom: 2rem;
+        background: transparent;
+    }
+
+    .blog-category-toggle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1.5rem;
+        background: white;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--dark-text);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .blog-category-toggle i {
+        color: var(--primary-color);
+        transition: transform 0.3s ease;
+    }
+
+    .blog-category-toggle.active i {
+        transform: rotate(180deg);
+    }
+
+    .blog-category-list {
+        display: none;
+        width: 100%;
+        background: white;
+        margin-top: 0.5rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        /* Softer shadow since it's inline */
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        overflow: hidden;
+        /* Prevent link borders from poking out */
+    }
+
+    .blog-category-list.show {
+        display: block;
+        animation: fadeInCard 0.2s ease forwards;
+    }
+
+    /* Keep desktop style links inside the mobile dropdown */
+    .blog-category-list .blog-category-link {
+        padding: 1.25rem 1.5rem;
+        border-radius: 0;
+        background: transparent;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .blog-category-list .blog-category-item:last-child .blog-category-link {
+        border-bottom: none;
+    }
+
+    .blog-category-list .blog-category-link i {
+        display: inline-block;
+    }
+
+    .free-course-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .blog-featured-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .blog-featured-title {
+        font-size: 1.6rem;
+    }
+
+    .blog-discover-title,
+    .free-courses-title {
+        font-size: 1.8rem;
+    }
+
+    .free-course-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .blog-card {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .blog-card-img-wrapper {
+        width: 100%;
+        height: 180px;
+        min-width: unset;
+    }
+}
+
+/* Close media query */
+
+/* Filtering Animations */
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}

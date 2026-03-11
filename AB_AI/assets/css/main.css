@@ -25,8 +25,9 @@ textarea {
   user-select: text;
 }
 
+html,
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
 }
 
@@ -305,12 +306,17 @@ body {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.1));
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 3px solid #ffffff;
   border-radius: 20px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  box-shadow: 0 12px 36px 0 rgba(31, 38, 135, 0.2);
   position: relative;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-center:hover {
@@ -670,6 +676,67 @@ body {
 }
 
 /* ============ PROFILE PAGE STYLES ============ */
+/* Shared Hero Class (based on gallery.html) */
+.shared-page-hero {
+  position: relative;
+  height: 60vh;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  z-index: 1;
+}
+
+.shared-page-hero-title {
+  color: #D4AF37;
+  font-size: clamp(2rem, 5vw + 1rem, 3.5rem);
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+  position: relative;
+}
+
+.shared-page-hero-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: #D4AF37;
+  margin: 1rem auto 0;
+}
+
+.shared-page-hero-subtitle {
+  color: #fff;
+  font-size: clamp(1rem, 2vw + 0.5rem, 1.2rem);
+  letter-spacing: 2px;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width: 991px) {
+  .shared-page-hero {
+    background-attachment: scroll !important;
+    background-position: center !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .shared-page-hero {
+    height: 40vh;
+    min-height: 300px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .shared-page-hero {
+    min-height: 250px;
+    margin-top: 0;
+  }
+}
+
 .hero-header {
   background: linear-gradient(135deg, #8B5A3C 0%, #5C3A24 100%);
   color: white;
@@ -954,13 +1021,14 @@ section.primary-bg h4 {
 
 /* ============ CARDS ============ */
 /* ============ CARDS ============ */
+/* ============ CARDS ============ */
 .card {
   background-color: var(--white);
-  border: 1px solid var(--border-color);
+  border: 3px solid #ffffff;
   border-radius: 12px;
   padding: 0;
   transition: all var(--transition);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   /* Softer shadow */
   overflow: hidden;
   /* Ensure image corners clip */
@@ -1102,14 +1170,12 @@ section.primary-bg h4 {
   flex-direction: column;
   min-height: 450px;
   /* Minimum height for consistency, allows growth */
-  height: auto;
-  /* Flexible height */
+  height: 100%;
 }
 
 .card:hover {
   transform: translateY(-8px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  background-color: var(--light-bg);
 }
 
 .card-image-container {
@@ -1144,6 +1210,8 @@ section.primary-bg h4 {
   /* Stack content naturally */
   text-align: center;
   /* Center align text like motion cards */
+  background-color: var(--primary-color);
+  color: var(--white);
 }
 
 .card-header {
@@ -1164,16 +1232,33 @@ section.primary-bg h4 {
 
 .card-title {
   font-size: 1.4rem;
-  margin-bottom: 0;
-  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  color: var(--secondary-color);
   font-weight: 700;
+  min-height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card p {
   font-size: 0.95rem;
   color: var(--light-text);
-  margin-bottom: var(--spacing-md);
-  line-height: 1.6;
+  /* Fixed visibility on white backgrounds */
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 5.5rem;
+  /* Forces symmetrical appearance */
+}
+
+/* Ensure white text for cards with dark background (like Our Courses) */
+.card-body p {
+  color: var(--white);
 }
 
 .course-footer {
@@ -1184,9 +1269,29 @@ section.primary-bg h4 {
   align-items: center;
   gap: var(--spacing-sm);
   padding-top: var(--spacing-md);
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   width: 100%;
 }
+
+.course-footer del {
+  color: #DDD !important;
+}
+
+.course-footer h4 {
+  margin-bottom: 0.5rem;
+}
+
+.course-footer h4 strong {
+  color: var(--secondary-color) !important;
+}
+
+.discount-text {
+  color: #FFF !important;
+  /* Make discount text pop instead of red on red */
+}
+
+/* Removed legacy .learn-more styles to avoid conflicts */
+
 
 .btn-full {
   width: 100%;
@@ -1343,6 +1448,61 @@ textarea.form-control {
 .card-auto {
   min-height: 0 !important;
   height: auto !important;
+}
+
+/* PREMIUM GOLDEN CARD UTILITY */
+.premium-gold-card {
+  background: #fff !important;
+  border-radius: 12px !important;
+  padding: 2.5rem 1.5rem !important;
+  text-align: center !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  border: 2px solid #D4AF37 !important;
+  /* Gold border */
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.15) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  color: #666 !important;
+}
+
+.premium-gold-card::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 6px !important;
+  background: linear-gradient(90deg, #591C21, #D4AF37) !important;
+  /* Maroon to Gold */
+  z-index: 1 !important;
+}
+
+.premium-gold-card:hover {
+  transform: translateY(-10px) !important;
+  box-shadow: 0 20px 40px rgba(212, 175, 55, 0.25) !important;
+}
+
+.premium-gold-card p {
+  color: #666 !important;
+  /* Ensure visibility on white card */
+  margin-bottom: 1rem !important;
+}
+
+.premium-gold-card h4,
+.premium-gold-card h3 {
+  color: #591C21 !important;
+  /* Deep Maroon titles */
+  margin-bottom: 1rem !important;
+  font-weight: 700 !important;
+}
+
+.premium-gold-card .card-icon img {
+  width: 50px !important;
+  height: 50px !important;
+  margin-bottom: 1rem !important;
 }
 
 /* ============ TEXT UTILITIES ============ */
@@ -1510,6 +1670,20 @@ textarea.form-control {
   gap: 0.4rem;
   justify-content: center;
   min-height: 3.6rem;
+}
+
+/* Extra badges (Online Available, Projects Included, etc.) shown in course footer */
+.badge-inline {
+  font-size: 0.72rem;
+  padding: 0.2rem 0.6rem;
+  background: #f8f8f8;
+  color: #555;
+  border: 1px solid #e0e0e0;
+  border-radius: 14px;
+  white-space: nowrap;
+  display: inline-block;
+  font-weight: 500;
+  letter-spacing: 0.2px;
 }
 
 /* Category badge: shows which level/tier the course belongs to */
@@ -1816,10 +1990,9 @@ textarea.form-control {
   flex: 0 0 50%;
   width: 50%;
   position: relative;
-  min-height: 500px;
+  min-height: 600px;
   /* Ensure height for background */
   background-image: url('../images/institute-building-modern.jpg');
-  background-attachment: fixed;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -1914,10 +2087,11 @@ textarea.form-control {
 /* Testimonial Marquee */
 .testimonial-scroll-container {
   overflow: hidden;
-  width: 100%;
+  width: 100vw;
   position: relative;
   padding: 2rem 0;
-  mask-image: linear-gradient(to right, transparent, black 1%, black 99%, transparent);
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
 }
 
 .testimonial-track {
@@ -1930,14 +2104,84 @@ textarea.form-control {
 }
 
 /* Pause on hover */
-.testimonial-track:hover {
+.testimonial-track:has(.testimonial-card-slide:hover) {
   animation-play-state: paused;
 }
 
 .testimonial-card-slide {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  border: none;
   width: 350px;
+  min-width: 350px;
+  height: 380px !important;
+  max-height: 380px !important;
   flex-shrink: 0;
-  padding: 2rem;
+  display: flex !important;
+  flex-direction: column;
+}
+
+.testimonial-card-slide:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+}
+
+.testimonial-img-wrapper {
+  height: 220px;
+  width: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+
+.testimonial-card-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  margin: 0;
+  border-radius: 0;
+}
+
+.testimonial-card-slide:hover img {
+  transform: scale(1.05);
+}
+
+.testimonial-info {
+  padding: 1rem 1.5rem 2rem 1.5rem;
+  text-align: center;
+  background: #fff;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.testimonial-card-slide h4.color-primary {
+  color: #591C21;
+  font-size: 1.3rem;
+  margin-top: 0 !important;
+  margin-bottom: 0.25rem;
+}
+
+.testimonial-card-slide .color-secondary.stars {
+  color: #D4AF37;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.testimonial-card-slide .card-small-text {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: auto;
+  line-height: 1.5;
+  border-top: 1px solid #eee;
+  padding-top: 0.75rem;
+  margin-bottom: 0;
+  overflow: hidden;
+  display: block;
 }
 
 .faculty-card-slide {
@@ -2023,10 +2267,638 @@ textarea.form-control {
   }
 }
 
+@media (max-width: 768px) {
+
+  .celestial-hero,
+  .hero-section {
+    margin-top: 0;
+    padding-top: 6rem;
+    /* Restored original padding or similar appropriate mobile padding */
+  }
+}
+
 /* Explore Tab Footer Alignment */
 .card .course-footer {
   margin-top: auto;
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+
+/* ============ SOCIAL BUTTONS ============ */
+.social-wrapper {
+  display: inline-flex;
+  list-style: none;
+  height: auto;
+  width: 100%;
+  padding-top: 10px;
+  font-family: "Poppins", sans-serif;
+  justify-content: flex-start;
+}
+
+.social-wrapper .icon {
+  position: relative;
+  background: var(--white);
+  border-radius: 50%;
+  margin: 10px 10px 10px 0;
+  width: 45px;
+  height: 45px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  text-decoration: none;
+  color: #333;
+}
+
+.social-wrapper .tooltip {
+  position: absolute;
+  top: 0;
+  font-size: 14px;
+  background: #fff;
+  color: #fff;
+  padding: 5px 8px;
+  border-radius: 5px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  white-space: nowrap;
+}
+
+.social-wrapper .tooltip::before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: #fff;
+  bottom: -3px;
+  left: 50%;
+  transform: translate(-50%) rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.social-wrapper .icon:hover .tooltip {
+  top: -45px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.social-wrapper .icon:hover span,
+.social-wrapper .icon:hover .tooltip {
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.social-wrapper .facebook:hover,
+.social-wrapper .facebook:hover .tooltip,
+.social-wrapper .facebook:hover .tooltip::before {
+  background: #1877f2;
+  color: #fff;
+}
+
+.social-wrapper .twitter:hover,
+.social-wrapper .twitter:hover .tooltip,
+.social-wrapper .twitter:hover .tooltip::before {
+  background: #1da1f2;
+  color: #fff;
+}
+
+.social-wrapper .instagram:hover,
+.social-wrapper .instagram:hover .tooltip,
+.social-wrapper .instagram:hover .tooltip::before {
+  background: #e4405f;
+  color: #fff;
+}
+
+.social-wrapper .youtube:hover,
+.social-wrapper .youtube:hover .tooltip,
+.social-wrapper .youtube:hover .tooltip::before {
+  background: #ff0000;
+  color: #fff;
+}
+
+.social-wrapper .linkedin:hover,
+.social-wrapper .linkedin:hover .tooltip,
+.social-wrapper .linkedin:hover .tooltip::before {
+  background: #0077b5;
+  color: #fff;
+}
+
+/* Auto-injected Discount Ribbon CSS */
+.card {
+  position: relative;
+}
+
+.card-auto {
+  position: relative;
+}
+
+.discount-text {
+  display: block;
+  font-size: 0.95em;
+  color: #d32f2f;
+  font-weight: 600;
+  margin-top: 4px;
+  text-align: center;
+  width: 100%;
+}
+
+.course-footer h4,
+.course-price {
+  text-align: center;
+}
+
+.discount-tag {
+  position: absolute;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  top: -10px;
+  left: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.discount-tag::before {
+  content: attr(data-discount);
+  position: absolute;
+  width: 150%;
+  height: 40px;
+  background-image: linear-gradient(45deg, #FF0044 0%, #FF5E00 100%);
+  transform: rotate(-45deg) translateY(-20px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  box-shadow: 0 5px 15px rgba(255, 0, 68, 0.4);
+  font-size: 0.8rem;
+}
+
+.discount-tag::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  bottom: 0;
+  left: 0;
+  height: 10px;
+  z-index: -1;
+  box-shadow: 140px -140px #cc3f47;
+  background-image: linear-gradient(45deg, #CC0036 0%, #D44E00 100%);
+}
+
+/* ============ 6 STAIRS CARD FIXES ============ */
+
+/* 1. Image container — dark bg, full image shown */
+.grid-responsive .premium-gold-card .card-image-container {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  background-color: #0d0d0d;
+  /* Dark bg hides any letterbox edges */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-responsive .premium-gold-card .card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Show WHOLE image — no cropping */
+  object-position: center;
+  padding: 0;
+  transition: transform 0.5s ease;
+}
+
+.grid-responsive .premium-gold-card:hover .card-image {
+  transform: scale(1.04);
+}
+
+/* 2. Fix card body layout — structured & readable */
+.grid-responsive .premium-gold-card .card-body {
+  background: linear-gradient(160deg, #591C21 0%, #3a0f13 100%) !important;
+  padding: 1.2rem 1.2rem 1.2rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1;
+  text-align: left !important;
+}
+
+/* 3. Card title — clearly visible, gold on dark background */
+.grid-responsive .premium-gold-card .card-title {
+  color: #FFD700 !important;
+  /* Bright gold for contrast */
+  font-size: 1.15rem !important;
+  font-weight: 800 !important;
+  margin-bottom: 0.5rem !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6) !important;
+  min-height: auto !important;
+  line-height: 1.3 !important;
+  display: block !important;
+  letter-spacing: 0.02em;
+}
+
+/* 4. Card header icon — visible */
+.grid-responsive .premium-gold-card .card-header {
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 0.5rem !important;
+  margin-bottom: 0.4rem !important;
+  background: transparent !important;
+  padding: 0 !important;
+  min-height: 4rem !important;
+}
+
+.grid-responsive .premium-gold-card .card-header-icon {
+  display: flex !important;
+  width: 32px !important;
+  height: 32px !important;
+  background: rgba(212, 175, 55, 0.15) !important;
+  border-radius: 50% !important;
+  font-size: 1rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+}
+
+/* 5. Description — natural height, perfectly aligned across all 6 cards */
+.grid-responsive .premium-gold-card .card-body>p {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 0.85rem !important;
+  line-height: 1.55 !important;
+  margin-bottom: 0.75rem !important;
+  min-height: 4.1rem !important;
+  overflow: hidden !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  text-align: left !important;
+  flex-shrink: 0;
+}
+
+/* 6. Badges row */
+.grid-responsive .premium-gold-card .mb-1 {
+  margin-top: auto !important;
+  margin-bottom: 0.6rem !important;
+}
+
+/* 7. Course footer — Learn More centered (Contact Us removed) */
+.grid-responsive .premium-gold-card .course-footer {
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  /* Center the button now Contact Us is gone */
+  border-top: 1px solid rgba(212, 175, 55, 0.3) !important;
+  padding-top: 1rem !important;
+  margin-top: 0.5rem !important;
+  flex-shrink: 0;
+}
+
+/* 8. h3 titles — bright gold on dark body */
+.grid-responsive .premium-gold-card h3 {
+  color: #FFD700 !important;
+}
+
+/* --- FACULTY CARD (Extracted for global use) --- */
+.faculty-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  border: none;
+  width: 350px;
+  min-width: 350px;
+  height: 450px !important;
+  max-height: 450px !important;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.faculty-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  background: linear-gradient(rgba(18, 5, 20, 0.7), rgba(18, 5, 20, 0.7)),
+    url('../images/about-hero-bg.jpg') no-repeat center center/cover;
+  height: 60vh;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.faculty-img-wrapper {
+  height: 220px;
+  width: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.faculty-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.faculty-card:hover .faculty-img {
+  transform: scale(1.05);
+}
+
+.faculty-info {
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
+  background: #fff;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.faculty-name {
+  color: #591C21;
+  font-size: 1.3rem;
+  margin-bottom: 0.25rem;
+}
+
+.faculty-role {
+  color: #D4AF37;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 0.5rem;
+}
+
+.faculty-bio {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: auto;
+  line-height: 1.5;
+  border-top: 1px solid #eee;
+  padding-top: 0.75rem;
+  margin-top: 0.5rem;
+  overflow: hidden;
+}
+
+.faculty-education {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  color: #591C21;
+  font-weight: 600;
+}
+
+/* =============================================
+   MOBILE FIXES — Accreditation & Benefits Cards
+   (max-width: 600px only, desktop unchanged)
+   ============================================= */
+@media (max-width: 600px) {
+
+  /* --- Accreditation Cards: 2 columns, full image visible (like zodiac) --- */
+  .accreditation-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.75rem !important;
+    align-items: stretch;
+  }
+
+  /* Fixed image area — same height for all, no cropping */
+  .accreditation-grid .faculty-img-wrapper {
+    height: 140px !important;
+    background: #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .accreditation-grid .faculty-img {
+    object-fit: contain !important;
+    height: 100% !important;
+    width: 100% !important;
+    padding: 6px;
+  }
+
+  /* Compact text area */
+  .accreditation-grid .faculty-info {
+    padding: 0.75rem 0.5rem !important;
+  }
+
+  .accreditation-grid .faculty-name {
+    font-size: 0.9rem !important;
+  }
+
+  .accreditation-grid .faculty-bio p {
+    font-size: 0.75rem !important;
+  }
+
+  /* --- Benefits Cards: 1 column, compact layout --- */
+  .benefits-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* shrink the maroon icon panel on mobile */
+  .benefits-grid>div>div:first-child {
+    min-width: 65px !important;
+    width: 65px !important;
+    font-size: 1.8rem !important;
+    padding: 1rem 0 !important;
+  }
+
+  /* tighten the text area padding on mobile */
+  .benefits-grid>div>div:last-child {
+    padding: 1rem 1rem !important;
+  }
+
+  /* smaller heading inside benefits cards on mobile */
+  .benefits-grid>div h4 {
+    font-size: 1rem !important;
+  }
+
+  /* smaller paragraph inside benefits cards on mobile */
+  .benefits-grid>div p {
+    font-size: 0.85rem !important;
+  }
+
+  /* --- Course Cards: remove white side margins and stabilize on mobile --- */
+  .light-bg .container-wide {
+    max-width: 100% !important;
+    padding: 0 0.4rem !important;
+    /* Minimal padding for edge-to-edge feel */
+  }
+
+  /* Disable hover lift and shadows on mobile */
+  .card:hover {
+    transform: none !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  /* Allow cards and images to take natural height — no truncated photos */
+  .card {
+    min-height: auto !important;
+    height: auto !important;
+  }
+
+  .card-image-container {
+    height: auto !important;
+    background-color: #fcfcfc !important;
+    /* Ensure background matches card theme */
+    display: flex !important;
+    padding: 0 !important;
+  }
+
+  /* Full image visibility: no cropping, no gaps */
+  .card-image {
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    /* Show complete image */
+    transition: none !important;
+  }
+}
+
+/* --- GOLDEN BUTTON START --- */
+.golden-button {
+  touch-action: manipulation;
+  display: inline-block;
+  outline: none;
+  font-family: inherit;
+  font-size: 1em;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 0.3em;
+  height: 2.75em;
+  line-height: 2.5em;
+  text-transform: uppercase;
+  padding: 0 1em;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(110, 80, 20, 0.4),
+    inset 0 -2px 5px 1px rgba(139, 66, 8, 1),
+    inset 0 -1px 1px 3px rgba(250, 227, 133, 1);
+  background-image: linear-gradient(160deg,
+      #a54e07,
+      #b47e11,
+      #fef1a2,
+      #bc881b,
+      #a54e07);
+  border: 1px solid #a55d07;
+  color: rgb(120, 50, 5);
+  text-shadow: 0 2px 2px rgba(250, 227, 133, 1);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  background-size: 100% 100%;
+  background-position: center;
+}
+
+.golden-button:focus,
+.golden-button:hover {
+  background-size: 150% 150%;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23),
+    inset 0 -2px 5px 1px #b17d10, inset 0 -1px 1px 3px rgba(250, 227, 133, 1);
+  border: 1px solid rgba(165, 93, 7, 0.6);
+  color: rgba(120, 50, 5, 0.8);
+}
+
+.golden-button:active {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(110, 80, 20, 0.4),
+    inset 0 -2px 5px 1px #b17d10, inset 0 -1px 1px 3px rgba(250, 227, 133, 1);
+}
+
+/* --- GOLDEN BUTTON END --- */
+/* --- HIGHLIGHTS GRID (Uniform Card Grid) --- */
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 2rem 0;
+}
+
+.highlights-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 380px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.highlights-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(212, 175, 55, 0.25);
+}
+
+.highlights-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  border-radius: 12px;
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.highlights-card:hover img {
+  transform: scale(1.05);
+  filter: brightness(0.4) saturate(0.5);
+}
+
+.highlights-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.95));
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.highlights-overlay h4 {
+  color: #D4AF37;
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.highlights-overlay p {
+  color: #ffffff;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Only show overlay on hover */
+.highlights-card:hover .highlights-overlay {
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .highlights-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .highlights-card {
+    height: 320px;
+  }
 }

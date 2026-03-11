@@ -1,0 +1,174 @@
+/* cinematic-hero.css */
+
+.about-split-image {
+    position: relative;
+    width: 100%;
+    min-height: 600px;
+    background-color: #020510;
+    /* Deep cosmic blue */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    /* Assuming the container might need rounded corners */
+}
+
+/* Base background with camera pan */
+.cinematic-bg {
+    position: absolute;
+    top: -15%;
+    left: -15%;
+    width: 130%;
+    height: 130%;
+    background-image: url('../images/vedic_cinematic_bg.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.85;
+    animation: camera-pan 30s ease-in-out infinite alternate;
+    z-index: 1;
+}
+
+/* Glowing overlay to add authoritative mood and depth */
+.cinematic-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 0%, rgba(2, 5, 16, 0.9) 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Rotating Zodiac Wheel Container */
+.zodiac-wheel-container {
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Use screen to blend the black background of the zodiac image into the cosmic scene */
+    mix-blend-mode: screen;
+    opacity: 0.95;
+    animation: camera-pan-wheel 30s ease-in-out infinite alternate;
+    /* Mask the edges of the square AI image so it gracefully fades into the background */
+    -webkit-mask-image: radial-gradient(circle closest-side, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+    mask-image: radial-gradient(circle closest-side, rgba(0, 0, 0, 1) 85%, rgba(0, 0, 0, 0) 100%);
+}
+
+.zodiac-wheel {
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/gold_zodiac_wheel.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: rotate-zodiac 120s linear infinite;
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.4));
+}
+
+/* Central glowing mandala focal point */
+.zodiac-wheel::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle at center, rgba(255, 215, 0, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(10px);
+    z-index: -1;
+    animation: pulse-glow 4s ease-in-out infinite alternate;
+}
+
+/* Dust Particles System */
+.dust-particle {
+    position: absolute;
+    bottom: -20px;
+    background-color: rgba(255, 223, 140, 0.8);
+    /* Golden dust */
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.6);
+    z-index: 4;
+    opacity: 0;
+    pointer-events: none;
+    animation: float-up linear infinite;
+}
+
+/* Keyframes */
+
+@keyframes camera-pan {
+    0% {
+        transform: scale(1) translate(0, 0);
+    }
+
+    100% {
+        transform: scale(1.1) translate(-2%, 2%);
+    }
+}
+
+@keyframes camera-pan-wheel {
+    0% {
+        transform: scale(1) translate(0, 0);
+    }
+
+    100% {
+        transform: scale(1.05) translate(-1%, 1%);
+    }
+}
+
+@keyframes rotate-zodiac {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse-glow {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 1;
+    }
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.8;
+    }
+
+    85% {
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translateY(-600px) translateX(30px);
+        opacity: 0;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .zodiac-wheel-container {
+        width: 250px;
+        height: 250px;
+    }
+
+    .about-split-image {
+        min-height: 400px;
+    }
+}

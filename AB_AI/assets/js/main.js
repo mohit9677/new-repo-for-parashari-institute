@@ -277,3 +277,200 @@ animationStyle.textContent = `
 document.head.appendChild(animationStyle);
 
 console.log('✓ Main JavaScript initialized');
+
+// ============ BLOG CAROUSEL ============
+document.addEventListener('DOMContentLoaded', function () {
+  const blogTrack = document.querySelector('.blog-carousel-track');
+  if (blogTrack) {
+    const slides = Array.from(blogTrack.children);
+    const nextButton = document.getElementById('blogCarouselNext');
+    const prevButton = document.getElementById('blogCarouselPrev');
+    const dotsNav = document.getElementById('blogCarouselDots');
+    const dots = Array.from(dotsNav.children);
+
+    let currentSlideIndex = 0;
+    let slideInterval;
+
+    const moveToSlide = (track, currentSlide, targetSlide, targetIndex) => {
+      if (!targetSlide) return;
+
+      if (currentSlide) currentSlide.classList.remove('active');
+      targetSlide.classList.add('active');
+
+      // Update dots
+      if (dotsNav) {
+        const currentDot = dotsNav.querySelector('.active');
+        if (currentDot) currentDot.classList.remove('active');
+        if (dots[targetIndex]) dots[targetIndex].classList.add('active');
+      }
+
+      currentSlideIndex = targetIndex;
+
+      // Move track based on slide width in pixels
+      const slideWidth = slides[0].getBoundingClientRect().width;
+      track.style.transform = `translateX(-${targetIndex * slideWidth}px)`;
+
+      resetInterval();
+    };
+
+    // Handle window resize dynamically to prevent misalignments
+    window.addEventListener('resize', () => {
+      const slideWidth = slides[0].getBoundingClientRect().width;
+      blogTrack.style.transform = `translateX(-${currentSlideIndex * slideWidth}px)`;
+    });
+
+    if (nextButton) {
+      nextButton.addEventListener('click', e => {
+        const currentSlide = blogTrack.querySelector('.active') || slides[currentSlideIndex];
+        let targetIndex = currentSlideIndex + 1;
+        if (targetIndex >= slides.length) targetIndex = 0; // loop back to start
+        const targetSlide = slides[targetIndex];
+
+        moveToSlide(blogTrack, currentSlide, targetSlide, targetIndex);
+      });
+    }
+
+    if (prevButton) {
+      prevButton.addEventListener('click', e => {
+        const currentSlide = blogTrack.querySelector('.active') || slides[currentSlideIndex];
+        let targetIndex = currentSlideIndex - 1;
+        if (targetIndex < 0) targetIndex = slides.length - 1; // loop to end
+        const targetSlide = slides[targetIndex];
+
+        moveToSlide(blogTrack, currentSlide, targetSlide, targetIndex);
+      });
+    }
+
+    if (dotsNav) {
+      dotsNav.addEventListener('click', e => {
+        const targetDot = e.target.closest('.pagination-dot');
+        if (!targetDot) return;
+
+        const currentSlide = blogTrack.querySelector('.active') || slides[currentSlideIndex];
+        const targetIndex = dots.findIndex(dot => dot === targetDot);
+        const targetSlide = slides[targetIndex];
+
+        moveToSlide(blogTrack, currentSlide, targetSlide, targetIndex);
+      });
+    }
+
+    // Auto play function
+    const nextSlideTimer = () => {
+      const currentSlide = blogTrack.querySelector('.active') || slides[currentSlideIndex];
+      let targetIndex = currentSlideIndex + 1;
+      if (targetIndex >= slides.length) targetIndex = 0;
+      const targetSlide = slides[targetIndex];
+      moveToSlide(blogTrack, currentSlide, targetSlide, targetIndex);
+    };
+
+    const resetInterval = () => {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlideTimer, 2000); // 2 seconds per slide
+    };
+
+    // Start auto play
+    resetInterval();
+
+    // Pause on hover
+    const carouselContainer = document.querySelector('.blog-carousel-container');
+    if (carouselContainer) {
+      carouselContainer.addEventListener('mouseenter', () => clearInterval(slideInterval));
+      carouselContainer.addEventListener('mouseleave', resetInterval);
+    }
+  }
+
+  // --- MOBILE BLOG CATEGORY TOGGLE ---
+  const blogCategoryToggle = document.getElementById('blogCategoryToggle');
+  const blogCategoryList = document.getElementById('blogCategoryList');
+  const blogCategoryActiveText = document.getElementById('blogCategoryActiveText');
+
+  if (blogCategoryToggle && blogCategoryList) {
+    blogCategoryToggle.addEventListener('click', () => {
+      blogCategoryList.classList.toggle('show');
+      blogCategoryToggle.classList.toggle('active');
+    });
+  }
+
+  // --- BLOG CATEGORY FILTERING LOGIC ---
+  const blogCategoryLinks = document.querySelectorAll('.blog-category-link');
+  const blogCards = document.querySelectorAll('.blog-card');
+
+  if (blogCategoryLinks.length > 0 && blogCards.length > 0) {
+    blogCategoryLinks.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault(); // Prevent default anchor jump
+
+        const filterValue = this.getAttribute('data-filter');
+
+        // Remove active class from all links
+        blogCategoryLinks.forEach(l => l.classList.remove('active'));
+
+        // Add active class to clicked link across all lists (mobile and desktop)
+        const matchingLinks = document.querySelectorAll(`.blog-category-link[data-filter="${filterValue}"]`);
+        matchingLinks.forEach(matchingLink => matchingLink.classList.add('active'));
+
+        // Update mobile toggle text
+        if (blogCategoryActiveText) {
+          // Find the active text by checking the content of the clicked link, ignoring the icon
+          const linkTextNode = Array.from(this.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+          if (linkTextNode) {
+            blogCategoryActiveText.textContent = linkTextNode.textContent.trim();
+          }
+        }
+
+        // Close dropdown on mobile
+        if (window.innerWidth <= 992 && blogCategoryList && blogCategoryList.classList.contains('show')) {
+          blogCategoryList.classList.remove('show');
+          if (blogCategoryToggle) blogCategoryToggle.classList.remove('active');
+        }
+
+        blogCards.forEach(card => {
+          const cardCategory = card.getAttribute('data-category');
+
+          if (filterValue === 'all' || filterValue === cardCategory) {
+            card.style.display = 'flex';
+            card.style.animation = 'none';
+            card.offsetHeight; /* Trigger reflow */
+            card.style.animation = 'fadeInCard 0.4s ease forwards';
+          } else {
+            card.style.display = 'none';
+            card.style.animation = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  // --- FREE COURSES TAB FILTERING LOGIC ---
+  const freeCourseTabs = document.querySelectorAll('.free-course-tab');
+  const freeCourseCards = document.querySelectorAll('.free-course-card');
+
+  if (freeCourseTabs.length > 0 && freeCourseCards.length > 0) {
+    freeCourseTabs.forEach(tab => {
+      tab.addEventListener('click', function () {
+        // Remove active class from all tabs
+        freeCourseTabs.forEach(t => t.classList.remove('active'));
+
+        // Add active class to clicked tab
+        this.classList.add('active');
+
+        const filterValue = this.getAttribute('data-filter');
+
+        freeCourseCards.forEach(card => {
+          const cardCategory = card.getAttribute('data-category');
+
+          if (filterValue === 'all' || filterValue === cardCategory) {
+            card.style.display = 'block';
+            card.style.animation = 'none';
+            card.offsetHeight; /* Trigger reflow */
+            card.style.animation = 'fadeInCard 0.4s ease forwards';
+          } else {
+            card.style.display = 'none';
+            card.style.animation = 'none';
+          }
+        });
+      });
+    });
+  }
+
+});
