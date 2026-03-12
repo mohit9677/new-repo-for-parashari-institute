@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const authRoutes = require('./routes/auth'); // Placeholder
 const videoRoutes = require('./routes/video');
@@ -12,6 +13,29 @@ const app = express();
 
 // Middleware
 app.use(cors());
+
+// Proxy routes (MUST be before express.json and express.static)
+app.use(
+    '/student',
+    createProxyMiddleware({
+        target: 'https://parashari-welcome.vercel.app',
+        changeOrigin: true,
+        pathRewrite: {
+            '^/student': ''
+        }
+    })
+);
+
+app.use(
+    '/jobs',
+    createProxyMiddleware({
+        target: 'https://jobs-app.vercel.app',
+        changeOrigin: true,
+        pathRewrite: {
+            '^/jobs': ''
+        }
+    })
+);
 
 // Regular Middleware
 app.use(express.json());

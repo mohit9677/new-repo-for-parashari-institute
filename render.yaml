@@ -1,0 +1,43 @@
+services:
+  # 1. Main Parent App (Landing + Proxy + Auth)
+  - type: web
+    name: parashari-parent-app
+    env: node
+    plan: free
+    rootDir: AB_AI
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: MONGODB_URI
+        sync: false # Set securely in Render dashboard
+      - key: JWT_SECRET
+        sync: false
+
+  # 2. Learning Portal API (Courses + Streams)
+  - type: web
+    name: parashari-learning-api
+    env: node
+    plan: free
+    rootDir: learningPortal/server
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 5002
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      # Cloudflare Variables
+      - key: CLOUDFLARE_ACCOUNT_ID
+        sync: false
+      - key: CLOUDFLARE_ACCESS_KEY_ID
+        sync: false
+      - key: CLOUDFLARE_SECRET_ACCESS_KEY
+        sync: false
+      - key: CLOUDFLARE_BUCKET_NAME
+        sync: false
+      - key: CLOUDFLARE_PUBLIC_URL
+        sync: false
