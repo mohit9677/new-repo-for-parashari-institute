@@ -22,7 +22,9 @@ app.use(cors({
         'http://localhost:3000', 
         process.env.CLIENT_URL,
         'https://parashariindian-learning.vercel.app',
-        'https://parashariindia.vercel.app'
+        'https://parashariindia.vercel.app',
+        'https://parashariindia.com',
+        'https://www.parashariindia.com'
     ],
     credentials: true
 }));
@@ -86,7 +88,7 @@ app.use((req, res, next) => {
         return next();
     }
 
-    const targetUrl = process.env.AB_AI_PRODUCTION_URL || 'https://parashariindia.vercel.app';
+    const targetUrl = process.env.AB_AI_PRODUCTION_URL || 'https://www.parashariindia.com';
     if (!targetUrl) return next();
 
     // 3. LOOP PROTECTION
