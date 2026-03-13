@@ -18,15 +18,15 @@ function StrictProtectedRoute({ children }) {
   const token = localStorage.getItem('token');
   const cameFromABAI = sessionStorage.getItem('ab_ai_entry');
 
-  /* if (!cameFromABAI || !token) {
-    const target = import.meta.env.VITE_AB_AI_PRODUCTION_URL || 'http://localhost:3000';
-    window.location.href = `${target}/login.html`;
+  if (!cameFromABAI || !token) {
+    const target = import.meta.env.VITE_AB_AI_PRODUCTION_URL || 'https://www.parashariindia.com';
+    window.location.href = target;
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
         Redirecting...
       </div>
     );
-  } */
+  }
 
   return (
     <AuthProvider>
