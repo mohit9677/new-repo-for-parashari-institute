@@ -1,0 +1,24 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://parashari-parent-app.onrender.com/api/$1"
+    },
+    {
+      "source": "/student/(.*)",
+      "destination": "https://parashari-welcome.vercel.app/$1"
+    },
+    {
+      "source": "/student",
+      "destination": "https://parashari-welcome.vercel.app"
+    },
+    {
+      "source": "/jobs/(.*)",
+      "destination": "https://jobs-app.vercel.app/$1"
+    },
+    {
+      "source": "/jobs",
+      "destination": "https://jobs-app.vercel.app"
+    }
+  ]
+}
