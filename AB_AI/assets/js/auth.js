@@ -188,7 +188,9 @@ async function handleRegistration(event) {
         if (res.ok) {
             alert("Account created successfully! Redirecting to dashboard...");
             // Redirect to learning portal with auto-login token
-            window.location.href = `http://localhost:5173/login?token=${result.token}`;
+            const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+            const targetUrl = isLocal ? 'http://localhost:5173' : 'https://parashariindian-learning.vercel.app';
+            window.location.href = `${targetUrl}/login?token=${result.token}`;
         } else {
             alert(result.message || "Signup failed");
             submitBtn.disabled = false;
@@ -244,7 +246,9 @@ async function loginUser(event) {
 
             // Redirect to Learning Portal with JWT token
             setTimeout(() => {
-                window.location.href = `http://localhost:5173/login?token=${encodeURIComponent(result.token)}`;
+                const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+                const targetUrl = isLocal ? 'http://localhost:5173' : 'https://parashariindian-learning.vercel.app';
+                window.location.href = `${targetUrl}/login?token=${encodeURIComponent(result.token)}`;
             }, 800);
         } else {
             // Show error message
