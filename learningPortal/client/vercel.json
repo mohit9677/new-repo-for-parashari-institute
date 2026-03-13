@@ -1,8 +1,9 @@
 {
-  "rewrites": [
+  "redirects": [
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "https://parashariindia.vercel.app",
+      "permanent": true
     }
   ]
 }
