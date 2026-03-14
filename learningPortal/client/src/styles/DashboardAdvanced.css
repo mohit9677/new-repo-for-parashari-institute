@@ -174,16 +174,10 @@
 
 .announcement-list-container h3,
 .announcement-list-container h4 {
-    font-size: 0.85rem;
+    font-size: 1.15rem;
     font-weight: 700;
     margin-bottom: var(--spacing-16);
     color: var(--text-main);
-}
-
-.empty-ann {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-    padding: var(--spacing-8) 0;
 }
 
 .ann-item {
@@ -315,6 +309,17 @@
 
     .announcement-list-container {
         padding: 8px;
+    }
+
+    .announcement-list-container h3,
+    .announcement-list-container h4 {
+        font-size: 0.78rem;
+    }
+
+    .empty-ann {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        padding: var(--spacing-8) 0;
     }
 
     .ann-item {
