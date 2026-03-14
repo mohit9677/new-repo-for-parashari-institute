@@ -104,6 +104,11 @@
     color: #e53e3e;
 }
 
+.logout-btn svg {
+    stroke: none;
+    fill: currentColor;
+}
+
 .logout-btn:hover {
     background: #ef4444;
     color: #ffffff;

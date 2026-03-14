@@ -307,13 +307,13 @@
     }
     
     .control-btn svg {
-        width: 14px;
-        height: 14px;
+        width: 10px;
+        height: 10px;
     }
     
     .big-play-btn {
-        width: 32px;
-        height: 32px;
+        width: 24px;
+        height: 24px;
         border-width: 1px;
     }
 
