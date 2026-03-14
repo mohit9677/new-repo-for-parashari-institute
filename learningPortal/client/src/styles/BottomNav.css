@@ -58,7 +58,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    background: #d7d7d7;
+    background: #ffffff;
     color: #333;
     padding: 8px 14px;
     border-radius: 50px;
@@ -71,8 +71,8 @@
 
 .ai-assist-fab:hover,
 .ai-assist-fab.active {
-    background: #c0c0c0;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    background: #d7d7d7;
+    box-shadow: 0 0 14px 4px rgba(215, 215, 215, 0.8), 0 4px 14px rgba(0,0,0,0.08);
     transform: translateY(-2px);
 }
 
