@@ -10,6 +10,8 @@ export default {
         const ALLOWED_ORIGINS = [
             "http://localhost:5173",
             "http://localhost:3000",
+            "https://www.parashariindia.com",
+            "https://parashariindia.com",
             env.CLIENT_URL // Allow dynamic config from secrets
         ];
 
