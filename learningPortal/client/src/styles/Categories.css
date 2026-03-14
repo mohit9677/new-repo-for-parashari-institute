@@ -1,5 +1,6 @@
 .categories-page {
-    padding-bottom: var(--spacing-32);
+    padding-bottom: 320px;
+    position: relative;
 }
 
 .page-header {
