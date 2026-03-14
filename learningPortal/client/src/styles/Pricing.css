@@ -1,7 +1,7 @@
 /* Pricing Page and Card Styles */
 .pricing-page-container {
     padding: 2rem 1rem;
-    background-color: #0f1014;
+    background-color: #d7d7d7;
     min-height: 80vh;
     display: flex;
     flex-direction: column;
@@ -23,7 +23,7 @@
 
 .pricing-header h1 {
     font-size: 1.8rem;
-    color: #e2e8f0;
+    color: #1a202c;
     font-weight: 800;
     margin-bottom: 0.5rem;
 }
