@@ -8,11 +8,11 @@ const Categories = () => {
     const [activeCategory, setActiveCategory] = useState(null);
 
     const categories = [
-        { id: 'Crash Course',  title: 'Crash Course',  icon: '🌱', desc: 'Start your journey here' },
-        { id: 'Diploma',       title: 'Diploma',       icon: '🏛️', desc: 'Build solid basics' },
+        { id: 'Crash Course',  title: 'Crash Course',  icon: '🔥', desc: 'Start your journey here' },
+        { id: 'Diploma',       title: 'Diploma',       icon: '📜', desc: 'Build solid basics' },
         { id: 'Bachelor',      title: 'Bachelor',      icon: '🎓', desc: 'Deep dive into wisdom' },
-        { id: 'Master',        title: 'Master',        icon: '📜', desc: 'Research & Advanced' },
-        { id: 'Grand Master',  title: 'Grand Master',  icon: '⚡', desc: 'Fast track learning' }
+        { id: 'Master',        title: 'Master',        icon: '🏅', desc: 'Research & Advanced' },
+        { id: 'Grand Master',  title: 'Grand Master',  icon: '👑', desc: 'Fast track learning' }
     ];
 
     const handleCategoryClick = (catId) => {
