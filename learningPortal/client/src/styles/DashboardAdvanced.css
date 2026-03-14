@@ -285,27 +285,41 @@
 
     .stats-row {
         grid-template-columns: repeat(2, 1fr);
-        gap: var(--spacing-16);
+        gap: var(--spacing-8);
     }
     
     .stat-card {
-        padding: var(--spacing-12);
-        gap: var(--spacing-8);
+        padding: var(--spacing-8);
+        gap: var(--spacing-4);
+        border-radius: var(--radius-12);
     }
 
     .stat-value {
-        font-size: 1.25rem;
+        font-size: 1.1rem;
     }
 
     .stat-header {
-        font-size: 0.75rem;
+        font-size: 0.65rem;
+    }
+
+    .stat-icon {
+        font-size: 0.85rem;
     }
 
     .announcement-list-container {
-        padding: var(--spacing-16);
+        padding: var(--spacing-12);
     }
 
     .ann-item {
-        padding: var(--spacing-12) 0;
+        padding: var(--spacing-8) 0;
+    }
+    
+    .ann-title {
+        font-size: 0.75rem;
+    }
+
+    .ann-type {
+        font-size: 0.55rem;
+        padding: 2px 6px;
     }
 }

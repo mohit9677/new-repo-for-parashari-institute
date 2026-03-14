@@ -126,4 +126,14 @@
         width: 36px;
         height: 36px;
     }
+
+    .header-icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .header-icon-btn svg {
+        width: 18px;
+        height: 18px;
+    }
 }

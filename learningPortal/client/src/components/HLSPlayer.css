@@ -307,12 +307,18 @@
     }
     
     .control-btn svg {
-        width: 18px;
-        height: 18px;
+        width: 14px;
+        height: 14px;
+    }
+    
+    .big-play-btn {
+        width: 32px;
+        height: 32px;
+        border-width: 1px;
     }
 
     .controls-left,
     .controls-right {
-        gap: 8px;
+        gap: 6px;
     }
 }
