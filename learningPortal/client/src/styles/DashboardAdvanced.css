@@ -282,4 +282,30 @@
     .continue-thumb {
         width: 100%;
     }
+
+    .stats-row {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-16);
+    }
+    
+    .stat-card {
+        padding: var(--spacing-12);
+        gap: var(--spacing-8);
+    }
+
+    .stat-value {
+        font-size: 1.25rem;
+    }
+
+    .stat-header {
+        font-size: 0.75rem;
+    }
+
+    .announcement-list-container {
+        padding: var(--spacing-16);
+    }
+
+    .ann-item {
+        padding: var(--spacing-12) 0;
+    }
 }
