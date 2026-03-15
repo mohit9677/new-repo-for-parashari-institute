@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,6 +14,55 @@
   <link rel="stylesheet" href="assets/css/search.css">
   <link rel="stylesheet" href="assets/css/chatbot.css">
   <link rel="stylesheet" href="assets/css/urgency.css">
+  <style>
+      .category-filter-container { margin: 20px 0 40px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+      .filter-tab { padding: 12px 24px; border-radius: 50px; background: #fff; border: 2px solid #e0d5c8; color: #5a1e1e; font-weight: 600; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-size: 0.95rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); position: relative; overflow: hidden; z-index: 1; }
+      .filter-tab::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #c8960c, #8b4513); opacity: 0; transition: opacity 0.3s ease; z-index: -1; }
+      .filter-tab:hover { border-color: #c8960c; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(200, 150, 12, 0.2); }
+      .filter-tab.active { background: linear-gradient(135deg, #c8960c, #8b4513); border-color: transparent; color: #fff; transform: scale(1.05); box-shadow: 0 10px 30px rgba(139, 69, 19, 0.3); }
+      .filter-tab.active::before { opacity: 1; }
+      .program-tab-content { animation: fadeIn 0.4s ease-in-out; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+      @media (max-width: 768px) {
+          .category-filter-container { justify-content: flex-start; overflow-x: auto; padding-bottom: 10px; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; gap: 10px; scrollbar-width: none; }
+          .category-filter-container::-webkit-scrollbar { display: none; }
+          .filter-tab { flex: 0 0 auto; padding: 10px 20px; font-size: 0.85rem; }
+      }
+      
+      .landscape-pricing-card { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #ffffff, #fdfbf7); border: 1px solid rgba(200, 150, 12, 0.3); border-left: 6px solid #c8960c; border-radius: 12px; padding: 25px 40px; margin-top: 40px; margin-bottom: 20px; flex-wrap: nowrap; gap: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+      .landscape-pricing-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(200, 150, 12, 0.12); }
+      .landscape-pricing-card .pricing-info-left { flex: 1; }
+      .landscape-pricing-card .pricing-block { display: flex; flex-direction: column; align-items: flex-end; justify-content: center; padding: 0 30px; border-right: 1px solid #e0d5c8; }
+      .landscape-pricing-card .enroll-block { padding-left: 10px; }
+      .landscape-pricing-card .save-badge { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px; border: 1px solid #c8e6c9; }
+      @media (max-width: 768px) {
+          .landscape-pricing-card { flex-direction: column; align-items: flex-start; padding: 20px; gap: 15px; }
+          .landscape-pricing-card .pricing-block { align-items: flex-start; padding: 15px 0; border-right: none; border-top: 1px solid #e0d5c8; border-bottom: 1px solid #e0d5c8; width: 100%; }
+          .landscape-pricing-card .enroll-block { width: 100%; padding-left: 0; }
+          .landscape-pricing-card .enroll-block .btn { width: 100%; text-align: center; }
+      }
+      
+      /* Comparison Chart Styles */
+      .comparison-section { padding: 60px 0; background: #fff; }
+      .comparison-table-wrapper { overflow-x: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-top: 30px; }
+      .comparison-table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 800px; background: #fff; }
+      .comparison-table th, .comparison-table td { padding: 18px 24px; text-align: center; border-bottom: 2px solid #f0f0f0; }
+      .comparison-table th:first-child, .comparison-table td:first-child { text-align: left; font-weight: 600; color: #5a1e1e; width: 40%; border-right: 2px solid #f0f0f0; }
+      .comparison-table thead th { background: #fdfbf7; padding: 24px; border-bottom: none; }
+      .comparison-table thead th:not(:first-child) { border-radius: 12px 12px 0 0; }
+      .comparison-table th.tier-diploma { background: #fdfbf7; }
+      .comparison-table th.tier-bachelors { background: #f5eedc; }
+      .comparison-table th.tier-masters { background: #e0d5c8; }
+      .tier-title { display: block; font-size: 1.3rem; color: #5a1e1e; margin-bottom: 5px; }
+      .tier-price { display: block; font-size: 1.1rem; color: #c8960c; font-weight: 700; }
+      .comparison-table tbody tr:nth-child(even) td { background: #fafafa; }
+      .comparison-table tbody tr:last-child td { border-bottom: none; }
+      .col-diploma { background: #fdfbf7 !important; }
+      .col-bachelors { background: #f5eedc !important; }
+      .col-masters { background: #e0d5c8 !important; }
+      .c-icon.check { color: #4CAF50; font-size: 1.2rem; }
+      .c-icon.cross { color: #f44336; font-size: 1.1rem; opacity: 0.6; }
+  </style>
 </head>
 
 <body>
@@ -22,10 +71,9 @@
   <div class="header-top">
     <div class="header-top-content">
       <div class="header-top-left">
-        <div class="header-top-item"><span class="header-top-icon">📞</span><a href="tel:+919999999999">+91
-            9999-999-999</a></div>
+        <div class="header-top-item"><span class="header-top-icon">📞</span><a href="tel:+919621051159">+91 962 105 1159</a></div>
         <div class="header-top-item"><span class="header-top-icon">✉️</span><a
-            href="mailto:info@parashari.com">info@parashari.com</a></div>
+            href="mailto:info@astrobharatai.com">info@astrobharatai.com</a></div>
       </div>
       <div class="header-top-right">Online Classes | ISO Certified</div>
     </div>
@@ -75,6 +123,7 @@
             <li class="dropdown-item"><a href="tarot.html">Tarot Reading</a></li>
             <li class="dropdown-item"><a href="numerology.html">Numerology</a></li>
             <li class="dropdown-item"><a href="mentorship.html">1-on-1 Mentorship</a></li>
+            <li class="dropdown-item"><a href="gemini-jyotish.html">Gemini Jyotish</a></li>
           </ul>
         </li>
         <li class="nav-item"><a href="fee-structure.html">Fee Structure</a></li>
@@ -93,7 +142,8 @@
         <a href="register.html" class="btn btn-primary btn-sm">Register</a>
       </div>
 
-      <button class="hamburger" title="Toggle navigation menu" aria-label="Toggle navigation menu">
+      
+<button class="hamburger" title="Toggle navigation menu" aria-label="Toggle navigation menu">
         <span></span>
         <span></span>
         <span></span>
@@ -139,119 +189,331 @@
 
 
 
-  <section class="hero-section hero-gradient" style="position: relative;">
+  
 
+  <section style="padding-top: 60px;">
+    <div class="container text-center">
+      <h1 class="color-primary" style="font-size: 2.5rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-gem"></i> Vedic Astrology (Jyotish)</h1>
+      <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem; font-weight: 500;">The Ancient Science of Cosmic Destiny</p>
     </div>
-    <div class="container">
-      <h1 class="color-secondary">🔮 Vedic Astrology (Jyotish)</h1>
-      <p>The Ancient Science of Cosmic Destiny</p>
+    <div class="container" data-animate>
+      <img src="assets/images/Picture3.png" alt="Vedic Astrology" class="rounded-lg" style="width: 85%; max-width: 1000px; height: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 0 auto; display: block; margin-bottom: 2rem;">
     </div>
-  </section>
+    <div class="container" data-animate>
+      <h2>What is Vedic Astrology?</h2>
+      <p>Vedic Astrology, also known as Jyotish, is an ancient system of astrology that originated in India and is rooted in the wisdom of the Vedas. The word Jyotish means “science of light,” symbolizing the study of cosmic influences on human life.</p>
+      <p>Vedic Astrology analyzes the positions and movements of celestial bodies such as planets, stars, and lunar nodes at the time of a person’s birth. Using a birth chart (Kundli), astrologers interpret planetary patterns to understand an individual’s personality, life path, strengths, challenges, and potential future events.</p>
+      <p>Unlike many modern astrology systems, Vedic Astrology emphasizes karma, timing of events, and spiritual evolution, making it both a predictive and philosophical discipline.</p>
 
-  <section>
-    <div class="container">
-      <div class="grid grid-2 grid-gap-3">
-        <div data-animate>
-          <h2>What is Vedic Astrology?</h2>
-          <p>Vedic Astrology, also known as Jyotish Shastra, is an ancient Indian science that explores the relationship
-            between celestial bodies and human life. Based on the Vedas, it offers profound insights into personality,
-            destiny, and life events.</p>
-          <p>Unlike Western astrology, Vedic Astrology uses the sidereal zodiac and focuses on lunar nodes (Rahu and
-            Ketu), dasha systems, and detailed predictive techniques.</p>
-          <ul class="list-reset">
-            <li class="mb-0-75">✓ Ancient science dating back 5000+ years</li>
-            <li class="mb-0-75">✓ Mathematical precision in calculations</li>
-            <li class="mb-0-75">✓ Accurate life predictions and guidance</li>
-            <li>✓ Spiritual and practical applications</li>
-          </ul>
-        </div>
-        <div data-animate>
-          <img src="assets/images/vedic-astrology-new.jpg" alt="Vedic Astrology" class="rounded-lg"
-            style="width: 100%; height: auto; object-fit: cover;">
-        </div>
-      </div>
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Why Should You Study Vedic Astrology?</h3>
+      <p>Studying Vedic Astrology allows individuals to gain deeper insights into human life, cosmic patterns, and the connection between the universe and personal destiny.</p>
+      <p>Through systematic study, students learn how planetary positions influence different areas of life such as career, relationships, health, and personal growth. It helps develop analytical thinking, intuition, and a deeper understanding of ancient Indian knowledge systems.</p>
+      <p>Many learners pursue Vedic Astrology not only to predict events but also to guide people toward better decisions and self-awareness.</p>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem;">What Are the Benefits of Studying Vedic Astrology?</h3>
+      <p>Learning Vedic Astrology provides several intellectual, personal, and professional benefits:</p>
+      <ul class="list-reset">
+        <li class="mb-0-75"><strong>1. Deeper Self-Understanding:</strong> It helps individuals understand their personality, strengths, weaknesses, and life patterns through birth chart analysis.</li>
+        <li class="mb-0-75"><strong>2. Better Decision Making:</strong> Astrology can provide guidance on timing and opportunities, helping people make informed life choices.</li>
+        <li class="mb-0-75"><strong>3. Spiritual and Philosophical Growth:</strong> Since Vedic Astrology is closely linked with spiritual traditions, studying it often leads to deeper reflection and personal growth.</li>
+        <li class="mb-0-75"><strong>4. Ability to Guide Others:</strong> Students who master the subject can offer insights and guidance to others regarding career, relationships, and life challenges.</li>
+        <li><strong>5. Intellectual Curiosity and Ancient Knowledge:</strong> It connects learners with thousands of years of traditional knowledge preserved in classical texts and astrological practices.</li>
+      </ul>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Can Someone Build a Career in Vedic Astrology?</h3>
+      <p>Yes, many people build meaningful careers in Vedic Astrology after proper study and practice. As interest in astrology and spiritual sciences grows worldwide, trained astrologers are increasingly sought after. Possible career paths include:</p>
+      <ul class="list-reset">
+        <li class="mb-0-75">✓ Professional astrologer or consultant</li>
+        <li class="mb-0-75">✓ Astrology teacher or researcher</li>
+        <li class="mb-0-75">✓ Author or content creator in astrology</li>
+        <li class="mb-0-75">✓ Online astrology consultant through digital platforms</li>
+        <li>✓ Spiritual counselor or advisor</li>
+      </ul>
+      <p style="margin-top: 1rem;">However, success in this field requires deep study, continuous practice, ethical guidance, and strong analytical ability. Astrology should be approached as a serious discipline rather than a shortcut to quick predictions.</p>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Who Should Learn Vedic Astrology?</h3>
+      <p>Vedic Astrology can be studied by anyone who is curious about cosmic influences and human life. It is particularly suitable for:</p>
+      <ul class="list-reset">
+        <li class="mb-0-75">✓ Students interested in traditional Indian knowledge systems</li>
+        <li class="mb-0-75">✓ Individuals seeking self-understanding and spiritual growth</li>
+        <li class="mb-0-75">✓ Researchers and learners interested in astrology and cosmology</li>
+        <li>✓ Professionals who wish to develop skills in astrological consultation</li>
+      </ul>
+      <p style="margin-top: 1rem;">No prior background in astrology is required to begin learning, but dedication and patience are important to master the subject.</p>    <!-- PROGRAM TABS JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.filter-tab[data-program]');
+            const contents = document.querySelectorAll('.program-tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+
+                    // Hide all contents
+                    contents.forEach(content => {
+                        content.style.display = 'none';
+                    });
+
+                    // Show corresponding content
+                    const targetId = tab.getAttribute('data-program');
+                    const targetContent = document.getElementById(targetId);
+                    if (targetContent) {
+                        targetContent.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>      <h3 style="margin-top: 2rem; margin-bottom: 1rem;">What Will You Learn in a Vedic Astrology Course?</h3>
+      <p>A structured Vedic Astrology course generally covers:</p>
+      <ul class="list-reset">
+          <li class="mb-0-75">✓ Fundamentals of planets, zodiac signs, and houses</li>
+          <li class="mb-0-75">✓ Birth chart (Kundli) creation and interpretation</li>
+          <li class="mb-0-75">✓ Planetary combinations and yogas</li>
+          <li class="mb-0-75">✓ Timing techniques and predictive methods</li>
+          <li>✓ Practical case studies and chart analysis</li>
+      </ul>
+      <p style="margin-top: 1rem;">These foundations help students gradually develop the ability to interpret charts and understand planetary influences.</p>
     </div>
   </section>
 
   <section class="light-bg">
     <div class="container">
-      <h2 class="card-section-title">Our Astrology Diploma Program</h2>
-
-      <div class="grid grid-2 grid-gap-3">
-        <div class="card card-auto p-4" data-animate>
-          <span class="discount-tag" data-discount="63% Discount"></span>
-          <h3 class="color-primary mb-1 text-center">Program Details</h3>
-          <table class="program-table">
-            <tr class="table-row">
-              <td class="table-cell-bold">Duration</td>
-              <td class="table-cell-right">6 Months</td>
-            </tr>
-            <tr class="table-row">
-              <td class="table-cell-bold">Mode</td>
-              <td class="table-cell-right">Online & Offline</td>
-            </tr>
-            <tr class="table-row">
-              <td class="table-cell-bold">Classes</td>
-              <td class="table-cell-right">24 + Practical</td>
-            </tr>
-            <tr class="table-row">
-              <td class="table-cell-bold">Fee</td>
-              <td class="table-cell-right"><del style="color:#999;font-size:0.85em;margin-right:8px;">₹7,999</del>
-                <strong style="color:#d32f2f;font-size:1.1em;">₹2,999</strong> <span class="discount-text">(with 63%
-                  discount)</span>
-              </td>
-            </tr>
-            <tr>
-              <td class="table-cell-bold">Certificate</td>
-              <td class="table-cell-right">Government Recognized</td>
-            </tr>
-          </table>
-          <a href="register.html" class="btn btn-primary btn-full mt-1-5">Enroll Now</a>
-        </div>
-
-        <div class="card card-auto p-4" data-animate>
-          <h3 class="color-primary mb-1 text-center">What You'll Learn</h3>
-          <ul class="list-reset">
-            <li class="mb-0-75"><strong>Module 1:</strong> Basics of Jyotish & Zodiac Signs</li>
-            <li class="mb-0-75"><strong>Module 2:</strong> Planets, Houses & Their Meanings</li>
-            <li class="mb-0-75"><strong>Module 3:</strong> Birth Chart Calculation</li>
-            <li class="mb-0-75"><strong>Module 4:</strong> Dasha System & Timing</li>
-            <li class="mb-0-75"><strong>Module 5:</strong> Remedial Measures</li>
-            <li class="mb-0-75"><strong>Module 6:</strong> Case Studies & Predictions</li>
-          </ul>
-        </div>
+      <h2 class="card-section-title">Our Vedic Astrology Program</h2>
+            
+      <div class="category-filter-container">
+          <button class="filter-tab active" data-program="diploma">Diploma</button>
+          <button class="filter-tab" data-program="bachelors">Bachelors</button>
+          <button class="filter-tab" data-program="masters">Masters</button>
       </div>
+
+      <!-- DIPLOMA -->
+      <div id="diploma" class="program-tab-content" style="display: block;">
+          <div class="grid grid-2 grid-gap-3">
+              <div class="card card-auto p-4" data-animate>
+                  <h3 class="color-primary mb-1 text-center" style="font-size: 1.5rem;">Basic Principals (Part 1)</h3>
+                  <ul class="list-reset" style="text-align: left;">
+                      <li class="mb-2"><strong>Module 1: Cosmic Mechanics</strong><br>Fundamentals of Astronomy and Astrology An introduction to the cosmic mechanics of Jyotish, covering Grahas (Planets), Rashis (Zodiac Signs), and the twelve Bhavas (Houses).</li>
+                      <li class="mb-0-75"><strong>Module 2: Planetary Dynamics</strong><br>Planetary Dynamics and Strengths An advanced study of Shadbala (the six-fold planetary strength) and the classification of planets as Functional Benefices or Malefices based on specific Ascendants.</li>
+                  </ul>
+              </div>
+              <div class="card card-auto p-4" data-animate>
+                  <h3 class="color-primary mb-1 text-center" style="font-size: 1.5rem;">Predictive Science (Part 2)</h3>
+                  <ul class="list-reset" style="text-align: left;">
+                      <li class="mb-2"><strong>Module 3: Temporal Timing</strong><br>Temporal Analysis and Timing of Events Mastering the Vimshottari Dasha system for life-cycle sequencing and utilizing Gochar (Transits) to pinpoint the exact timing of significant life events.</li>
+                      <li class="mb-0-75"><strong>Module 4: Chart Synthesis</strong><br>Chart Synthesis and Practical Application Comprehensive analysis of the birth chart for specific life areas—including Career, Marriage, and Health—along with the implementation of Basic Remedial Measures.</li>
+                  </ul>
+              </div>
+          </div>
+          
+          <div class="landscape-pricing-card" data-animate>
+              <div class="pricing-info-left">
+                  <span class="save-badge"><i class="fas fa-tag" style="margin-right: 4px;"></i> Save 24% Today</span>
+                  <h3 class="color-primary" style="font-size: 1.8rem; margin: 5px 0 10px 0;">Diploma in Vedic Astrology</h3>
+                  <p class="mb-0" style="font-size: 1rem; color: #555; display: flex; align-items: center; gap: 8px;">
+                      <i class="far fa-clock" style="color: #c8960c; font-size: 1.1rem;"></i> <strong>Duration:</strong> 8 WEEKS comprehensive training
+                  </p>
+              </div>
+              <div class="pricing-block">
+                  <div style="text-decoration: line-through; color: #999; font-size: 1.1rem; margin-bottom: 2px;">Regular Price: ₹5,499</div>
+                  <strong style="color: #c8960c; font-size: 2.5rem; line-height: 1; font-weight: 800;">₹4,199</strong>
+              </div>
+              <div class="enroll-block">
+                  <a href="register.html" class="btn btn-primary" style="padding: 14px 35px; border-radius: 50px; font-weight: 700; letter-spacing: 0.5px; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(200, 150, 12, 0.3);">Enroll Now</a>
+              </div>
+          </div>
+      </div>
+
+      <!-- BACHELORS -->
+      <div id="bachelors" class="program-tab-content" style="display: none;">
+          <div class="grid grid-3 grid-gap-2">
+              <div class="card card-auto p-4" data-animate>
+                  <h3 class="color-primary mb-1 text-center" style="font-size: 1.3rem;">Foundations (Part 1)</h3>
+                  <ul class="list-reset" style="text-align: left;">
+                      <li class="mb-2"><strong>Module 1: Siddhanta & Math</strong><br>Covers the astronomical foundations of Jyotish, calculating planetary longitudes and the mathematical construction of a precise horoscope.</li>
+                      <li class="mb-0-75"><strong>Module 2: Graha & Rashi Analysis</strong><br>Analyses planetary strength through Shadbala, Dig Bala, and varying Avasthas of planets.</li>
+                  </ul>
+              </div>
+              <div class="card card-auto p-4" data-animate>
+                  <h3 class="color-primary mb-1 text-center" style="font-size: 1.3rem;">Predictive (Part 2)</h3>
+                  <ul class="list-reset" style="text-align: left;">
+                      <li class="mb-2"><strong>Module 3: Advanced Dasha Systems</strong><br>Moves beyond the standard Vimshottari to explore Yogini and Jaimini’s Chara Dashas for nuanced, multi-layered predictive timing.</li>
+                      <li class="mb-0-75"><strong>Module 4: Varga Charts</strong><br>Deep dives into Divisional Charts, specifically D-9 for marriage and D-10 for professional success.</li>
+                  </ul>
+              </div>
+              <div class="card card-auto p-4" data-animate>
+                  <h3 class="color-primary mb-1 text-center" style="font-size: 1.3rem;">Application (Part 3)</h3>
+                  <ul class="list-reset" style="text-align: left;">
+                      <li class="mb-2"><strong>Module 5: Ashtakvarga & Transits</strong><br>Uses the Ashtakvarga point system to quantify planetary power and analyses Transits to pinpoint exact timing.</li>
+                      <li class="mb-0-75"><strong>Module 6: Remedial Jyotish</strong><br>Focuses on the practical application of Mantras, Yantras, and Muhurta to balance planetary energies.</li>
+                  </ul>
+              </div>
+          </div>
+
+          <div class="landscape-pricing-card" data-animate>
+             <div class="pricing-info-left">
+                  <span class="save-badge"><i class="fas fa-tag" style="margin-right: 4px;"></i> Save 25% Today</span>
+                  <h3 class="color-primary" style="font-size: 1.8rem; margin: 5px 0 10px 0;">Bachelors in Vedic Astrology</h3>
+                  <p class="mb-0" style="font-size: 1rem; color: #555; display: flex; align-items: center; gap: 8px;">
+                      <i class="far fa-clock" style="color: #c8960c; font-size: 1.1rem;"></i> <strong>Duration:</strong> 12 WEEKS advanced program
+                  </p>
+              </div>
+              <div class="pricing-block">
+                  <div style="text-decoration: line-through; color: #999; font-size: 1.1rem; margin-bottom: 2px;">Regular Price: ₹11,999</div>
+                  <strong style="color: #c8960c; font-size: 2.5rem; line-height: 1; font-weight: 800;">₹8,999</strong>
+              </div>
+              <div class="enroll-block">
+                  <a href="register.html" class="btn btn-primary" style="padding: 14px 35px; border-radius: 50px; font-weight: 700; letter-spacing: 0.5px; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(200, 150, 12, 0.3);">Enroll Now</a>
+              </div>
+          </div>
+      </div>
+
+      <!-- MASTERS -->
+      <div id="masters" class="program-tab-content" style="display: none;">
+          <div class="grid grid-2 grid-gap-3">
+              <div class="card card-auto p-4" data-animate>
+                  <h3 class="color-primary mb-1 text-center" style="font-size: 1.4rem;">Foundation (Part 1)</h3>
+                  <ul class="list-reset" style="text-align: left;">
+                      <li class="mb-2"><strong>Module 1: Siddhanta & Astronomy</strong><br>Covers the mathematical foundations of the horoscope, calculating planetary longitudes, and understanding the cosmic mechanics of the Zodiac.</li>
+                      <li class="mb-0-75"><strong>Module 2: Graha & Rashi Analysis</strong><br>In-depth study of planetary strengths (Shadbala), directional strength (Dig Bala), and how signs modify the behavior of the nine Grahas.</li>
+                  </ul>
+              </div>
+              <div class="card card-auto p-4" data-animate>
+                  <h3 class="color-primary mb-1 text-center" style="font-size: 1.4rem;">Analysis & Timing (Part 2)</h3>
+                  <ul class="list-reset" style="text-align: left;">
+                      <li class="mb-2"><strong>Module 3: Bhava & House Lords</strong><br>Analyses the 12 Bhavas (houses), focusing on the placement of house lords and the impact of planetary aspects.</li>
+                      <li class="mb-0-75"><strong>Module 4: Advanced Dasha Systems</strong><br>Mastering the Vimshottari Dasha and seasonal cycles like Yogini or Chara Dashas to pinpoint the exact timing of life events.</li>
+                  </ul>
+              </div>
+              <div class="card card-auto p-4" data-animate>
+                  <h3 class="color-primary mb-1 text-center" style="font-size: 1.4rem;">Divisional & Transits (Part 3)</h3>
+                  <ul class="list-reset" style="text-align: left;">
+                      <li class="mb-2"><strong>Module 5: Varga (Divisional) Charts</strong><br>Deep dives into the 16 Shodashvargas, primarily the Navamsha (D9) for fruitage and Dashamsha (D10) for career and status.</li>
+                      <li class="mb-0-75"><strong>Module 6: Ashtakvarga & Transits</strong><br>Utilizing the Ashtakvarga point system to quantify planetary power and tracking Gochar (Transits) to predict immediate and future outcomes.</li>
+                  </ul>
+              </div>
+              <div class="card card-auto p-4" data-animate>
+                  <h3 class="color-primary mb-1 text-center" style="font-size: 1.4rem;">Practice & Ethics (Part 4)</h3>
+                  <ul class="list-reset" style="text-align: left;">
+                      <li class="mb-2"><strong>Module 7: Muhurta & Panchanga</strong><br>The science of Electional Astrology, using the five limbs of the Panchanga to select auspicious moments for vital activities.</li>
+                      <li class="mb-0-75"><strong>Module 8: Remedial Jyotish & Ethics</strong><br>Applying Mantra, Yantra, and Gemstone remedies while maintaining high ethical standards during professional client consultations.</li>
+                  </ul>
+              </div>
+          </div>
+
+          <div class="landscape-pricing-card" data-animate>
+             <div class="pricing-info-left">
+                  <span class="save-badge"><i class="fas fa-tag" style="margin-right: 4px;"></i> Save 25% Today</span>
+                  <h3 class="color-primary" style="font-size: 1.8rem; margin: 5px 0 10px 0;">Masters in Vedic Astrology</h3>
+                  <p class="mb-0" style="font-size: 1rem; color: #555; display: flex; align-items: center; gap: 8px;">
+                      <i class="far fa-clock" style="color: #c8960c; font-size: 1.1rem;"></i> <strong>Duration:</strong> 16 WEEKS ultimate mastery
+                  </p>
+              </div>
+              <div class="pricing-block">
+                  <div style="text-decoration: line-through; color: #999; font-size: 1.1rem; margin-bottom: 2px;">Regular Price: ₹24,999</div>
+                  <strong style="color: #c8960c; font-size: 2.5rem; line-height: 1; font-weight: 800;">₹18,699</strong>
+              </div>
+              <div class="enroll-block">
+                  <a href="register.html" class="btn btn-primary" style="padding: 14px 35px; border-radius: 50px; font-weight: 700; letter-spacing: 0.5px; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(200, 150, 12, 0.3);">Enroll Now</a>
+              </div>
+          </div>
+      </div>
+      
     </div>
   </section>
 
-  <section>
-    <div class="container">
-      <h2 class="card-section-title">Why Study Astrology?</h2>
-
-      <div class="grid grid-3 grid-gap-2">
-        <div class="card text-center card-auto p-3" data-animate>
-          <div class="font-3xl mb-1">💼</div>
-          <h4>Career Advancement</h4>
-          <p>Become a professional astrologer or consultant with high earning potential.</p>
-        </div>
-        <div class="card text-center card-auto p-3" data-animate>
-          <div class="font-3xl mb-1">🧘</div>
-          <h4>Personal Growth</h4>
-          <p>Gain deep self-knowledge and understand your life purpose and destiny.</p>
-        </div>
-        <div class="card text-center card-auto p-3" data-animate>
-          <div class="font-3xl mb-1">✨</div>
-          <h4>Help Others</h4>
-          <p>Guide people towards better decisions and positive life changes.</p>
-        </div>
+  <!-- COMPARISON TABLE SECTION -->
+  <section class="comparison-section">
+      <div class="container text-center">
+          <h2 class="card-section-title" style="margin-bottom: 10px;">Program Comparison</h2>
+          <p class="color-light-text mb-2">Find the right Vedic Astrology certification path for your goals.</p>
+          
+          <div class="comparison-table-wrapper">
+              <table class="comparison-table">
+                  <thead>
+                      <tr>
+                          <th style="background: #fff; border-right: 2px solid #f0f0f0;"></th>
+                          <th class="tier-diploma">
+                              <span class="tier-title">Diploma</span>
+                              <span class="tier-price">₹4,199</span>
+                          </th>
+                          <th class="tier-bachelors">
+                              <span class="tier-title">Bachelors</span>
+                              <span class="tier-price">₹8,999</span>
+                          </th>
+                          <th class="tier-masters">
+                              <span class="tier-title">Masters</span>
+                              <span class="tier-price">₹18,699</span>
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>Module 1: Cosmic Mechanics / Math</td>
+                          <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                      <tr>
+                          <td>Module 2: Planetary Dynamics</td>
+                          <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                      <tr>
+                          <td>Module 3: Temporal Timing & Dashas</td>
+                          <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                      <tr>
+                          <td>Module 4: Chart Synthesis / Varga Charts</td>
+                          <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                      <tr>
+                          <td>Module 5: Ashtakvarga & Transits</td>
+                          <td class="col-diploma"><i class="fas fa-times c-icon cross"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                      <tr>
+                          <td>Module 6: Remedial Jyotish</td>
+                          <td class="col-diploma"><i class="fas fa-times c-icon cross"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                      <tr>
+                          <td>Module 7: Muhurta & Panchanga</td>
+                          <td class="col-diploma"><i class="fas fa-times c-icon cross"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-times c-icon cross"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                      <tr>
+                          <td>Module 8: Advanced Ethics & Practice</td>
+                          <td class="col-diploma"><i class="fas fa-times c-icon cross"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-times c-icon cross"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                      <tr>
+                          <td><strong>Government Approved E-Certificate</strong></td>
+                          <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
       </div>
-    </div>
   </section>
 
   <section class="light-bg">
     <div class="container text-center">
       <h2 class="mb-1-5">Ready to Master Vedic Astrology?</h2>
-      <p class="mb-2">Join our Astrology Diploma program and become a certified professional.</p>
+      <p class="mb-2">Join our extensive program and unlock the science of destiny.</p>
       <a href="register.html" class="btn btn-primary btn-lg">Start Learning Today</a>
     </div>
   </section>
@@ -269,7 +531,7 @@
         <a href="courses.html" class="marquee-btn">View Courses</a>
       </div>
       <div class="marquee-item">
-        <span class="marquee-icon">⭐</span> Join Parashari Institute Today — Scholarship Available for Top Performers!
+        <span class="marquee-icon"><i class="fa-solid fa-star"></i></span> Join Parashari Institute Today — Scholarship Available for Top Performers!
         <a href="register.html" class="marquee-btn">Apply Now</a>
       </div>
       <!-- Duplicate for seamless scrolling -->
@@ -283,7 +545,7 @@
         <a href="courses.html" class="marquee-btn">View Courses</a>
       </div>
       <div class="marquee-item">
-        <span class="marquee-icon">⭐</span> Join Parashari Institute Today — Scholarship Available for Top Performers!
+        <span class="marquee-icon"><i class="fa-solid fa-star"></i></span> Join Parashari Institute Today — Scholarship Available for Top Performers!
         <a href="register.html" class="marquee-btn">Apply Now</a>
       </div>
     </div>
@@ -336,7 +598,7 @@
           <li><a href="courses.html">Diploma</a></li>
           <li><a href="courses.html">Bachelor</a></li>
           <li><a href="courses.html">Master</a></li>
-          <li><a href="courses.html">Grand Master</a></li>
+          <!-- <li><a href="courses.html">Grand Master</a></li> -->
           <li><a href="6-stairs.html">6 Stairs</a></li>
         </ul>
       </div>
@@ -351,7 +613,7 @@
         <div class="contact-info">
           <div class="contact-icon">📞</div>
           <div class="contact-text">
-            <p class="p-reset"><a href="tel:+919005703159">+91 9005703159</a></p>
+            <p class="p-reset"><a href="tel:+919621051159">+91 962 105 1159</a></p>
           </div>
         </div>
       </div>

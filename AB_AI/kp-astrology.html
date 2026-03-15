@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,6 +14,57 @@
     <link rel="stylesheet" href="assets/css/search.css">
     <link rel="stylesheet" href="assets/css/chatbot.css">
     <link rel="stylesheet" href="assets/css/urgency.css">
+    <style>
+        .category-filter-container { margin: 20px 0 40px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .filter-tab { padding: 12px 24px; border-radius: 50px; background: #fff; border: 2px solid #e0d5c8; color: #5a1e1e; font-weight: 600; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-size: 0.95rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); position: relative; overflow: hidden; z-index: 1; }
+        .filter-tab::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #c8960c, #8b4513); opacity: 0; transition: opacity 0.3s ease; z-index: -1; }
+        .filter-tab:hover { border-color: #c8960c; transform: translateY(-3px); box-shadow: 0 8px 25px rgba(200, 150, 12, 0.2); }
+        .filter-tab.active { background: linear-gradient(135deg, #c8960c, #8b4513); border-color: transparent; color: #fff; transform: scale(1.05); box-shadow: 0 10px 30px rgba(139, 69, 19, 0.3); }
+        .filter-tab.active::before { opacity: 1; }
+        .program-tab-content { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) {
+            .category-filter-container { justify-content: flex-start; overflow-x: auto; padding-bottom: 10px; flex-wrap: nowrap; -webkit-overflow-scrolling: touch; gap: 10px; scrollbar-width: none; }
+            .category-filter-container::-webkit-scrollbar { display: none; }
+            .filter-tab { flex: 0 0 auto; padding: 10px 20px; font-size: 0.85rem; }
+        }
+        
+        .landscape-pricing-card { display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, #ffffff, #fdfbf7); border: 1px solid rgba(200, 150, 12, 0.3); border-left: 6px solid #c8960c; border-radius: 12px; padding: 25px 40px; margin-top: 40px; margin-bottom: 20px; flex-wrap: nowrap; gap: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .landscape-pricing-card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(200, 150, 12, 0.12); }
+        .landscape-pricing-card .pricing-info-left { flex: 1; }
+        .landscape-pricing-card .pricing-block { display: flex; flex-direction: column; align-items: flex-end; justify-content: center; padding: 0 30px; border-right: 1px solid #e0d5c8; }
+        .landscape-pricing-card .enroll-block { padding-left: 10px; }
+        .landscape-pricing-card .save-badge { display: inline-block; background: #e8f5e9; color: #2e7d32; padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 5px; border: 1px solid #c8e6c9; }
+        @media (max-width: 768px) {
+            .landscape-pricing-card { flex-direction: column; align-items: flex-start; padding: 20px; gap: 15px; }
+            .landscape-pricing-card .pricing-block { align-items: flex-start; padding: 15px 0; border-right: none; border-top: 1px solid #e0d5c8; border-bottom: 1px solid #e0d5c8; width: 100%; }
+            .landscape-pricing-card .enroll-block { width: 100%; padding-left: 0; }
+            .landscape-pricing-card .enroll-block .btn { width: 100%; text-align: center; }
+        }
+        
+        /* Comparison Chart Styles */
+        .comparison-section { padding: 60px 0; background: #fff; }
+        .comparison-table-wrapper { overflow-x: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); margin-top: 30px; }
+        .comparison-table { width: 100%; border-collapse: separate; border-spacing: 0; min-width: 800px; background: #fff; }
+        .comparison-table th, .comparison-table td { padding: 18px 24px; text-align: center; border-bottom: 2px solid #f0f0f0; }
+        .comparison-table th:first-child, .comparison-table td:first-child { text-align: left; font-weight: 600; color: #5a1e1e; width: 40%; border-right: 2px solid #f0f0f0; }
+        .comparison-table thead th { background: #fdfbf7; padding: 24px; border-bottom: none; }
+        .comparison-table thead th:not(:first-child) { border-radius: 12px 12px 0 0; }
+        .comparison-table th.tier-diploma { background: #fdfbf7; }
+        .comparison-table th.tier-bachelors { background: #f5eedc; }
+        .comparison-table th.tier-masters { background: #e0d5c8; }
+        
+        .tier-title { display: block; font-size: 1.3rem; color: #5a1e1e; margin-bottom: 5px; }
+        .tier-price { display: block; font-size: 1.1rem; color: #c8960c; font-weight: 700; }
+        .comparison-table tbody tr:nth-child(even) td { background: #fafafa; }
+        .comparison-table tbody tr:last-child td { border-bottom: none; }
+        .col-diploma { background: #fdfbf7 !important; }
+        .col-bachelors { background: #f5eedc !important; }
+        .col-masters { background: #e0d5c8 !important; }
+        
+        .c-icon.check { color: #4CAF50; font-size: 1.2rem; }
+        .c-icon.cross { color: #f44336; font-size: 1.1rem; opacity: 0.6; }
+    </style>
 </head>
 
 <body>
@@ -21,10 +72,9 @@
     <div class="header-top">
         <div class="header-top-content">
             <div class="header-top-left">
-                <div class="header-top-item"><span class="header-top-icon">📞</span><a href="tel:+919999999999">+91
-                        9999-999-999</a></div>
+                <div class="header-top-item"><span class="header-top-icon">📞</span><a href="tel:+919621051159">+91 962 105 1159</a></div>
                 <div class="header-top-item"><span class="header-top-icon">✉️</span><a
-                        href="mailto:info@parashari.com">info@parashari.com</a></div>
+                        href="mailto:info@astrobharatai.com">info@astrobharatai.com</a></div>
             </div>
             <div class="header-top-right">Online Classes | ISO Certified</div>
         </div>
@@ -72,6 +122,7 @@
                         <li class="dropdown-item"><a href="tarot.html">Tarot Reading</a></li>
                         <li class="dropdown-item"><a href="numerology.html">Numerology</a></li>
                         <li class="dropdown-item"><a href="mentorship.html">1-on-1 Mentorship</a></li>
+            <li class="dropdown-item"><a href="gemini-jyotish.html">Gemini Jyotish</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a href="fee-structure.html">Fee Structure</a></li>
@@ -87,7 +138,8 @@
                 <a href="login.html" class="btn btn-outline btn-sm">Login</a>
                 <a href="register.html" class="btn btn-primary btn-sm">Register</a>
             </div>
-            <button class="hamburger" title="Toggle navigation menu" aria-label="Toggle navigation menu">
+            
+<button class="hamburger" title="Toggle navigation menu" aria-label="Toggle navigation menu">
                 <span></span><span></span><span></span>
             </button>
         </nav>
@@ -133,117 +185,293 @@
 
 
 
-    <section class="hero-section hero-gradient">
-        <div class="container">
-            <h1 class="color-secondary">⭐ KP Astrology</h1>
-            <p>Krishnamurti Paddhati - The Most Precise Predictive System</p>
-        </div>
-    </section>
+    
 
-    <section>
-        <div class="container">
-            <div class="grid grid-2 grid-gap-3">
-                <div data-animate>
-                    <h2>What is KP Astrology?</h2>
-                    <p>Krishnamurti Paddhati (KP) is a stellar system of astrology developed by Prof. K.S. Krishnamurti.
-                        It eliminates the ambiguity of traditional astrology and provides clear YES or NO answers to any
-                        question with remarkable accuracy.</p>
-                    <p>KP uses sub-lords, ruling planets, and a unique house division system to give precise predictions
-                        about timing of events, making it the most scientific and accurate predictive tool in astrology.
-                    </p>
-                    <ul class="list-reset">
-                        <li class="mb-0-75">✓ Scientific & logical approach</li>
-                        <li class="mb-0-75">✓ Precise timing of events</li>
-                        <li class="mb-0-75">✓ Clear YES/NO predictions</li>
-                        <li>✓ Works without birth time</li>
-                    </ul>
-                </div>
-                <div data-animate>
-                    <img src="assets/images/kp-astrology-new.jpg" alt="KP Astrology" class="rounded-lg">
-                </div>
-            </div>
-        </div>
-    </section>
+    <section style="padding-top: 60px;">
+    <div class="container text-center">
+      <h1 class="color-primary" style="font-size: 2.5rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-star"></i> KP Astrology</h1>
+      <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem; font-weight: 500;">Krishnamurti Paddhati - The Most Precise Predictive System</p>
+    </div>
+    <div class="container" data-animate>
+      <img src="assets/images/Picture4.png" alt="KP Astrology" class="rounded-lg" style="width: 85%; max-width: 1000px; height: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 0 auto; display: block; margin-bottom: 2rem;">
+    </div>
+    <div class="container" data-animate>
+        <h2>What is KP Astrology?</h2>
+        <p>KP Astrology stands for Krishnamurti Paddhati, a modern and systematic approach to astrology developed by K. S. Krishnamurti in the 20th century.</p>
+        <p>KP Astrology is known for its precision and simplified predictive techniques. Unlike traditional methods that rely heavily on broad planetary interpretations, KP Astrology focuses on stellar divisions (Nakshatras) and sub-lords to determine the exact timing and nature of events.</p>
+        <p>This system combines principles from classical Indian astrology with mathematical accuracy, allowing astrologers to make more detailed and time-specific predictions about various aspects of life such as career, marriage, education, and financial matters.</p>
 
-    <section class="light-bg">
-        <div class="container">
-            <h2 class="card-section-title">Our KP Astrology Diploma Program</h2>
-            <div class="grid grid-2 grid-gap-3">
-                <div class="card card-auto p-4" data-animate>
-                    <span class="discount-tag" data-discount="41% Discount"></span>
-                    <h3 class="color-primary mb-1 text-center">Program Details</h3>
-                    <table class="program-table">
-                        <tr class="table-row">
-                            <td class="table-cell-bold">Duration</td>
-                            <td class="table-cell-right">5 Months</td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-cell-bold">Mode</td>
-                            <td class="table-cell-right">Online & Offline</td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-cell-bold">Classes</td>
-                            <td class="table-cell-right">20 + Practical</td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-cell-bold">Fee</td>
-                            <td class="table-cell-right"><del
-                                    style="color:#999;font-size:0.85em;margin-right:8px;">₹17,000</del> <strong
-                                    style="color:#d32f2f;font-size:1.1em;">₹9,999</strong> <span
-                                    class="discount-text">(with 41% discount)</span></td>
-                        </tr>
-                        <tr>
-                            <td class="table-cell-bold">Certificate</td>
-                            <td class="table-cell-right">Government Recognized</td>
-                        </tr>
-                    </table>
-                    <a href="register.html" class="btn btn-primary btn-full mt-1-5">Enroll Now</a>
-                </div>
-                <div class="card card-auto p-4" data-animate>
-                    <h3 class="color-primary mb-1 text-center">What You'll Learn</h3>
-                    <ul class="list-reset">
-                        <li class="mb-0-75"><strong>Module 1:</strong> KP Principles & Stellar Theory</li>
-                        <li class="mb-0-75"><strong>Module 2:</strong> Placidus House System</li>
-                        <li class="mb-0-75"><strong>Module 3:</strong> Sub-Lord Theory & Cusps</li>
-                        <li class="mb-0-75"><strong>Module 4:</strong> Ruling Planets & Significators</li>
-                        <li class="mb-0-75"><strong>Module 5:</strong> Horary Number Astrology</li>
-                        <li class="mb-0-75"><strong>Module 6:</strong> Timing Events with Dasha</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+        <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Why Should You Study KP Astrology?</h3>
+        <p>Here are five key reasons students choose to learn KP Astrology.</p>
+        <ul class="list-reset">
+            <li class="mb-0-75"><strong>1. Learn a Logical System of Astrology:</strong> KP Astrology is known for its clear rules and systematic approach to chart interpretation. This structured methodology helps students understand astrological concepts more easily and apply them in practical analysis.</li>
+            <li class="mb-0-75"><strong>2. Improve Predictive Skills:</strong> The techniques used in KP Astrology focus strongly on timing of events and detailed chart interpretation. Students learn methods that help refine their predictive abilities.</li>
+            <li class="mb-0-75"><strong>3. Gain Analytical Thinking Skills:</strong> Studying KP Astrology encourages careful observation, pattern recognition, and logical analysis of planetary positions and house significations.</li>
+            <li class="mb-0-75"><strong>4. Explore a Modern Astrological Method:</strong> KP Astrology represents a modern development in astrological study, blending traditional ideas with refined techniques developed in the 20th century.</li>
+            <li><strong>5. Develop a Professional Knowledge Area:</strong> With proper training and experience, KP Astrology can become a specialized skill that may lead to opportunities in teaching, consulting, or research in astrology.</li>
+        </ul>
 
-    <section>
-        <div class="container">
-            <h2 class="card-section-title">Why Study KP Astrology?</h2>
-            <div class="grid grid-3 grid-gap-2">
-                <div class="card text-center card-auto p-3" data-animate>
-                    <div class="font-3xl mb-1">💼</div>
-                    <h4>Career Advancement</h4>
-                    <p>Become a KP specialist with unique expertise in precise predictions.</p>
-                </div>
-                <div class="card text-center card-auto p-3" data-animate>
-                    <div class="font-3xl mb-1">🧘</div>
-                    <h4>Personal Growth</h4>
-                    <p>Get accurate answers to your life's important questions.</p>
-                </div>
-                <div class="card text-center card-auto p-3" data-animate>
-                    <div class="font-3xl mb-1">✨</div>
-                    <h4>Help Others</h4>
-                    <p>Provide scientific, accurate predictions that truly help people.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        <h3 style="margin-top: 2rem; margin-bottom: 1rem;">What Are the Benefits of Studying KP Astrology?</h3>
+        <p>Studying KP Astrology offers several benefits for learners interested in astrology and predictive sciences.</p>
+        <ul class="list-reset">
+            <li class="mb-0-75"><strong>1. Greater Predictive Precision:</strong> KP Astrology uses detailed stellar divisions and sub-lord analysis, which can provide more precise interpretations of life events.</li>
+            <li class="mb-0-75"><strong>2. Structured Analytical Method:</strong> The system follows a clear and logical framework, helping students learn astrology in a systematic and organized way.</li>
+            <li class="mb-0-75"><strong>3. Practical Application:</strong> KP Astrology is often used for answering specific questions about life events such as career opportunities, marriage timing, education, and property matters.</li>
+            <li class="mb-0-75"><strong>4. Faster Chart Interpretation:</strong> Compared to many traditional methods, KP techniques can sometimes allow astrologers to analyze charts more efficiently.</li>
+            <li><strong>5. Deeper Understanding of Planetary Influence:</strong> Students gain insight into how planetary positions interact with houses and constellations to influence different areas of life.</li>
+        </ul>
 
-    <section class="light-bg">
-        <div class="container text-center">
-            <h2 class="mb-1-5">Ready to Master KP Astrology?</h2>
-            <p class="mb-2">Join our KP program and learn the most accurate predictive system in astrology.</p>
-            <a href="register.html" class="btn btn-primary btn-lg">Start Learning Today</a>
-        </div>
-    </section>
+        <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Can Someone Build a Career in KP Astrology?</h3>
+        <p>Yes, individuals who study KP Astrology in depth and gain practical experience can build professional opportunities in this field. Possible career paths include:</p>
+        <ul class="list-reset">
+            <li class="mb-0-75">✓ Professional astrology consultant</li>
+            <li class="mb-0-75">✓ KP Astrology teacher or trainer</li>
+            <li class="mb-0-75">✓ Researcher in astrology and predictive sciences</li>
+            <li class="mb-0-75">✓ Content creator or author on astrology topics</li>
+            <li>✓ Online astrology consultation services</li>
+        </ul>
+        <p style="margin-top: 1rem;">However, developing a career in astrology requires serious study, continuous practice, and ethical guidance when offering advice to others.</p>
+    </div>
+  </section>
+
+  <section class="light-bg">
+      <div class="container">
+          <h2 class="card-section-title">Our KP Astrology Program</h2>
+          
+          <div class="category-filter-container">
+              <button class="filter-tab active" data-program="diploma">Diploma</button>
+              <button class="filter-tab" data-program="bachelors">Bachelors</button>
+              <button class="filter-tab" data-program="masters">Masters</button>
+          </div>
+
+          <!-- DIPLOMA -->
+          <div id="diploma" class="program-tab-content" style="display: block;">
+              <div class="grid grid-2 grid-gap-3">
+                  <div class="card card-auto p-4" data-animate>
+                      <h3 class="color-primary mb-1 text-center" style="font-size: 1.5rem;">Foundations (Part 1)</h3>
+                      <ul class="list-reset" style="text-align: left;">
+                          <li class="mb-2"><strong>Module 1: Sub-Lords & Placidus</strong><br>Explains the core KP discovery: dividing stars into Sub-Lords for precision, using the Placidus system for exact house boundaries.</li>
+                          <li class="mb-0-75"><strong>Module 2: Star Lords & Interlinks</strong><br>Analyses how Star Lords dictate planetary results and how Cuspal Interlinks connect different houses to reveal specific life promises.</li>
+                      </ul>
+                  </div>
+                  <div class="card card-auto p-4" data-animate>
+                      <h3 class="color-primary mb-1 text-center" style="font-size: 1.5rem;">Predictive Science (Part 2)</h3>
+                      <ul class="list-reset" style="text-align: left;">
+                          <li class="mb-2"><strong>Module 3: Ruling Planets & Horary</strong><br>Teaches Ruling Planets for real-time guidance and Prashna (Horary) to answer specific questions based on a number (1–249).</li>
+                          <li class="mb-0-75"><strong>Module 4: 4-Step Theory & Timing</strong><br>Mastering the 4-Step Theory to predict the exact timing of events through "Dasha" periods and analysing real-world professional cases.</li>
+                      </ul>
+                  </div>
+              </div>
+              
+              <div class="landscape-pricing-card" data-animate>
+                  <div class="pricing-info-left">
+                      <span class="save-badge"><i class="fas fa-tag" style="margin-right: 4px;"></i> Save 24% Today</span>
+                      <h3 class="color-primary" style="font-size: 1.8rem; margin: 5px 0 10px 0;">Diploma in KP Astrology</h3>
+                      <p class="mb-0" style="font-size: 1rem; color: #555; display: flex; align-items: center; gap: 8px;">
+                          <i class="far fa-clock" style="color: #c8960c; font-size: 1.1rem;"></i> <strong>Duration:</strong> 8 WEEKS comprehensive training
+                      </p>
+                  </div>
+                  <div class="pricing-block">
+                      <div style="text-decoration: line-through; color: #999; font-size: 1.1rem; margin-bottom: 2px;">Regular Price: ₹5,499</div>
+                      <strong style="color: #c8960c; font-size: 2.5rem; line-height: 1; font-weight: 800;">₹4,199</strong>
+                  </div>
+                  <div class="enroll-block">
+                      <a href="register.html" class="btn btn-primary" style="padding: 14px 35px; border-radius: 50px; font-weight: 700; letter-spacing: 0.5px; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(200, 150, 12, 0.3);">Enroll Now</a>
+                  </div>
+              </div>
+          </div>
+
+          <!-- BACHELORS -->
+          <div id="bachelors" class="program-tab-content" style="display: none;">
+              <div class="grid grid-3 grid-gap-2">
+                  <div class="card card-auto p-4" data-animate>
+                      <h3 class="color-primary mb-1 text-center" style="font-size: 1.3rem;">Foundations (Part 1)</h3>
+                      <ul class="list-reset" style="text-align: left;">
+                          <li class="mb-2"><strong>Module 1: Placidus vs. Vedic</strong><br>Compares the Placidus House System with traditional Vedic Bhava Chalit, establishing why exact house boundaries are crucial for KP.</li>
+                          <li class="mb-0-75"><strong>Module 2: The Sub-Lord Theory</strong><br>Delves into the Sub-Lord, the defining feature of KP that divides each star into nine parts for unparalleled predictive precision.</li>
+                      </ul>
+                  </div>
+                  <div class="card card-auto p-4" data-animate>
+                      <h3 class="color-primary mb-1 text-center" style="font-size: 1.3rem;">Predictive (Part 2)</h3>
+                      <ul class="list-reset" style="text-align: left;">
+                          <li class="mb-2"><strong>Module 3: Cuspal Interlinks</strong><br>Explores Cuspal Interlinks, interpreting the twelve houses through their Star Lords to determine the actual promise of any event.</li>
+                          <li class="mb-0-75"><strong>Module 4: Horary (Prashna)</strong><br>Mastering Horary Astrology to answer specific queries by using a number between 1 and 249 when birth time is unknown.</li>
+                      </ul>
+                  </div>
+                  <div class="card card-auto p-4" data-animate>
+                      <h3 class="color-primary mb-1 text-center" style="font-size: 1.3rem;">Application (Part 3)</h3>
+                      <ul class="list-reset" style="text-align: left;">
+                          <li class="mb-2"><strong>Module 5: Ruling Planets (RP)</strong><br>Teaches the Ruling Planets (RP) theory, applying "Divine Time" to verify charts, rectify birth times, and confirm specific predictions.</li>
+                          <li class="mb-0-75"><strong>Module 6: Practical Synthesis</strong><br>Synthesizes all techniques to predict marriage, career, and health with exact timing by combining Sub-Lords and planetary periods (Dasha).</li>
+                      </ul>
+                  </div>
+              </div>
+
+              <div class="landscape-pricing-card" data-animate>
+                 <div class="pricing-info-left">
+                      <span class="save-badge"><i class="fas fa-tag" style="margin-right: 4px;"></i> Save 25% Today</span>
+                      <h3 class="color-primary" style="font-size: 1.8rem; margin: 5px 0 10px 0;">Bachelors in KP Astrology</h3>
+                      <p class="mb-0" style="font-size: 1rem; color: #555; display: flex; align-items: center; gap: 8px;">
+                          <i class="far fa-clock" style="color: #c8960c; font-size: 1.1rem;"></i> <strong>Duration:</strong> 12 WEEKS advanced program
+                      </p>
+                  </div>
+                  <div class="pricing-block">
+                      <div style="text-decoration: line-through; color: #999; font-size: 1.1rem; margin-bottom: 2px;">Regular Price: ₹11,999</div>
+                      <strong style="color: #c8960c; font-size: 2.5rem; line-height: 1; font-weight: 800;">₹8,999</strong>
+                  </div>
+                  <div class="enroll-block">
+                      <a href="register.html" class="btn btn-primary" style="padding: 14px 35px; border-radius: 50px; font-weight: 700; letter-spacing: 0.5px; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(200, 150, 12, 0.3);">Enroll Now</a>
+                  </div>
+              </div>
+          </div>
+
+          <!-- MASTERS -->
+          <div id="masters" class="program-tab-content" style="display: none;">
+              <div class="grid grid-2 grid-gap-3">
+                  <div class="card card-auto p-4" data-animate>
+                      <h3 class="color-primary mb-1 text-center" style="font-size: 1.4rem;">Foundation (Part 1)</h3>
+                      <ul class="list-reset" style="text-align: left;">
+                          <li class="mb-2"><strong>Module 1: Fundamental Principles</strong><br>Compares the Placidus House System with Vedic Bhava Chalit, establishing why exact house boundaries are crucial for KP precision.</li>
+                          <li class="mb-0-75"><strong>Module 2: The Sub-Lord Theory</strong><br>Delves into the Sub-Lord, the defining feature of KP that divides each star into nine parts for unparalleled predictive accuracy.</li>
+                      </ul>
+                  </div>
+                  <div class="card card-auto p-4" data-animate>
+                      <h3 class="color-primary mb-1 text-center" style="font-size: 1.4rem;">Analysis & Interlinks (Part 2)</h3>
+                      <ul class="list-reset" style="text-align: left;">
+                          <li class="mb-2"><strong>Module 3: Cuspal Interlinks</strong><br>Explores Cuspal Interlinks, interpreting the twelve houses through their Star Lords to determine the actual promise of life events.</li>
+                          <li class="mb-0-75"><strong>Module 4: Significance & Indicators</strong><br>Mastering Planetary Significators (A, B, C, D levels) to identify which houses a planet will manifest during its Dasha.</li>
+                      </ul>
+                  </div>
+                  <div class="card card-auto p-4" data-animate>
+                      <h3 class="color-primary mb-1 text-center" style="font-size: 1.4rem;">Query & Verification (Part 3)</h3>
+                      <ul class="list-reset" style="text-align: left;">
+                          <li class="mb-2"><strong>Module 5: Horary (Prashna) Astrology</strong><br>Using Horary Astrology to solve specific queries by selecting a number between 1 and 249 when birth time is unknown.</li>
+                          <li class="mb-0-75"><strong>Module 6: Ruling Planets (RP)</strong><br>Teaches the Ruling Planets (RP) theory, applying "Divine Time" to verify charts, rectify birth times, and confirm specific predictions.</li>
+                      </ul>
+                  </div>
+                  <div class="card card-auto p-4" data-animate>
+                      <h3 class="color-primary mb-1 text-center" style="font-size: 1.4rem;">Practice & Synthesis (Part 4)</h3>
+                      <ul class="list-reset" style="text-align: left;">
+                          <li class="mb-2"><strong>Module 7: Timing of Events</strong><br>Synthesizes Dasha, Bhukti, and Transits with Sub-Lord strength to predict marriage, career, and health with exact calendar dates.</li>
+                          <li class="mb-0-75"><strong>Module 8: Professional Synthesis</strong><br>Focuses on advanced case studies, ethical consultation, and integrating KP techniques into a modern, high-precision astrological practice.</li>
+                      </ul>
+                  </div>
+              </div>
+
+              <div class="landscape-pricing-card" data-animate>
+                 <div class="pricing-info-left">
+                      <span class="save-badge"><i class="fas fa-tag" style="margin-right: 4px;"></i> Save 25% Today</span>
+                      <h3 class="color-primary" style="font-size: 1.8rem; margin: 5px 0 10px 0;">Masters in KP Astrology</h3>
+                      <p class="mb-0" style="font-size: 1rem; color: #555; display: flex; align-items: center; gap: 8px;">
+                          <i class="far fa-clock" style="color: #c8960c; font-size: 1.1rem;"></i> <strong>Duration:</strong> 16 WEEKS ultimate mastery
+                      </p>
+                  </div>
+                  <div class="pricing-block">
+                      <div style="text-decoration: line-through; color: #999; font-size: 1.1rem; margin-bottom: 2px;">Regular Price: ₹24,999</div>
+                      <strong style="color: #c8960c; font-size: 2.5rem; line-height: 1; font-weight: 800;">₹18,699</strong>
+                  </div>
+                  <div class="enroll-block">
+                      <a href="register.html" class="btn btn-primary" style="padding: 14px 35px; border-radius: 50px; font-weight: 700; letter-spacing: 0.5px; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(200, 150, 12, 0.3);">Enroll Now</a>
+                  </div>
+              </div>
+          </div>
+          
+      </div>
+  </section>
+
+  <!-- COMPARISON TABLE SECTION -->
+  <section class="comparison-section">
+      <div class="container text-center">
+          <h2 class="card-section-title" style="margin-bottom: 10px;">Program Comparison</h2>
+          <p class="color-light-text mb-2">Find the right KP Astrology certification path for your goals.</p>
+          
+          <div class="comparison-table-wrapper">
+              <table class="comparison-table">
+                  <thead>
+                      <tr>
+                          <th style="background: #fff; border-right: 2px solid #f0f0f0;"></th>
+                          <th class="tier-diploma">
+                              <span class="tier-title">Diploma</span>
+                              <span class="tier-price">₹4,199</span>
+                          </th>
+                          <th class="tier-bachelors">
+                              <span class="tier-title">Bachelors</span>
+                              <span class="tier-price">₹8,999</span>
+                          </th>
+                          <th class="tier-masters">
+                              <span class="tier-title">Masters</span>
+                              <span class="tier-price">₹18,699</span>
+                          </th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>Module 1: Fundamental Principles & Placidus</td>
+                          <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                      <tr>
+                          <td>Module 2: The Sub-Lord Theory</td>
+                          <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                      <tr>
+                          <td>Module 3: Cuspal Interlinks</td>
+                          <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                      <tr>
+                          <td>Module 4: Significance & Indicators</td>
+                          <td class="col-diploma"><i class="fas fa-times c-icon cross"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-times c-icon cross"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                      <tr>
+                          <td>Module 5: Horary (Prashna) Astrology</td>
+                          <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                      <tr>
+                          <td>Module 6: Ruling Planets (RP) Theory</td>
+                          <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                      <tr>
+                          <td>Module 7: Timing of Events (Dashas & Transits)</td>
+                          <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                      <tr>
+                          <td>Module 8: Advanced Professional Synthesis</td>
+                          <td class="col-diploma"><i class="fas fa-times c-icon cross"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                      <tr>
+                          <td><strong>Government Approved E-Certificate</strong></td>
+                          <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                          <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </section>
+
+  <section class="light-bg">
+      <div class="container text-center">
+          <h2 class="mb-1-5">Ready to Master KP Astrology?</h2>
+          <p class="mb-2">Join our program and learn the most accurate predictive system in modern astrology.</p>
+          <a href="register.html" class="btn btn-primary btn-lg">Start Learning Today</a>
+      </div>
+  </section>
 
     <!-- TOP URGENCY MARQUEE -->
     <div class="urgency-marquee-container">
@@ -259,7 +487,7 @@
                 <a href="courses.html" class="marquee-btn">View Courses</a>
             </div>
             <div class="marquee-item">
-                <span class="marquee-icon">⭐</span> Join Parashari Institute Today — Scholarship Available for Top
+                <span class="marquee-icon"><i class="fa-solid fa-star"></i></span> Join Parashari Institute Today — Scholarship Available for Top
                 Performers!
                 <a href="register.html" class="marquee-btn">Apply Now</a>
             </div>
@@ -275,7 +503,7 @@
                 <a href="courses.html" class="marquee-btn">View Courses</a>
             </div>
             <div class="marquee-item">
-                <span class="marquee-icon">⭐</span> Join Parashari Institute Today — Scholarship Available for Top
+                <span class="marquee-icon"><i class="fa-solid fa-star"></i></span> Join Parashari Institute Today — Scholarship Available for Top
                 Performers!
                 <a href="register.html" class="marquee-btn">Apply Now</a>
             </div>
@@ -330,7 +558,7 @@
                     <li><a href="courses.html">Diploma</a></li>
                     <li><a href="courses.html">Bachelor</a></li>
                     <li><a href="courses.html">Master</a></li>
-                    <li><a href="courses.html">Grand Master</a></li>
+                    <!-- <li><a href="courses.html">Grand Master</a></li> -->
                     <li><a href="6-stairs.html">6 Stairs</a></li>
                 </ul>
             </div>
@@ -345,7 +573,7 @@
                 <div class="contact-info">
                     <div class="contact-icon">📞</div>
                     <div class="contact-text">
-                        <p class="p-reset"><a href="tel:+919005703159">+91 9005703159</a></p>
+                        <p class="p-reset"><a href="tel:+919621051159">+91 962 105 1159</a></p>
                     </div>
                 </div>
             </div>
@@ -411,7 +639,34 @@
         });
     </script>
 
+    <!-- PROGRAM TABS JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.filter-tab[data-program]');
+            const contents = document.querySelectorAll('.program-tab-content');
 
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+
+                    // Hide all contents
+                    contents.forEach(content => {
+                        content.style.display = 'none';
+                    });
+
+                    // Show corresponding content
+                    const targetId = tab.getAttribute('data-program');
+                    const targetContent = document.getElementById(targetId);
+                    if (targetContent) {
+                        targetContent.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 

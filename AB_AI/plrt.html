@@ -1,419 +1,610 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Past Life Regression Theory - Parashari Indian Institute</title>
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/navbar.css">
-  <link rel="stylesheet" href="assets/css/footer.css">
-  <link rel="stylesheet" href="assets/css/responsive.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="assets/css/loader.css">
-  <link rel="stylesheet" href="assets/css/search.css">
-  <link rel="stylesheet" href="assets/css/chatbot.css">
-  <link rel="stylesheet" href="assets/css/urgency.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Life Regression Theory (PLRT) - Parashari Indian Institute</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/navbar.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/loader.css">
+    <link rel="stylesheet" href="assets/css/search.css">
+    <link rel="stylesheet" href="assets/css/chatbot.css">
+    <link rel="stylesheet" href="assets/css/urgency.css">
+    <style>
+        .landscape-pricing-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #ffffff, #fdfbf7);
+            border: 1px solid rgba(200, 150, 12, 0.3);
+            border-left: 6px solid #c8960c;
+            border-radius: 12px;
+            padding: 25px 40px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            flex-wrap: nowrap;
+            gap: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .landscape-pricing-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(200, 150, 12, 0.12);
+        }
+        .landscape-pricing-card .pricing-info-left {
+            flex: 1;
+        }
+        .landscape-pricing-card .pricing-block {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 0 30px;
+            border-right: 1px solid #e0d5c8;
+        }
+        .landscape-pricing-card .enroll-block {
+            padding-left: 10px;
+        }
+        .landscape-pricing-card .save-badge {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            border: 1px solid #c8e6c9;
+        }
+        .landscape-pricing-card .crash-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            color: #e65100;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-left: 10px;
+            border: 1px solid #ffcc80;
+            letter-spacing: 0.5px;
+        }
+        @media (max-width: 768px) {
+            .landscape-pricing-card {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+                gap: 15px;
+            }
+            .landscape-pricing-card .pricing-block {
+                align-items: flex-start;
+                padding: 15px 0;
+                border-right: none;
+                border-top: 1px solid #e0d5c8;
+                border-bottom: 1px solid #e0d5c8;
+                width: 100%;
+            }
+            .landscape-pricing-card .enroll-block {
+                width: 100%;
+                padding-left: 0;
+            }
+            .landscape-pricing-card .enroll-block .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* FAQ Accordion Styles */
+        .faq-section {
+            padding: 60px 0;
+            background: #fff;
+        }
+        .faq-item {
+            background: #fdfbf7;
+            border: 1px solid rgba(200, 150, 12, 0.15);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease;
+        }
+        .faq-item:hover {
+            box-shadow: 0 4px 15px rgba(200, 150, 12, 0.1);
+        }
+        .faq-question {
+            padding: 18px 24px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: #5a1e1e;
+            font-size: 1.05rem;
+            transition: background 0.3s ease;
+        }
+        .faq-question:hover {
+            background: rgba(200, 150, 12, 0.05);
+        }
+        .faq-question .faq-toggle {
+            font-size: 1.2rem;
+            color: #c8960c;
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+            margin-left: 15px;
+        }
+        .faq-item.active .faq-question .faq-toggle {
+            transform: rotate(45deg);
+        }
+        .faq-answer {
+            padding: 0 24px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+            color: #555;
+            line-height: 1.7;
+        }
+        .faq-item.active .faq-answer {
+            padding: 0 24px 20px;
+            max-height: 500px;
+        }
+    </style>
 </head>
 
 <body>
 
-
-  <div class="header-top">
-    <div class="header-top-content">
-      <div class="header-top-left">
-        <div class="header-top-item"><span class="header-top-icon">📞</span><a href="tel:+919999999999">+91
-            9999-999-999</a></div>
-        <div class="header-top-item"><span class="header-top-icon">✉️</span><a
-            href="mailto:info@parashari.com">info@parashari.com</a></div>
-      </div>
-      <div class="header-top-right">Online Classes | ISO Certified</div>
-    </div>
-  </div>
-
-  <header>
-    <nav class="navbar">
-      <!-- Logo removed from navbar as requested -->
-
-      <ul class="nav-menu">
-
-        <li class="nav-item search-nav-item">
-          <!-- Search Bar Injected -->
-          <div class="search-container">
-            <div class="container-input">
-              <input type="text" placeholder="Search all courses" name="text" class="input" id="courseSearchInput">
-              <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z"
-                  fill-rule="evenodd"></path>
-              </svg>
+    <div class="header-top">
+        <div class="header-top-content">
+            <div class="header-top-left">
+                <div class="header-top-item"><span class="header-top-icon">📞</span><a href="tel:+919621051159">+91 962 105 1159</a></div>
+                <div class="header-top-item"><span class="header-top-icon">✉️</span><a
+                        href="mailto:info@astrobharatai.com">info@astrobharatai.com</a></div>
             </div>
-            <div id="searchResults" class="search-results"></div>
-          </div>
-        </li>
-
-        <li class="nav-item"><a href="index.html">Home</a></li>
-        <li class="nav-item"><a href="profile.html">About Us</a></li>
-
-        <li class="nav-item dropdown">
-          <a href="javascript:void(0)" class="active">Courses <i class="fas fa-chevron-down"
-              style="font-size: 0.8em; margin-left: 4px;"></i></a>
-          <ul class="dropdown-menu">
-            <li class="dropdown-item"><a href="astrology.html">Vedic Astrology</a></li>
-            <li class="dropdown-item"><a href="nadi-jyotish.html">Nadi Jyotish</a></li>
-            <li class="dropdown-item"><a href="lal-kitab.html">Lal Kitab Remedies</a></li>
-            <li class="dropdown-item"><a href="remedy-course.html">Remedy Course (Upaay Gyaan)</a></li>
-            <li class="dropdown-item"><a href="kp-astrology.html">KP Astrology</a></li>
-            <li class="dropdown-item"><a href="bnn-astrology.html">BNN (Advanced Techniques)</a></li>
-            <li class="dropdown-item"><a href="crystal-healing.html">Crystal Healing</a></li>
-            <li class="dropdown-item"><a href="medical-astrology.html">Medical Astrology</a></li>
-            <li class="dropdown-item"><a href="complete-astrology.html">Complete Astrology Course</a></li>
-            <li class="dropdown-item"><a href="rudraksha.html">Rudraksha Remedies</a></li>
-            <li class="dropdown-item"><a href="vastu.html">Vastu Shastra</a></li>
-            <li class="dropdown-item"><a href="palmistry.html">Palmistry</a></li>
-            <li class="dropdown-item"><a href="face-reading.html">Face Reading</a></li>
-            <li class="dropdown-item"><a href="tarot.html">Tarot Reading</a></li>
-            <li class="dropdown-item"><a href="numerology.html">Numerology</a></li>
-            <li class="dropdown-item"><a href="mentorship.html">1-on-1 Mentorship</a></li>
-          </ul>
-        </li>
-        <li class="nav-item"><a href="fee-structure.html">Fee Structure</a></li>
-
-        <li class="nav-item"><a href="courses.html">Explore</a></li>
-        <li class="nav-item"><a href="blog.html">Blog</a></li>
-        <li class="nav-item"><a href="6-stairs.html">6 Stairs</a></li>
-        <li class="nav-item"><a href="gallery.html">Gallery</a></li>
-        <li class="nav-item"><a href="contact.html">Contact</a></li>
-      </ul>
-
-
-
-      <div class="navbar-cta">
-        <a href="login.html" class="btn btn-outline btn-sm">Login</a>
-        <a href="register.html" class="btn btn-primary btn-sm">Register</a>
-      </div>
-
-      <button class="hamburger" title="Toggle navigation menu" aria-label="Toggle navigation menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </nav>
-
-    <div class="mobile-menu">
-      <ul class="nav-menu mobile-menu-nav">
-
-        <li class="nav-item w-full"><a href="index.html">Home</a></li>
-        <li class="nav-item w-full"><a href="profile.html">About Us</a></li>
-        <li class="nav-item w-full"><a href="courses.html">Courses</a></li>
-        <li class="nav-item w-full"><a href="fee-structure.html">Fee Structure</a></li>
-        <li class="nav-item w-full"><a href="courses.html">Explore</a></li>
-        <li class="nav-item w-full"><a href="blog.html">Blog</a></li>
-        <li class="nav-item w-full"><a href="6-stairs.html">6 Stairs</a></li>
-        <li class="nav-item w-full"><a href="gallery.html">Gallery</a></li>
-        <li class="nav-item w-full"><a href="contact.html">Contact</a></li>
-      </ul>
-
-
-      <div class="navbar-cta">
-        <a href="login.html" class="btn btn-outline btn-sm">Login</a>
-        <a href="register.html" class="btn btn-primary btn-sm">Register</a>
-      </div>
-    </div>
-
-    <div class="search-results"></div>
-    </div>
-    </div>
-    <div class="tablet-search-container">
-      <div class="search-container">
-        <div class="container-input">
-          <input type="text" placeholder="Search all courses" name="text" class="input">
-          <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z"
-              fill-rule="evenodd"></path>
-          </svg>
+            <div class="header-top-right">Online Classes | ISO Certified</div>
         </div>
+    </div>
+    <header>
+        <nav class="navbar">
+            <ul class="nav-menu">
+
+                <li class="nav-item search-nav-item">
+                    <div class="search-container">
+                        <div class="container-input">
+                            <input type="text" placeholder="Search all courses" name="text" class="input"
+                                id="courseSearchInput">
+                            <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z"
+                                    fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <div id="searchResults" class="search-results"></div>
+                    </div>
+                </li>
+
+                <li class="nav-item"><a href="index.html">Home</a></li>
+                <li class="nav-item"><a href="profile.html">About Us</a></li>
+                <li class="nav-item dropdown">
+                    <a href="javascript:void(0)" class="active">Courses <i class="fas fa-chevron-down"
+                            style="font-size: 0.8em; margin-left: 4px;"></i></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item"><a href="astrology.html">Vedic Astrology</a></li>
+                        <li class="dropdown-item"><a href="nadi-jyotish.html">Nadi Jyotish</a></li>
+                        <li class="dropdown-item"><a href="lal-kitab.html">Lal Kitab Remedies</a></li>
+                        <li class="dropdown-item"><a href="remedy-course.html">Remedy Course (Upaay Gyaan)</a></li>
+                        <li class="dropdown-item"><a href="kp-astrology.html">KP Astrology</a></li>
+                        <li class="dropdown-item"><a href="bnn-astrology.html">BNN (Advanced Techniques)</a></li>
+                        <li class="dropdown-item"><a href="crystal-healing.html">Crystal Healing</a></li>
+                        <li class="dropdown-item"><a href="medical-astrology.html">Medical Astrology</a></li>
+                        <li class="dropdown-item"><a href="complete-astrology.html">Complete Astrology Course</a></li>
+                        <li class="dropdown-item"><a href="rudraksha.html">Rudraksha Remedies</a></li>
+                        <li class="dropdown-item"><a href="vastu.html">Vastu Shastra</a></li>
+                        <li class="dropdown-item"><a href="palmistry.html">Palmistry</a></li>
+                        <li class="dropdown-item"><a href="face-reading.html">Face Reading</a></li>
+                        <li class="dropdown-item"><a href="tarot.html">Tarot Reading</a></li>
+                        <li class="dropdown-item"><a href="numerology.html">Numerology</a></li>
+                        <li class="dropdown-item"><a href="mentorship.html">1-on-1 Mentorship</a></li>
+            <li class="dropdown-item"><a href="gemini-jyotish.html">Gemini Jyotish</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="fee-structure.html">Fee Structure</a></li>
+                <li class="nav-item"><a href="courses.html">Explore</a></li>
+                <li class="nav-item"><a href="blog.html">Blog</a></li>
+                <li class="nav-item"><a href="6-stairs.html">6 Stairs</a></li>
+                <li class="nav-item"><a href="gallery.html">Gallery</a></li>
+                <li class="nav-item"><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="navbar-cta">
+                <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+                <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+            </div>
+            
+<button class="hamburger" title="Toggle navigation menu" aria-label="Toggle navigation menu">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+        <div class="mobile-menu">
+            <ul class="nav-menu mobile-menu-nav">
+                <li class="nav-item w-full"><a href="index.html">Home</a></li>
+                <li class="nav-item w-full"><a href="profile.html">About Us</a></li>
+                <li class="nav-item w-full"><a href="courses.html">Courses</a></li>
+                <li class="nav-item w-full"><a href="fee-structure.html">Fee Structure</a></li>
+                <li class="nav-item w-full"><a href="courses.html">Explore</a></li>
+                <li class="nav-item w-full"><a href="blog.html">Blog</a></li>
+                <li class="nav-item w-full"><a href="6-stairs.html">6 Stairs</a></li>
+                <li class="nav-item w-full"><a href="gallery.html">Gallery</a></li>
+                <li class="nav-item w-full"><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <div class="navbar-cta">
+                <a href="login.html" class="btn btn-outline btn-sm">Login</a>
+                <a href="register.html" class="btn btn-primary btn-sm">Register</a>
+            </div>
+        </div>
+
         <div class="search-results"></div>
-      </div>
-    </div>
-  </header>
-
-
-
-  <section class="hero-section hero-gradient">
-    <div class="container">
-      <h1 class="color-secondary">⏳ Past Life Regression Theory (PLRT)</h1>
-      <p>Delve into the science of past lives to heal present traumas and uncover karmic patterns.</p>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div class="grid grid-2 grid-gap-3">
-        <div data-animate>
-          <h2>Understanding Past Life Regression Theory</h2>
-          <p>Delve into the science of past lives to heal present traumas and uncover karmic patterns. Embark on a
-            journey to deeply understand the fundamental principles and practical applications of this mystic science.
-          </p>
-          <p>This program is designed to provide you with comprehensive knowledge, allowing you to incorporate these
-            ancient techniques into modern-day contexts.</p>
-          <ul class="list-reset">
-            <li class="mb-0-75">✓ Core fundamentals and philosophy</li>
-            <li class="mb-0-75">✓ Advanced practical techniques</li>
-            <li class="mb-0-75">✓ Real-life case studies and applications</li>
-            <li>✓ Spiritual and practical guidance</li>
-          </ul>
         </div>
-        <div data-animate>
-          <img src="assets/images/past-life.jpg" alt="Past Life Regression Theory" class="rounded-lg"
-            style="width:100%;border-radius:12px;">
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="light-bg">
-    <div class="container">
-      <h2 class="card-section-title">Our Past Life Regression Theory Program</h2>
-
-      <div class="grid grid-2 grid-gap-3">
-        <div class="card card-auto p-4" data-animate>
-          <h3 class="color-primary mb-1 text-center">Program Details</h3>
-          <table class="program-table">
-            <tr class="table-row">
-              <td class="table-cell-bold">Duration</td>
-              <td class="table-cell-right">3 Months</td>
-            </tr>
-            <tr class="table-row">
-              <td class="table-cell-bold">Mode</td>
-              <td class="table-cell-right">Online & Offline</td>
-            </tr>
-            <tr class="table-row">
-              <td class="table-cell-bold">Practical Hours</td>
-              <td class="table-cell-right">40+ Hours</td>
-            </tr>
-            <tr class="table-row">
-              <td class="table-cell-bold">Fee</td>
-              <td class="table-cell-right">₹8,500</td>
-            </tr>
-            <tr>
-              <td class="table-cell-bold">Certificate</td>
-              <td class="table-cell-right">Industry Recognized</td>
-            </tr>
-          </table>
-          <a href="register.html" class="btn btn-primary btn-full mt-1-5">Enroll Now</a>
+        <div class="tablet-search-container">
+            <div class="search-container">
+                <div class="container-input">
+                    <input type="text" placeholder="Search all courses" name="text" class="input">
+                    <svg fill="#000000" width="20px" height="20px" viewBox="0 0 1920 1920"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M790.588 1468.235c-373.722 0-677.647-303.924-677.647-677.647 0-373.722 303.925-677.647 677.647-677.647 373.723 0 677.647 303.925 677.647 677.647 0 373.723-303.924 677.647-677.647 677.647Zm596.781-160.715c120.396-138.692 193.807-319.285 193.807-516.932C1581.176 354.748 1226.428 0 790.588 0S0 354.748 0 790.588s354.748 790.588 790.588 790.588c197.647 0 378.24-73.411 516.932-193.807l516.028 516.142 79.963-79.963-516.142-516.028Z"
+                            fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <div class="search-results"></div>
+            </div>
         </div>
+    </header>
 
-        <div class="card card-auto p-4" data-animate>
-          <h3 class="color-primary mb-1 text-center">Curriculum Highlights</h3>
-          <ul class="list-reset">
-            <li class="mb-0-75"><strong>Week 1-2:</strong> Hand Lines Basics</li>
-            <li class="mb-0-75"><strong>Week 3-4:</strong> Advanced Line Analysis</li>
-            <li class="mb-0-75"><strong>Week 5-6:</strong> Mounds & Marks</li>
-            <li class="mb-0-75"><strong>Week 7-8:</strong> Personality Reading</li>
-            <li class="mb-0-75"><strong>Week 9-10:</strong> Future Predictions</li>
-            <li class="mb-0-75"><strong>Week 11-12:</strong> Case Studies</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section>
-    <div class="container">
-      <h2 class="card-section-title">Past Life Regression Theory Success Stories</h2>
 
-      <div class="grid grid-3 grid-gap-2">
-        <div class="card text-center card-auto p-3" data-animate>
-          <div class="color-secondary mb-1">⭐⭐⭐⭐⭐</div>
-          <p class="mb-1">"Started my own consultancy right after the course. Now I earn ₹50,000+ per month!"</p>
-          <p class="font-sm color-secondary">- Priya Sharma, Bangalore</p>
-        </div>
-        <div class="card text-center card-auto p-3" data-animate>
-          <div class="color-secondary mb-1">⭐⭐⭐⭐⭐</div>
-          <p class="mb-1">"The instructors are incredibly knowledgeable. I learned more in 3 months than in years of
-            self-study."</p>
-          <p class="font-sm color-secondary">- Rajesh Patel, Mumbai</p>
-        </div>
-        <div class="card text-center card-auto p-3" data-animate>
-          <div class="color-secondary mb-1">⭐⭐⭐⭐⭐</div>
-          <p class="mb-1">"Life-changing course! I now help my family and friends with accurate readings. Highly
-            recommended!"</p>
-          <p class="font-sm color-secondary">- Anjali Gupta, Delhi</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    
 
-  <section class="light-bg">
+    <!-- HERO & INTRO -->
+    <section style="padding-top: 60px;">
     <div class="container text-center">
-      <h2 class="mb-1-5">Ready to Master Past Life Regression Theory?</h2>
-      <p class="mb-2">Join our Past Life Regression Theory program and unlock an ancient science.</p>
-      <a href="register.html" class="btn btn-primary btn-lg">Enroll Today</a>
+      <h1 class="color-primary" style="font-size: 2.5rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-hourglass-half"></i> Past Life Regression Theory (PLRT)</h1>
+      <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem; font-weight: 500;">Explore Subconscious Memories &amp; Heal Through the Wisdom of Past Lives</p>
+    </div>
+    <div class="container" data-animate>
+      <img src="assets/images/PLRT.png" alt="Past Life Regression Theory" class="rounded-lg" style="width: 85%; max-width: 1000px; height: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 0 auto; display: block; margin-bottom: 2rem;">
+    </div>
+    <div class="container" data-animate>
+      <h2>What is Past Life Regression Theory (PLRT)?</h2>
+      <p>Past Life Regression Theory is a method used to explore memories believed to be connected with previous lifetimes through deep relaxation and guided visualization techniques. It helps individuals understand emotional patterns, fears, or life situations that may have deeper subconscious roots.</p>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Why Should I Learn Past Life Regression?</h3>
+      <p>Learning PLRT can help you understand how subconscious memories influence present life decisions, relationships, fears, and habits. It also allows you to guide others through safe regression techniques for emotional insight and self-awareness.</p>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Do I Need Any Background to Learn This?</h3>
+      <p>No. This crash course is designed for beginners as well as people who already study astrology, spirituality, psychology, or healing practices.</p>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem;">What Will You Learn in This Crash Course?</h3>
+      <p>In this course you will learn:</p>
+      <ul class="list-reset">
+        <li class="mb-0-75">✓ Fundamentals of Past Life Regression Theory</li>
+        <li class="mb-0-75">✓ How subconscious memories influence present life</li>
+        <li class="mb-0-75">✓ Basic regression techniques</li>
+        <li class="mb-0-75">✓ How guided regression sessions work</li>
+        <li class="mb-0-75">✓ Ethical guidelines and precautions</li>
+        <li>✓ Real-life applications of PLRT</li>
+      </ul>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Who Should Take This Course?</h3>
+      <p>This course is ideal for:</p>
+      <ul class="list-reset">
+        <li class="mb-0-75">✓ Astrology students</li>
+        <li class="mb-0-75">✓ Spiritual seekers</li>
+        <li class="mb-0-75">✓ Healers and therapists</li>
+        <li class="mb-0-75">✓ Tarot or energy practitioners</li>
+        <li>✓ Anyone curious about past life concepts and subconscious patterns</li>
+      </ul>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Can I Build a Career Using PLRT Knowledge?</h3>
+      <p>Many practitioners integrate PLRT with astrology, healing practices, counseling, or spiritual guidance. While this crash course introduces the theory and methods, deeper practice and experience are needed to become a professional practitioner.</p>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem;">What Makes This Course Different?</h3>
+      <p>This course is designed with a structured learning approach, simplified explanations, and practical insights, making it easy for beginners to understand Past Life Regression without confusion.</p>
     </div>
   </section>
 
-  <!-- TOP URGENCY MARQUEE -->
-  <div class="urgency-marquee-container">
-    <div class="urgency-marquee-content">
-      <div class="marquee-item">
-        <span class="marquee-icon">🎓</span> Admissions Open! Register Now for Upcoming Batches — Limited Seats
-        Available! <div class="marquee-timer timer-pulse">Ends in: <span class="marquee-timer-val">47:59:59</span></div>
-        <a href="register.html" class="marquee-btn">Fast Register</a>
-      </div>
-      <div class="marquee-item">
-        <span class="marquee-icon">🔥</span> Fast Track Your Career with 100% Placement Assistance
-        <a href="courses.html" class="marquee-btn">View Courses</a>
-      </div>
-      <div class="marquee-item">
-        <span class="marquee-icon">⭐</span> Join Parashari Institute Today — Scholarship Available for Top Performers!
-        <a href="register.html" class="marquee-btn">Apply Now</a>
-      </div>
-      <!-- Duplicate for seamless scrolling -->
-      <div class="marquee-item">
-        <span class="marquee-icon">🎓</span> Admissions Open! Register Now for Upcoming Batches — Limited Seats
-        Available! <div class="marquee-timer timer-pulse">Ends in: <span class="marquee-timer-val">47:59:59</span></div>
-        <a href="register.html" class="marquee-btn">Fast Register</a>
-      </div>
-      <div class="marquee-item">
-        <span class="marquee-icon">🔥</span> Fast Track Your Career with 100% Placement Assistance
-        <a href="courses.html" class="marquee-btn">View Courses</a>
-      </div>
-      <div class="marquee-item">
-        <span class="marquee-icon">⭐</span> Join Parashari Institute Today — Scholarship Available for Top Performers!
-        <a href="register.html" class="marquee-btn">Apply Now</a>
-      </div>
+    <!-- CRASH COURSE PROGRAM -->
+    <section class="light-bg">
+        <div class="container">
+            <h2 class="card-section-title">PLRT Crash Course</h2>
+
+            <div class="grid grid-2 grid-gap-3">
+                <div class="card card-auto p-4" data-animate>
+                    <h3 class="color-primary mb-1 text-center" style="font-size: 1.5rem;">What You'll Master</h3>
+                    <ul class="list-reset" style="text-align: left;">
+                        <li class="mb-2"><strong>Fundamentals of PLRT</strong><br>Understanding the core principles of Past Life Regression — how memories from previous lifetimes are believed to be stored in the subconscious mind.</li>
+                        <li class="mb-2"><strong>Subconscious Memory Patterns</strong><br>Learning how deeply embedded experiences influence your present-day emotions, fears, relationships, and decision-making.</li>
+                        <li class="mb-0-75"><strong>Basic Regression Techniques</strong><br>Step-by-step introduction to deep relaxation and guided visualization methods used in regression sessions.</li>
+                    </ul>
+                </div>
+                <div class="card card-auto p-4" data-animate>
+                    <h3 class="color-primary mb-1 text-center" style="font-size: 1.5rem;">Practical Applications</h3>
+                    <ul class="list-reset" style="text-align: left;">
+                        <li class="mb-2"><strong>Guided Session Framework</strong><br>Understanding how structured regression sessions work — from induction to safely bringing a person back to present awareness.</li>
+                        <li class="mb-2"><strong>Ethics &amp; Safety</strong><br>Learning the ethical guidelines, precautions, and boundaries essential for responsible practice of regression techniques.</li>
+                        <li class="mb-0-75"><strong>Real-Life Applications</strong><br>Exploring how PLRT insights are applied in personal healing, spiritual growth, and complementary therapeutic practices.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="landscape-pricing-card" data-animate>
+                <div class="pricing-info-left">
+                    <span class="save-badge"><i class="fas fa-tag" style="margin-right: 4px;"></i> Save 29% Today</span>
+                    <span class="crash-badge"><i class="fas fa-bolt" style="margin-right: 4px;"></i> CRASH COURSE</span>
+                    <h3 class="color-primary" style="font-size: 1.8rem; margin: 10px 0 10px 0;">Past Life Regression Theory (PLRT)</h3>
+                    <p class="mb-0" style="font-size: 1rem; color: #555; display: flex; align-items: center; gap: 8px;">
+                        <i class="far fa-clock" style="color: #c8960c; font-size: 1.1rem;"></i> <strong>Duration:</strong> 4 WEEKS intensive crash course
+                    </p>
+                </div>
+                <div class="pricing-block">
+                    <div style="text-decoration: line-through; color: #999; font-size: 1.1rem; margin-bottom: 2px;">Regular Price: ₹3,499</div>
+                    <strong style="color: #c8960c; font-size: 2.5rem; line-height: 1; font-weight: 800;">₹2,499</strong>
+                </div>
+                <div class="enroll-block">
+                    <a href="register.html" class="btn btn-primary" style="padding: 14px 35px; border-radius: 50px; font-weight: 700; letter-spacing: 0.5px; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(200, 150, 12, 0.3);">Enroll Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="card-section-title text-center" style="margin-bottom: 10px;">Frequently Asked Questions</h2>
+            <p class="color-light-text mb-2 text-center">Everything you need to know about the PLRT Crash Course.</p>
+
+            <div class="faq-item active">
+                <div class="faq-question">
+                    <span>Is Past Life Regression hypnosis?</span>
+                    <i class="fas fa-plus faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Past Life Regression often uses deep relaxation or hypnotic techniques, but the focus is on accessing subconscious memories rather than controlling the mind. The person always remains aware and in control during the process.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is Past Life Regression scientifically proven?</span>
+                    <i class="fas fa-plus faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Past Life Regression is a subject studied in psychology, spirituality, and consciousness research. While many people report powerful experiences, it is generally considered an exploratory spiritual practice rather than a scientifically proven method.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>How long is this crash course?</span>
+                    <i class="fas fa-plus faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>This crash course is a 4-week intensive program designed to provide a clear and structured introduction to PLRT so that students can quickly understand the theory and basic techniques.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Will I receive a certificate after completing the course?</span>
+                    <i class="fas fa-plus faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, students who complete the course will receive a certificate from Parashari Indian Institute of Research and Astrology.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Is this course safe to practice?</span>
+                    <i class="fas fa-plus faq-toggle"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, when done with proper guidance and ethical understanding. In this course we explain safety precautions, ethical boundaries, and responsible use of regression techniques.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="light-bg">
+        <div class="container text-center">
+            <h2 class="mb-1-5">Ready to Explore Past Life Regression?</h2>
+            <p class="mb-2">Join our PLRT Crash Course and unlock the secrets of your subconscious mind.</p>
+            <a href="register.html" class="btn btn-primary btn-lg">Start Learning Today</a>
+        </div>
+    </section>
+
+    <!-- TOP URGENCY MARQUEE -->
+    <div class="urgency-marquee-container">
+        <div class="urgency-marquee-content">
+            <div class="marquee-item">
+                <span class="marquee-icon">🎓</span> Admissions Open! Register Now for Upcoming Batches — Limited Seats
+                Available! <div class="marquee-timer timer-pulse">Ends in: <span
+                        class="marquee-timer-val">47:59:59</span></div> <a href="register.html" class="marquee-btn">Fast
+                    Register</a>
+            </div>
+            <div class="marquee-item">
+                <span class="marquee-icon">🔥</span> Fast Track Your Career with 100% Placement Assistance
+                <a href="courses.html" class="marquee-btn">View Courses</a>
+            </div>
+            <div class="marquee-item">
+                <span class="marquee-icon"><i class="fa-solid fa-star"></i></span> Join Parashari Institute Today — Scholarship Available for Top
+                Performers!
+                <a href="register.html" class="marquee-btn">Apply Now</a>
+            </div>
+            <!-- Duplicate for seamless scrolling -->
+            <div class="marquee-item">
+                <span class="marquee-icon">🎓</span> Admissions Open! Register Now for Upcoming Batches — Limited Seats
+                Available! <div class="marquee-timer timer-pulse">Ends in: <span
+                        class="marquee-timer-val">47:59:59</span></div> <a href="register.html" class="marquee-btn">Fast
+                    Register</a>
+            </div>
+            <div class="marquee-item">
+                <span class="marquee-icon">🔥</span> Fast Track Your Career with 100% Placement Assistance
+                <a href="courses.html" class="marquee-btn">View Courses</a>
+            </div>
+            <div class="marquee-item">
+                <span class="marquee-icon"><i class="fa-solid fa-star"></i></span> Join Parashari Institute Today — Scholarship Available for Top
+                Performers!
+                <a href="register.html" class="marquee-btn">Apply Now</a>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <footer>
-    <div class="footer-content">
-      <div class="footer-section">
-        <h4>About Parashari</h4>
-        <p>Preserving and promoting authentic Vedic wisdom since 1998.</p>
-        <div class="social-wrapper">
-          <a href="https://www.instagram.com/astrobharatai?igsh=Z2M2ZW82OXBxaGNr" target="_blank"
-            rel="noopener noreferrer" class="icon instagram">
-            <span class="tooltip">Instagram</span>
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://www.youtube.com/@astrobharatai" target="_blank" rel="noopener noreferrer"
-            class="icon youtube">
-            <span class="tooltip">YouTube</span>
-            <i class="fab fa-youtube"></i>
-          </a>
-          <a href="https://x.com/AstroBharatAI" target="_blank" rel="noopener noreferrer" class="icon twitter">
-            <span class="tooltip">Twitter</span>
-            <i class="fab fa-twitter"></i>
-          </a>
-          <a href="https://www.linkedin.com/company/astrobharatai/" target="_blank" rel="noopener noreferrer"
-            class="icon linkedin">
-            <span class="tooltip">LinkedIn</span>
-            <i class="fab fa-linkedin-in"></i>
-          </a>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Parashari</h4>
+                <p>Preserving and promoting authentic Vedic wisdom since 1998.</p>
+                <div class="social-wrapper">
+                    <a href="https://www.instagram.com/astrobharatai?igsh=Z2M2ZW82OXBxaGNr" target="_blank"
+                        rel="noopener noreferrer" class="icon instagram">
+                        <span class="tooltip">Instagram</span>
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@astrobharatai" target="_blank" rel="noopener noreferrer"
+                        class="icon youtube">
+                        <span class="tooltip">YouTube</span>
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://x.com/AstroBharatAI" target="_blank" rel="noopener noreferrer"
+                        class="icon twitter">
+                        <span class="tooltip">Twitter</span>
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/company/astrobharatai/" target="_blank" rel="noopener noreferrer"
+                        class="icon linkedin">
+                        <span class="tooltip">LinkedIn</span>
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="profile.html">About Us</a></li>
+                    <li><a href="fee-structure.html">Fee Structure</a></li>
+                    <li><a href="courses.html">Explore</a></li>
+                    <li><a href="6-stairs.html">6 Stairs</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Programs</h4>
+                <ul class="footer-links">
+                    <li><a href="courses.html">Crash Course</a></li>
+                    <li><a href="courses.html">Diploma</a></li>
+                    <li><a href="courses.html">Bachelor</a></li>
+                    <li><a href="courses.html">Master</a></li>
+                    <!-- <li><a href="courses.html">Grand Master</a></li> -->
+                    <li><a href="6-stairs.html">6 Stairs</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <div class="contact-info">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-text">
+                        <p class="p-reset">123 Vedic Street, Delhi - 110001</p>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-text">
+                        <p class="p-reset"><a href="tel:+919621051159">+91 962 105 1159</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="footer-section">
-        <h4>Quick Links</h4>
-        <ul class="footer-links">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="profile.html">About Us</a></li>
-          <li><a href="fee-structure.html">Fee Structure</a></li>
-          <li><a href="courses.html">Explore</a></li>
-          <li><a href="6-stairs.html">6 Stairs</a></li>
-          <li><a href="gallery.html">Gallery</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h4>Programs</h4>
-        <ul class="footer-links">
-          <li><a href="courses.html">Crash Course</a></li>
-          <li><a href="courses.html">Diploma</a></li>
-          <li><a href="courses.html">Bachelor</a></li>
-          <li><a href="courses.html">Master</a></li>
-          <li><a href="courses.html">Grand Master</a></li>
-          <li><a href="6-stairs.html">6 Stairs</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h4>Contact</h4>
-        <div class="contact-info">
-          <div class="contact-icon">📍</div>
-          <div class="contact-text">
-            <p class="p-reset">1/344, near Kathauta Chauraha Road, Vinamra Khand, Gomti Nagar, Lucknow, Uttar Pradesh
-              226010</p>
-          </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <div class="copyright">
+                    <p class="p-reset">&copy; 2024 Parashari Institute. All rights reserved.</p>
+                </div>
+                <div class="developer-credit">Designed by <a href="#">Our Team</a></div>
+            </div>
         </div>
-        <div class="contact-info">
-          <div class="contact-icon">📞</div>
-          <div class="contact-text">
-            <p class="p-reset"><a href="tel:+919005703159">+91 9005703159</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-bottom-content">
-        <div class="copyright">
-          <p class="p-reset">&copy; 2024 Parashari Institute.</p>
-        </div>
-        <div class="developer-credit">Designed by <a href="#">Our Team</a></div>
-      </div>
-    </div>
-  </footer>
+    </footer>
 
 
 
-  <script src="assets/js/navbar.js"></script>
-  <script src="assets/js/form-validation.js"></script>
-  <script src="assets/js/main.js"></script>
-  <script src="assets/js/loader.js"></script>
-  <script src="assets/js/search.js"></script>
-  <script src="assets/js/chatbot.js"></script>
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/form-validation.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/loader.js"></script>
+    <script src="assets/js/search.js"></script>
+    <script src="assets/js/chatbot.js"></script>
 
-  <!-- URGENCY TIMER JS -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Set end date to 2 days from now for consistent urgency
-      let endDate = new Date();
-      endDate.setDate(endDate.getDate() + 2);
-      endDate.setHours(23, 59, 59);
-
-      const timerElements = document.querySelectorAll('.marquee-timer-val');
-
-      if (timerElements.length > 0) {
-        setInterval(function () {
-          const now = new Date().getTime();
-          const distance = endDate.getTime() - now;
-
-          if (distance < 0) {
-            // Reset timer to 2 days if it expires
-            endDate = new Date();
+    <!-- URGENCY TIMER JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let endDate = new Date();
             endDate.setDate(endDate.getDate() + 2);
-            return;
-          }
+            endDate.setHours(23, 59, 59);
 
-          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const timerElements = document.querySelectorAll('.marquee-timer-val');
 
-          const timeString =
-            (hours < 10 ? "0" + hours : hours) + ":" +
-            (minutes < 10 ? "0" + minutes : minutes) + ":" +
-            (seconds < 10 ? "0" + seconds : seconds);
+            if (timerElements.length > 0) {
+                setInterval(function () {
+                    const now = new Date().getTime();
+                    const distance = endDate.getTime() - now;
 
-          timerElements.forEach(el => {
-            el.innerText = timeString;
-          });
-        }, 250);
-      }
-    });
-  </script>
+                    if (distance < 0) {
+                        endDate = new Date();
+                        endDate.setDate(endDate.getDate() + 2);
+                        return;
+                    }
 
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+                    const timeString =
+                        (hours < 10 ? "0" + hours : hours) + ":" +
+                        (minutes < 10 ? "0" + minutes : minutes) + ":" +
+                        (seconds < 10 ? "0" + seconds : seconds);
+
+                    timerElements.forEach(el => {
+                        el.innerText = timeString;
+                    });
+                }, 250);
+            }
+        });
+    </script>
+
+    <!-- FAQ ACCORDION JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    // Close all
+                    faqItems.forEach(i => i.classList.remove('active'));
+                    // Toggle clicked
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 

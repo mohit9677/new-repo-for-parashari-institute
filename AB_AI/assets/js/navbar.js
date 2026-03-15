@@ -60,39 +60,70 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 /* ============ MEGA MENU LOGIC ============ */
-const allCoursesList = [
-  { name: 'Vedic Astrology', meta: 'Vedic Analysis', url: 'astrology.html', icon: 'fas fa-om' },
-  { name: 'Numerology', meta: 'Number Science', url: 'numerology.html', icon: 'fas fa-sort-numeric-up' },
-  { name: 'KP Astrology', meta: 'Stellar Astrology', url: 'kp-astrology.html', icon: 'fas fa-star' },
-  { name: 'Gemstone Science', meta: 'Precious Stones', url: 'gemstone.html', icon: 'fas fa-gem' },
-  { name: 'Vastu Shastra', meta: 'Space Harmony', url: 'vastu.html', icon: 'fas fa-home' },
-  { name: 'Lal Kitab', meta: 'Practical Solutions', url: 'lal-kitab.html', icon: 'fas fa-book' },
-  { name: 'Face Reading', meta: 'Physiognomy', url: 'face-reading.html', icon: 'fas fa-user' },
-  { name: 'Reiki Healing', meta: 'Energy Healing', url: 'reiki.html', icon: 'fas fa-hand-holding-medical' },
-  { name: 'Tarot Reading', meta: 'Card Divination', url: 'tarot.html', icon: 'fas fa-clone' },
-  { name: 'Nakshatra', meta: 'Constellations', url: 'nakshatra.html', icon: 'fas fa-moon' },
-  { name: 'Crystal', meta: 'Energy Balancing', url: 'crystal-healing.html', icon: 'fas fa-gem' },
-  { name: 'Rudraksha', meta: 'Sacred Beads', url: 'rudraksha.html', icon: 'fas fa-seedling' },
-  { name: 'Palmistry', meta: 'Hand Analysis', url: 'palmistry.html', icon: 'fas fa-hand-paper' },
-  { name: 'Nadi Jyotish', meta: 'Precision Timing', url: 'nadi-jyotish.html', icon: 'fas fa-scroll' },
-  { name: 'Remedy Course', meta: 'Upaay Gyaan', url: 'remedy-course.html', icon: 'fas fa-hand-holding-heart' },
-  { name: 'Medical Astrology', meta: 'Health & Wellness', url: 'medical-astrology.html', icon: 'fas fa-heartbeat' },
-  { name: 'BNN Advance', meta: 'Bhrigu Nandi Nadi', url: 'bnn-astrology.html', icon: 'fas fa-code-branch' },
-  { name: 'Healing', meta: 'Holistic Wellness', url: 'healing.html', icon: 'fas fa-leaf' },
-  { name: 'Feng Shui', meta: 'Energy Flow', url: 'feng-shui.html', icon: 'fas fa-yin-yang' },
-  { name: 'Past Life Prediction', meta: 'Karma Analysis', url: 'plrt.html', icon: 'fas fa-hourglass-half' },
-  { name: 'Gemini Jyotish', meta: 'Twin Logic', url: 'gemini-jyotish.html', icon: 'fas fa-users' }
-];
-
 const crashCourseList = [
-  { name: 'Past Life', meta: 'Karma Analysis', url: 'plrt.html', icon: 'fas fa-hourglass-half' },
-  { name: 'Palmistry', meta: 'Hand Analysis', url: 'palmistry.html', icon: 'fas fa-hand-paper' },
-  { name: 'Face Reading', meta: 'Physiognomy', url: 'face-reading.html', icon: 'fas fa-user' },
-  { name: 'Numerology', meta: 'Number Science', url: 'numerology.html', icon: 'fas fa-sort-numeric-up' },
-  { name: 'Rudraksha', meta: 'Sacred Beads', url: 'rudraksha.html', icon: 'fas fa-seedling' },
-  { name: 'Vedic Astrology', meta: 'Vedic Analysis', url: 'astrology.html', icon: 'fas fa-om' },
-  { name: 'Tarot Reading', meta: 'Card Divination', url: 'tarot.html', icon: 'fas fa-clone' }
+  { name: 'Past Life Regression Theory (PLRT)', meta: 'Past', url: 'plrt.html', icon: 'fas fa-hourglass-half' },
+  { name: 'Bhoomi Vastu & Prasada Vastu', meta: 'Bhoomi', url: 'vastu.html', icon: 'fas fa-home' },
+  { name: 'Modern Western Palmistry', meta: 'Modern', url: 'palmistry.html', icon: 'fas fa-hand-paper' },
+  { name: 'Mobile Numerology', meta: 'Mobile', url: 'numerology.html', icon: 'fas fa-sort-numeric-up' },
+  { name: '(Face Reading) Western Physiognomy', meta: '(Face', url: 'face-reading.html', icon: 'fas fa-user' },
+  { name: 'Financial Astrology (Artha)', meta: 'Financial', url: 'astrology.html', icon: 'fas fa-om' },
+  { name: 'Lal Kitab Basics', meta: 'Lal', url: 'lal-kitab.html', icon: 'fas fa-book' },
+  { name: 'Medical Astrology', meta: 'Medical', url: 'medical-astrology.html', icon: 'fas fa-heartbeat' },
+  { name: 'The BNN Intensive: A 14-Day Mastery', meta: 'The', url: 'bnn-astrology.html', icon: 'fas fa-code-branch' },
+  { name: 'Modern Career Astrology', meta: 'Modern', url: 'astrology.html', icon: 'fas fa-om' },
+  { name: 'Business Numerology', meta: 'Business', url: 'numerology.html', icon: 'fas fa-sort-numeric-up' },
+  { name: 'Vedic Numerology', meta: 'Vedic', url: 'numerology.html', icon: 'fas fa-sort-numeric-up' },
+  { name: 'Nadi Jyotish', meta: 'Nadi', url: 'nadi-jyotish.html', icon: 'fas fa-scroll' },
+  { name: 'Healing', meta: 'Healing', url: 'reiki.html', icon: 'fas fa-hand-holding-medical' },
+  { name: 'Feng Shui', meta: 'Feng', url: 'feng-shui.html', icon: 'fas fa-yin-yang' },
+  { name: 'Gemini Jyotish', meta: 'Gemini', url: 'gemini-jyotish.html', icon: 'fas fa-users' }
 ];
+const diplomaList = [
+  { name: 'Vedic Astrology (Jyotish)', meta: 'Vedic', url: 'astrology.html', icon: 'fas fa-om' },
+  { name: 'Numerology (Pythagorean & Chaldean)', meta: 'Numerology', url: 'numerology.html', icon: 'fas fa-sort-numeric-up' },
+  { name: 'KP Astrology (Krishnamurti Padhdhati)', meta: 'KP', url: 'kp-astrology.html', icon: 'fas fa-star' },
+  { name: 'Gemstone Science (Ratna Vigyan)', meta: 'Gemstone', url: 'gemstone.html', icon: 'fas fa-gem' },
+  { name: 'Vastu Shastra', meta: 'Vastu', url: 'vastu.html', icon: 'fas fa-home' },
+  { name: 'Lal Kitab', meta: 'Lal', url: 'lal-kitab.html', icon: 'fas fa-book' },
+  { name: 'Face Reading (Physiognomy)', meta: 'Face', url: 'face-reading.html', icon: 'fas fa-user' },
+  { name: 'Reiki Healing', meta: 'Reiki', url: 'reiki.html', icon: 'fas fa-hand-holding-medical' },
+  { name: 'Tarot Reading', meta: 'Tarot', url: 'tarot.html', icon: 'fas fa-clone' },
+  { name: 'Nakshatra (Lunar Mansions)', meta: 'Nakshatra', url: 'nakshatra.html', icon: 'fas fa-moon' },
+  { name: 'Crystal Healing', meta: 'Crystal', url: 'crystal-healing.html', icon: 'fas fa-gem' },
+  { name: 'Rudraksha', meta: 'Rudraksha', url: 'rudraksha.html', icon: 'fas fa-seedling' },
+  { name: 'Palmistry (Chirognomy & Chiromancy)', meta: 'Palmistry', url: 'palmistry.html', icon: 'fas fa-hand-paper' }
+];
+const bachelorList = [
+  { name: 'Vedic Astrology (Jyotish)', meta: 'Vedic', url: 'astrology.html', icon: 'fas fa-om' },
+  { name: 'Numerology (Pythagorean & Chaldean)', meta: 'Numerology', url: 'numerology.html', icon: 'fas fa-sort-numeric-up' },
+  { name: 'KP Astrology (Krishnamurti Padhdhati)', meta: 'KP', url: 'kp-astrology.html', icon: 'fas fa-star' },
+  { name: 'Gemstone Science (Ratna Vigyan)', meta: 'Gemstone', url: 'gemstone.html', icon: 'fas fa-gem' },
+  { name: 'Vastu Shastra', meta: 'Vastu', url: 'vastu.html', icon: 'fas fa-home' },
+  { name: 'Lal Kitab', meta: 'Lal', url: 'lal-kitab.html', icon: 'fas fa-book' },
+  { name: 'Face Reading (Physiognomy)', meta: 'Face', url: 'face-reading.html', icon: 'fas fa-user' },
+  { name: 'Reiki Healing', meta: 'Reiki', url: 'reiki.html', icon: 'fas fa-hand-holding-medical' },
+  { name: 'Tarot Reading', meta: 'Tarot', url: 'tarot.html', icon: 'fas fa-clone' },
+  { name: 'Nakshatra (Lunar Mansions) 1', meta: 'Nakshatra', url: 'nakshatra.html', icon: 'fas fa-moon' },
+  { name: 'Crystal Healing', meta: 'Crystal', url: 'crystal-healing.html', icon: 'fas fa-gem' },
+  { name: 'Rudraksha', meta: 'Rudraksha', url: 'rudraksha.html', icon: 'fas fa-seedling' },
+  { name: 'Palmistry (Chirognomy & Chiromancy)', meta: 'Palmistry', url: 'palmistry.html', icon: 'fas fa-hand-paper' }
+];
+const masterList = [
+  { name: 'Numerology (Pythagorean & Chaldean)', meta: 'Numerology', url: 'numerology.html', icon: 'fas fa-sort-numeric-up' },
+  { name: 'Vedic Astrology (Jyotish)', meta: 'Vedic', url: 'astrology.html', icon: 'fas fa-om' },
+  { name: 'KP Astrology (Krishnamurti Padhdhati)', meta: 'KP', url: 'kp-astrology.html', icon: 'fas fa-star' },
+  { name: 'Gemstone Science (Ratna Vigyan)', meta: 'Gemstone', url: 'gemstone.html', icon: 'fas fa-gem' },
+  { name: 'Vastu Shastra', meta: 'Vastu', url: 'vastu.html', icon: 'fas fa-home' },
+  { name: 'Lal Kitab', meta: 'Lal', url: 'lal-kitab.html', icon: 'fas fa-book' },
+  { name: 'Face Reading (Physiognomy)', meta: 'Face', url: 'face-reading.html', icon: 'fas fa-user' },
+  { name: 'Reiki Healing', meta: 'Reiki', url: 'reiki.html', icon: 'fas fa-hand-holding-medical' },
+  { name: 'Tarot Reading', meta: 'Tarot', url: 'tarot.html', icon: 'fas fa-clone' },
+  { name: 'Nakshatra (Lunar Mansions)', meta: 'Nakshatra', url: 'nakshatra.html', icon: 'fas fa-moon' },
+  { name: 'Crystal Healing', meta: 'Crystal', url: 'crystal-healing.html', icon: 'fas fa-gem' },
+  { name: 'Rudraksha', meta: 'Rudraksha', url: 'rudraksha.html', icon: 'fas fa-seedling' },
+  { name: 'Palmistry (Chirognomy & Chiromancy)', meta: 'Palmistry', url: 'palmistry.html', icon: 'fas fa-hand-paper' }
+];
+const grandMasterList = [];
 
 const courseDomains = [
   {
@@ -139,7 +170,7 @@ const courseDomains = [
         "Industry-ready certification"
       ]
     },
-    courses: allCoursesList
+    courses: diplomaList
   },
   {
     id: 'level-bachelor',
@@ -162,7 +193,7 @@ const courseDomains = [
         "Ability to deliver detailed professional-grade reports"
       ]
     },
-    courses: allCoursesList
+    courses: bachelorList
   },
   {
     id: 'level-master',
@@ -185,7 +216,7 @@ const courseDomains = [
         "Leadership in consultation, research, and education"
       ]
     },
-    courses: allCoursesList
+    courses: masterList
   },
   {
     id: 'level-grandmaster',
@@ -193,9 +224,9 @@ const courseDomains = [
     icon: 'fas fa-crown',
     description: 'Elite visionary training establishing you as a global authority in astrology.',
     specialContent: {
-      title: "ASTROBHARATAI Grand Master Pass \u2013 Complete Syllabus",
+      title: "ASTROBHARATAI Grand Master Pass – Complete Syllabus",
       whoItIsFor: "Dedicated individuals seeking an All-in-One Lifetime Mastery Program",
-      objective: "Includes \u2705 All 10 Diploma Programs | \u2705 All Mastery Bundles | \u2705 All future courses & upgrades",
+      objective: "Includes ✅ All 10 Diploma Programs | ✅ All Mastery Bundles | ✅ All future courses & upgrades",
       whatYouWillLearn: [
         "<b>Comprehensive Knowledge:</b> Vedic & KP Astrology, Lal Kitab, Numerology, Vastu",
         "<b>Specialized Sciences:</b> Gemstones, Face Reading, Palmistry, Tarot, Reiki",
@@ -207,11 +238,11 @@ const courseDomains = [
       learningOutcome: [
         "Expert-level authority as a Modern Occult Scientist",
         "Faculty eligibility (post evaluation)",
-        "Priority Live Q&A (\u201cFirst-Row Access\u201d)",
+        "Priority Live Q&A (\"First-Row Access\")",
         "Lifetime alumni & professional network"
       ]
     },
-    courses: allCoursesList
+    courses: grandMasterList
   },
   {
     id: 'level-6stairs',

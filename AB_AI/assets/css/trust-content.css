@@ -1,0 +1,186 @@
+/* ============================================
+   TRUST & CONTENT ENHANCEMENTS
+   ============================================ */
+
+@keyframes elegantShimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+@keyframes steadyGoldGlow {
+    0% { box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
+    50% { box-shadow: 0 4px 25px rgba(212, 175, 55, 0.4); }
+    100% { box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); }
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Inline Placement Bar - Sophisticated Version */
+.inline-placement-bar {
+    background: linear-gradient(90deg, #591C21, #832430, #D4AF37, #832430, #591C21);
+    background-size: 200% auto;
+    color: #fff;
+    padding: 0.8rem 2.2rem;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    border: 1.5px solid #D4AF37;
+    position: relative;
+    overflow: hidden;
+    animation: elegantShimmer 5s infinite linear, slideInLeft 0.8s ease-out, steadyGoldGlow 3s infinite ease-in-out;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    z-index: 10;
+}
+
+.inline-placement-bar::before {
+    display: none;
+}
+
+.inline-placement-bar::after {
+    display: none;
+}
+
+
+.inline-placement-bar i {
+    font-size: 1.1rem;
+    color: #D4AF37;
+}
+
+/* Free Masterclass Hub */
+.video-masterclass-section {
+    padding: 5rem 0;
+    background: #fff;
+}
+
+.masterclass-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.featured-video {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    background: #000;
+    aspect-ratio: 16/9;
+    width: 100%;
+}
+
+.video-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.featured-video iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.video-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #ff0000;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    z-index: 10;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+.playlist-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.playlist-item {
+    display: flex;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    background: #fdfdfd;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-items: center;
+    min-height: 110px;
+}
+
+.playlist-item.active {
+    border-color: #D4AF37;
+    background: #fff;
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.1);
+}
+
+.playlist-item:hover {
+    background: #fff;
+    border-color: #D4AF37;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transform: translateX(5px);
+}
+
+.playlist-thumb {
+    width: 110px;
+    height: 70px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.playlist-info h5 {
+    font-size: 0.95rem;
+    margin: 0 0 3px 0;
+    color: #1A1A1A;
+}
+
+.playlist-info span {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+@media (max-width: 991px) {
+    .masterclass-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .inline-placement-bar {
+        font-size: 0.8rem;
+        padding: 0.6rem 1.2rem;
+        width: 100%;
+        justify-content: center;
+    }
+}
+

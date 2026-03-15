@@ -19,12 +19,12 @@ const coursesData = [
     // ── INTRO COURSE (Beginner) ──────────────────────────────────────────────
     {
         id: 1,
-        title: "Vedic Astrology",
-        isCategory: "Crash Course",   // Beginner
-        icon: "♈",
+        title: "Vedic Astrology (Jyotish)",
+        isCategory: "Diploma",
+        icon: '<i class="fa-solid fa-om"></i>',
         image: "assets/images/aries-card.png",
         description: "Master the ancient science of Vedic Astrology. Learn natal charts, planetary movements, and predictions.",
-        price: "₹5,999",
+        price: "₹4,199",
         badges: ["✓ Certification", "Online Available"],
         link: "astrology.html"
     },
@@ -32,21 +32,21 @@ const coursesData = [
         id: 2,
         title: "Nadi Jyotish",
         isCategory: "Crash Course",   // Beginner
-        icon: "📜",
-        image: "assets/images/taurus-card.png",
+        icon: '<i class="fa-solid fa-scroll"></i>',
+        image: "assets/images/Nadi Jyotish.png",
         description: "Learn precise prediction techniques using Nadi astrology principles and leaf reading concepts.",
-        price: "₹5,999",
+        price: "₹2,999",
         badges: ["✓ Certification"],
         link: "nadi-jyotish.html"
     },
     {
         id: 3,
-        title: "Palmistry",
-        isCategory: "Crash Course",   // Beginner
-        icon: "✋",
+        title: "Palmistry (Chirognomy & Chiromancy)",
+        isCategory: "Diploma",
+        icon: '<i class="fa-solid fa-hand-sparkles"></i>',
         image: "assets/images/pisces-card.png",
         description: "Decode destiny through palm lines and understand personality traits.",
-        price: "₹3,999",
+        price: "₹4,199",
         badges: ["✓ Certification"],
         link: "palmistry.html"
     },
@@ -54,23 +54,23 @@ const coursesData = [
     // ── DIPLOMA (Popular) ────────────────────────────────────────────────────
     {
         id: 4,
-        title: "Lal Kitab Remedies",
+        title: "Lal Kitab",
         isCategory: "Diploma",        // Popular
-        icon: "📕",
+        icon: '<i class="fa-solid fa-book-journal-whills"></i>',
         image: "assets/images/gemini-card.png",
         description: "Simple yet effective remedies for complex life problems using the wisdom of Lal Kitab.",
-        price: "₹18,000",
+        price: "₹4,199",
         badges: ["✓ Certification"],
         link: "lal-kitab.html"
     },
     {
         id: 5,
-        title: "Complete Astrology",
+        title: "Gemstone Science (Ratna Vigyan)",
         isCategory: "Diploma",        // Popular
-        icon: "🎓",
-        image: "assets/images/sagittarius-card.png",
-        description: "From beginner to professional level — comprehensive diploma in Vedic sciences.",
-        price: "₹13,000",
+        icon: '<i class="fa-regular fa-gem"></i>',
+        image: "assets/images/gemstone.jpg",
+        description: "Master the science of gemstones and their impact on human life and destiny.",
+        price: "₹4,199",
         badges: ["✓ Diploma"],
         link: "complete-astrology.html"
     },
@@ -78,10 +78,10 @@ const coursesData = [
         id: 6,
         title: "Tarot Reading",
         isCategory: "Diploma",        // Popular
-        icon: "🃏",
+        icon: '<i class="fa-solid fa-layer-group"></i>',
         image: "assets/images/gemini-card.png",
         description: "Unlock intuitive guidance and future predictions using Tarot cards.",
-        price: "₹2,999",
+        price: "₹4,199",
         badges: ["✓ Certification"],
         link: "tarot.html"
     },
@@ -89,34 +89,34 @@ const coursesData = [
     // ── BACHELOR (Pro) ───────────────────────────────────────────────────────
     {
         id: 7,
-        title: "KP Astrology",
-        isCategory: "Bachelor",       // Pro
-        icon: "⭐",
+        title: "KP Astrology (Krishnamurti Padhdhati)",
+        isCategory: "Diploma",
+        icon: '<i class="fa-solid fa-star"></i>',
         image: "assets/images/leo-card.png",
         description: "Krishnamurti Paddhati system for pinpoint accuracy in timing events and predictions.",
-        price: "₹14,000",
+        price: "₹4,199",
         badges: ["✓ Certification"],
         link: "kp-astrology.html"
     },
     {
         id: 8,
         title: "Vastu Shastra",
-        isCategory: "Bachelor",       // Pro
-        icon: "🏠",
+        isCategory: "Diploma",
+        icon: '<i class="fa-solid fa-house-chimney"></i>',
         image: "assets/images/aquarius-card.png",
         description: "Transform your space. Learn the principles of Vastu for prosperity, health, and harmony.",
-        price: "₹2,999",
+        price: "₹4,199",
         badges: ["✓ Certification", "Projects Included"],
         link: "vastu.html"
     },
     {
         id: 9,
-        title: "Numerology",
-        isCategory: "Bachelor",       // Pro
-        icon: "🔢",
+        title: "Numerology (Pythagorean & Chaldean)",
+        isCategory: "Diploma",
+        icon: '<i class="fa-solid fa-hashtag"></i>',
         image: "assets/images/virgo-card.jpg",
-        description: "Numerology studies how numbers connected to your name and birthdate reveal personality, life path, and opportunities. ✨",
-        price: "₹3,999",
+        description: "Numerology studies how numbers connected to your name and birthdate reveal personality, life path, and opportunities.",
+        price: "₹4,199",
         badges: ["✓ Certification"],
         link: "numerology.html"
     },
@@ -125,33 +125,33 @@ const coursesData = [
     {
         id: 10,
         title: "Remedy Course",
-        isCategory: "Master",         // Advanced
-        icon: "🕉️",
+        isCategory: "Diploma",
+        icon: '<i class="fa-solid fa-om"></i>',
         image: "assets/images/cancer-card.png",
         description: "Comprehensive training on effective astrological remedies for health, wealth, and relationships.",
-        price: "₹12,000",
-        badges: ["✓ Certification"],
+        price: "₹4,199",
+        badges: ["✓ Certification", "Diploma Level"],
         link: "remedy-course.html"
     },
     {
         id: 11,
         title: "Medical Astrology",
-        isCategory: "Master",         // Advanced
-        icon: "⚕️",
-        image: "assets/images/scorpio-card.png",
+        isCategory: "Crash Course",         // Relocated
+        icon: '<i class="fa-solid fa-staff-snake"></i>',
+        image: "assets/images/Medical Astrology.png",
         description: "Diagnose potential health issues and find ayurvedic remedies through planetary positions.",
-        price: "₹9,000",
+        price: "₹2,999",
         badges: ["✓ Certification"],
         link: "medical-astrology.html"
     },
     {
         id: 12,
-        title: "Face Reading",
-        isCategory: "Master",         // Advanced
-        icon: "👤",
+        title: "Face Reading (Physiognomy)",
+        isCategory: "Diploma",
+        icon: '<i class="fa-solid fa-user"></i>',
         image: "assets/images/aries-card.png",
         description: "Master the art of physiognomy to read character and fortune from facial features.",
-        price: "₹8,000",
+        price: "₹4,199",
         badges: ["✓ Certification"],
         link: "face-reading.html"
     },
@@ -160,37 +160,434 @@ const coursesData = [
     {
         id: 13,
         title: "BNN Advanced",
-        isCategory: "Grand Master",   // Elite
-        icon: "🔍",
+        isCategory: "Hidden",   // Elite
+        icon: '<i class="fa-solid fa-magnifying-glass"></i>',
         image: "assets/images/virgo-card.jpg",
         description: "Bhrigu Nandi Nadi advanced predictive techniques for professional astrologers.",
-        price: "₹15,000",
+        price: "₹24,999",
         badges: ["✓ Advanced"],
         link: "bnn-astrology.html"
     },
     {
         id: 14,
         title: "Rudraksha Remedies",
-        isCategory: "Grand Master",   // Elite
-        icon: "📿",
+        isCategory: "Hidden",   // Elite
+        icon: '<i class="fa-solid fa-om"></i>',
         image: "assets/images/capricorn-card.png",
         description: "Understand the power of different Mukhi Rudrakshas and their therapeutic benefits.",
-        price: "₹35,000",
+        price: "₹24,999",
         badges: ["✓ Certification"],
         link: "rudraksha.html"
     },
     {
         id: 15,
         title: "1-on-1 Mentorship",
-        isCategory: "Grand Master",   // Elite
-        icon: "🤝",
+        isCategory: "Hidden",   // Elite
+        icon: '<i class="fa-solid fa-handshake-angle"></i>',
         image: "assets/images/libra-card.png",
         description: "Personalized guidance and advanced training with expert gurus for serious learners.",
         price: "Contact Us",
         badges: ["Personalized"],
         link: "contact.html"
+    },
+    // ── BACHELOR (Pro) Restructured ──────────────────────────────────────────
+    {
+        id: 16,
+        title: "Vedic Astrology (Jyotish)",
+        isCategory: "Bachelor",
+        icon: '<i class="fa-solid fa-om"></i>',
+        image: "assets/images/aries-card.png",
+        description: "Advanced professional program in Vedic Astrology. Deep dive into predictive techniques.",
+        price: "₹8,999",
+        badges: ["✓ Certification", "Pro Level"],
+        link: "astrology.html"
+    },
+    {
+        id: 17,
+        title: "Numerology (Pythagorean & Chaldean)",
+        isCategory: "Bachelor",
+        icon: '<i class="fa-solid fa-hashtag"></i>',
+        image: "assets/images/virgo-card.jpg",
+        description: "Professional Numerology certification covering advanced calculations and analysis.",
+        price: "₹8,999",
+        badges: ["✓ Certification", "Pro Level"],
+        link: "numerology.html"
+    },
+    {
+        id: 18,
+        title: "KP Astrology (Krishnamurti Padhdhati)",
+        isCategory: "Bachelor",
+        icon: '<i class="fa-solid fa-star"></i>',
+        image: "assets/images/leo-card.png",
+        description: "Timing of events and advanced prediction using the KP system at a professional level.",
+        price: "₹8,999",
+        badges: ["✓ Certification", "Pro Level"],
+        link: "kp-astrology.html"
+    },
+    {
+        id: 19,
+        title: "Gemstone Science (Ratna Vigyan)",
+        isCategory: "Bachelor",
+        icon: '<i class="fa-regular fa-gem"></i>',
+        image: "assets/images/gemstone.jpg",
+        description: "Scientific study of gemstones and their advanced applications in human life.",
+        price: "₹8,999",
+        badges: ["✓ Certification", "Pro Level"],
+        link: "complete-astrology.html"
+    },
+    {
+        id: 20,
+        title: "Vastu Shastra",
+        isCategory: "Bachelor",
+        icon: '<i class="fa-solid fa-house-chimney"></i>',
+        image: "assets/images/aquarius-card.png",
+        description: "Comprehensive professional training in Vastu principles for large-scale projects.",
+        price: "₹8,999",
+        badges: ["✓ Certification", "Pro Level"],
+        link: "vastu.html"
+    },
+    {
+        id: 21,
+        title: "Lal Kitab",
+        isCategory: "Bachelor",
+        icon: '<i class="fa-solid fa-book-journal-whills"></i>',
+        image: "assets/images/gemini-card.png",
+        description: "In-depth study of Lal Kitab remedies and their professional application.",
+        price: "₹8,999",
+        badges: ["✓ Certification", "Pro Level"],
+        link: "lal-kitab.html"
+    },
+    {
+        id: 22,
+        title: "Face Reading (Physiognomy)",
+        isCategory: "Bachelor",
+        icon: '<i class="fa-solid fa-user"></i>',
+        image: "assets/images/aries-card.png",
+        description: "Expert level character analysis and fortune telling through facial features.",
+        price: "₹8,999",
+        badges: ["✓ Certification", "Pro Level"],
+        link: "face-reading.html"
+    },
+    {
+        id: 23,
+        title: "Reiki Healing",
+        isCategory: "Bachelor",
+        icon: '<i class="fa-solid fa-hands-holding-circle"></i>',
+        image: "assets/images/Healing.png",
+        description: "Professional level Reiki certification for advanced practitioners.",
+        price: "₹8,999",
+        badges: ["✓ Certification", "Pro Level"],
+        link: "reiki.html"
+    },
+    {
+        id: 24,
+        title: "Tarot Reading",
+        isCategory: "Bachelor",
+        icon: '<i class="fa-solid fa-layer-group"></i>',
+        image: "assets/images/gemini-card.png",
+        description: "Professional grade intuitive guidance and advanced predictive tarot mastery.",
+        price: "₹8,999",
+        badges: ["✓ Certification", "Pro Level"],
+        link: "tarot.html"
+    },
+    {
+        id: 25,
+        title: "Nakshatra (Lunar Mansions) 1",
+        isCategory: "Bachelor",
+        icon: '<i class="fa-solid fa-star-half-stroke"></i>',
+        image: "assets/images/gold_zodiac_wheel.png",
+        description: "In-depth research and professional application of Lunar Mansions in astrology.",
+        price: "₹8,999",
+        badges: ["✓ Certification", "Pro Level"],
+        link: "nakshatra.html"
+    },
+    {
+        id: 26,
+        title: "Crystal Rudraksha",
+        isCategory: "Bachelor",
+        icon: '<i class="fa-solid fa-gem"></i>',
+        image: "assets/images/crystal-healing-new.jpg",
+        description: "Scientific and professional combination of crystals and rudrakshas for healing.",
+        price: "₹8,999",
+        badges: ["✓ Certification", "Pro Level"],
+        link: "crystal-healing.html"
+    },
+    {
+        id: 27,
+        title: "Palmistry (Chirognomy & Chiromancy)",
+        isCategory: "Bachelor",
+        icon: '<i class="fa-solid fa-hand-sparkles"></i>',
+        image: "assets/images/pisces-card.png",
+        description: "Comprehensive professional level palmistry including line analysis and personality traits.",
+        price: "₹8,999",
+        badges: ["✓ Certification", "Pro Level"],
+        link: "palmistry.html"
+    },
+    {
+        id: 28,
+        title: "Feng Shui",
+        isCategory: "Crash Course",
+        icon: '<i class="fa-solid fa-torii-gate"></i>',
+        image: "assets/images/feng-shui-astrology.jpg",
+        description: "Learn the art of placement and flow of energy (Qi) to improve life harmony.",
+        price: "₹2,999",
+        badges: ["✓ Certification", "Beginner Tier"],
+        link: "feng-shui.html"
+    },
+    {
+        id: 29,
+        title: "Numerology (Pythagorean & Chaldean)",
+        isCategory: "Master",
+        icon: '<i class="fa-solid fa-hashtag"></i>',
+        image: "assets/images/numerology-new.jpg",
+        description: "Master level numerology covering deep Pythagorean and Chaldean systems.",
+        price: "₹18,699",
+        badges: ["✓ Certification", "Advanced Tier"],
+        link: "numerology.html"
+    },
+    {
+        id: 30,
+        title: "Vedic Astrology (Jyotish)",
+        isCategory: "Master",
+        icon: '<i class="fa-solid fa-om"></i>',
+        image: "assets/images/vedic-astrology-new.jpg",
+        description: "Expert level Vedic Astrology with advanced predictive techniques.",
+        price: "₹18,699",
+        badges: ["✓ Certification", "Advanced Tier"],
+        link: "astrology.html"
+    },
+    {
+        id: 31,
+        title: "KP Astrology (Krishnamurti Padhdhati)",
+        isCategory: "Master",
+        icon: '<i class="fa-solid fa-star"></i>',
+        image: "assets/images/kp-astrology-new.jpg",
+        description: "Advanced KP Astrology for pinpoint outcome timing and event analysis.",
+        price: "₹18,699",
+        badges: ["✓ Certification", "Advanced Tier"],
+        link: "kp-astrology.html"
+    },
+    {
+        id: 32,
+        title: "Gemstone Science (Ratna Vigyan)",
+        isCategory: "Master",
+        icon: '<i class="fa-regular fa-gem"></i>',
+        image: "assets/images/gemstone.jpg",
+        description: "In-depth study of gemstone vibrations and therapeutic planetary correlations.",
+        price: "₹18,699",
+        badges: ["✓ Certification", "Advanced Tier"],
+        link: "complete-astrology.html"
+    },
+    {
+        id: 33,
+        title: "Vastu Shastra",
+        isCategory: "Master",
+        icon: '<i class="fa-solid fa-house-chimney"></i>',
+        image: "assets/images/vastu-new.jpg",
+        description: "Advanced Vastu principles for industrial, commercial and residential planning.",
+        price: "₹18,699",
+        badges: ["✓ Certification", "Advanced Tier"],
+        link: "vastu.html"
+    },
+    {
+        id: 34,
+        title: "Lal Kitab",
+        isCategory: "Master",
+        icon: '<i class="fa-solid fa-book-journal-whills"></i>',
+        image: "assets/images/lal-kitab-new.jpg",
+        description: "Mastering complex Lal Kitab remedies and horoscope analysis.",
+        price: "₹18,699",
+        badges: ["✓ Certification", "Advanced Tier"],
+        link: "lal-kitab.html"
+    },
+    {
+        id: 35,
+        title: "Face Reading (Physiognomy)",
+        isCategory: "Master",
+        icon: '<i class="fa-solid fa-user"></i>',
+        image: "assets/images/face-reading-new.jpg",
+        description: "Advanced face reading techniques to identify subtle character traits.",
+        price: "₹18,699",
+        badges: ["✓ Certification", "Advanced Tier"],
+        link: "face-reading.html"
+    },
+    {
+        id: 36,
+        title: "Healing",
+        isCategory: "Crash Course",
+        icon: '<i class="fa-solid fa-hands-holding-circle"></i>',
+        image: "assets/images/healing.jpg",
+        description: "Foundational course on energy healing, chakra balancing and spiritual wellness.",
+        price: "₹2,999",
+        badges: ["✓ Certification", "Beginner Tier"],
+        link: "reiki.html"
+    },
+    {
+        id: 37,
+        title: "Tarot Reading",
+        isCategory: "Master",
+        icon: '<i class="fa-solid fa-layer-group"></i>',
+        image: "assets/images/tarot-new.jpg",
+        description: "Intuitive Master level Tarot reading and spread interpretations.",
+        price: "₹18,699",
+        badges: ["✓ Certification", "Advanced Tier"],
+        link: "tarot.html"
+    },
+    {
+        id: 38,
+        title: "Nakshatra (Lunar Mansions)",
+        isCategory: "Master",
+        icon: '<i class="fa-solid fa-star-half-stroke"></i>',
+        image: "assets/images/gold_zodiac_wheel.png",
+        description: "Deep research into the 27 Nakshatras and their specific life impacts.",
+        price: "₹18,699",
+        badges: ["✓ Certification", "Advanced Tier"],
+        link: "nakshatra.html"
+    },
+    {
+        id: 39,
+        title: "Crystal Rudraksha",
+        isCategory: "Master",
+        icon: '<i class="fa-solid fa-gem"></i>',
+        image: "assets/images/crystal-healing-new.jpg",
+        description: "Advanced usage of crystals and Rudraksha for planetary remediation.",
+        price: "₹18,699",
+        badges: ["✓ Certification", "Advanced Tier"],
+        link: "crystal-healing.html"
+    },
+    {
+        id: 40,
+        title: "Palmistry (Chirognomy & Chiromancy)",
+        isCategory: "Master",
+        icon: '<i class="fa-solid fa-hand-sparkles"></i>',
+        image: "assets/images/palmistry-new.jpg",
+        description: "Advanced palmistry including complex line variants and hand psychology.",
+        price: "₹18,699",
+        badges: ["✓ Certification", "Advanced Tier"],
+        link: "palmistry.html"
+    },
+    // ── CRASH COURSE (Beginner) POPULATION ───────────────────────────────────
+    {
+        id: 41,
+        title: "Past Life Regression Theory (PLRT)",
+        isCategory: "Crash Course",
+        icon: '<i class="fa-solid fa-hourglass-half"></i>',
+        image: "assets/images/past-life.jpg",
+        description: "Explore the theoretical foundations of past life regression and soul journey principles.",
+        price: "₹2,999",
+        badges: ["✓ Certification", "Beginner Tier"],
+        link: "plrt.html"
+    },
+    {
+        id: 42,
+        title: "Bhoomi Vastu & Prasada Vastu",
+        isCategory: "Crash Course",
+        icon: '<i class="fa-solid fa-house-chimney"></i>',
+        image: "assets/images/vastu-new.jpg",
+        description: "Learn site energetics and architectural integration principles for harmonic living.",
+        price: "₹2,999",
+        badges: ["✓ Certification", "Beginner Tier"],
+        link: "vastu.html"
+    },
+    {
+        id: 43,
+        title: "Modern Western Palmistry",
+        isCategory: "Crash Course",
+        icon: '<i class="fa-solid fa-hand-sparkles"></i>',
+        image: "assets/images/palmistry-new.jpg",
+        description: "Understanding personality and character analysis through modern western palmistry techniques.",
+        price: "₹2,999",
+        badges: ["✓ Certification", "Beginner Tier"],
+        link: "palmistry.html"
+    },
+    {
+        id: 44,
+        title: "Mobile Numerology",
+        isCategory: "Crash Course",
+        icon: '<i class="fa-solid fa-mobile-screen"></i>',
+        image: "assets/images/mobile numerology.png",
+        description: "Decode the impact of mobile numbers on luck, professional success and personal life.",
+        price: "₹2,999",
+        badges: ["✓ Certification", "Beginner Tier"],
+        link: "numerology.html"
+    },
+    {
+        id: 45,
+        title: "(Face Reading) Western Physiognomy",
+        isCategory: "Crash Course",
+        icon: '<i class="fa-solid fa-user"></i>',
+        image: "assets/images/(Face Reading) Western Physiognomy (Character Analysis.png",
+        description: "Learn systematic character analysis and behavioral profiling through facial features.",
+        price: "₹2,999",
+        badges: ["✓ Certification", "Beginner Tier"],
+        link: "face-reading.html"
+    },
+    {
+        id: 46,
+        title: "Financial Astrology (Artha)",
+        isCategory: "Crash Course",
+        icon: '<i class="fa-solid fa-chart-line"></i>',
+        image: "assets/images/Financial Astrology (Artha).png",
+        description: "Introductory course on identifying financial potential and wealth cycles in birth charts.",
+        price: "₹2,999",
+        badges: ["✓ Certification", "Beginner Tier"],
+        link: "astrology.html"
+    },
+    {
+        id: 47,
+        title: "Lal Kitab Basics",
+        isCategory: "Crash Course",
+        icon: '<i class="fa-solid fa-book-journal-whills"></i>',
+        image: "assets/images/Lal Kitab Basics.png",
+        description: "Foundational principles of Lal Kitab and its unique approach to astrological remedies.",
+        price: "₹2,999",
+        badges: ["✓ Certification", "Beginner Tier"],
+        link: "lal-kitab.html"
+    },
+    {
+        id: 48,
+        title: "BNN Intensive (14-Day Mastery)",
+        isCategory: "Crash Course",
+        icon: '<i class="fa-solid fa-magnifying-glass"></i>',
+        image: "assets/images/The BNN Intensive A 14-Day Mastery of Bhrigu Nandi Nadi.png",
+        description: "Intensive training on the Bhrigu Nandi Nadi system for rapid and accurate predictions.",
+        price: "₹2,999",
+        badges: ["✓ Certification", "Beginner Tier"],
+        link: "bnn-astrology.html"
+    },
+    {
+        id: 49,
+        title: "Modern Career Astrology",
+        isCategory: "Crash Course",
+        icon: '<i class="fa-solid fa-briefcase"></i>',
+        image: "assets/images/Modern Career Astrology.png",
+        description: "Astrological guidance for modern professions, career planning, and timing of success.",
+        price: "₹2,999",
+        badges: ["✓ Certification", "Beginner Tier"],
+        link: "astrology.html"
+    },
+    {
+        id: 50,
+        title: "Business Numerology",
+        isCategory: "Crash Course",
+        icon: '<i class="fa-solid fa-building"></i>',
+        image: "assets/images/Business Numerology.png",
+        description: "Optimizing business names, brand identities and timing for commercial success.",
+        price: "₹2,999",
+        badges: ["✓ Certification", "Beginner Tier"],
+        link: "numerology.html"
+    },
+    {
+        id: 51,
+        title: "Vedic Numerology",
+        isCategory: "Crash Course",
+        icon: '<i class="fa-solid fa-hashtag"></i>',
+        image: "assets/images/Vedic Numerology.png",
+        description: "Traditional Indian numerological systems for understanding destiny and life path.",
+        price: "₹2,999",
+        badges: ["✓ Certification", "Beginner Tier"],
+        link: "numerology.html"
     }
-
 ];
 
 /**

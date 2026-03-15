@@ -33,7 +33,124 @@
       background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
         url('assets/images/explore-hero-image.png') center/cover no-repeat fixed;
     }
+
+    /* Category Filter Styles */
+    .category-filter-container {
+      margin: 40px 0;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .filter-tab {
+      padding: 12px 24px;
+      border-radius: 50px;
+      background: #fff;
+      border: 2px solid #e0d5c8;
+      color: #5a1e1e;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-size: 0.95rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .filter-tab::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #c8960c, #8b4513);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    .filter-tab:hover {
+      border-color: #c8960c;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(200, 150, 12, 0.2);
+    }
+
+    .filter-tab.active {
+      background: linear-gradient(135deg, #c8960c, #8b4513);
+      border-color: transparent;
+      color: #fff;
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(139, 69, 19, 0.3);
+    }
+
+    .filter-tab.active::before {
+      opacity: 1;
+    }
+
+    /* Animation for cards when filtering */
+    .premium-gold-card {
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .premium-gold-card.hidden {
+      display: none;
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    @media (max-width: 768px) {
+      .category-filter-container {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
+        gap: 10px;
+        scrollbar-width: none;
+      }
+      .category-filter-container::-webkit-scrollbar {
+        display: none;
+      }
+      .filter-tab {
+        flex: 0 0 auto;
+        padding: 10px 20px;
+        font-size: 0.85rem;
+      }
+    }
+
+    #courseGrid.all-courses-active .category-badge {
+      display: none !important;
+    }
+  
+    /* Guarantee structured alignment for all course cards */
+    .course-desc-text {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 60px; /* Aligns textual height across varying card lengths */
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+  
+    @media (max-width: 768px) {
+      .category-filter-container {
+        display: none !important;
+      }
+      }
+
   </style>
+<style>
+/* Mobile Dropdown CSS */
+.mobile-category-dropdown { display: none; margin-bottom: 20px; }
+@media (max-width: 768px) {
+  .category-filter-container { display: none !important; }
+  .mobile-category-dropdown { display: block; }
+}
+</style>
 </head>
 
 <body>
@@ -43,11 +160,11 @@
       <div class="header-top-left">
         <div class="header-top-item">
           <span class="header-top-icon">📞</span>
-          <a href="tel:+919999999999">+91 9999-999-999</a>
+          <a href="tel:+919621051159">+91 962 105 1159</a>
         </div>
         <div class="header-top-item">
           <span class="header-top-icon">✉️</span>
-          <a href="mailto:info@parashari.com">info@parashari.com</a>
+          <a href="mailto:info@astrobharatai.com">info@astrobharatai.com</a>
         </div>
       </div>
       <div class="header-top-right">Online Classes | ISO Certified</div>
@@ -156,7 +273,8 @@
         <a href="login.html" class="btn btn-outline btn-sm">Login</a>
         <a href="register.html" class="btn btn-primary btn-sm">Register</a>
       </div>
-      <button class="hamburger" title="Toggle navigation menu" aria-label="Toggle navigation menu">
+            
+<button class="hamburger" title="Toggle navigation menu" aria-label="Toggle navigation menu">
         <span>
         </span>
         <span>
@@ -232,25 +350,502 @@
         <h2>Explore Our Programs</h2>
         <p class="color-light-text">Explore our diverse range of certification programs designed for all levels</p>
       </div>
-      <div class="grid-responsive grid-gap-2">
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course">
-          <span class="discount-tag" data-discount="63% Discount"></span>
+
+      
+      <!-- Mobile Category Dropdown -->
+      <div class="mobile-category-dropdown">
+        <select id="mobileCategorySelect" class="form-control" style="
+          background: url(&quot;data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white' width='24' height='24'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e&quot;) no-repeat right 15px center, linear-gradient(135deg, #c8960c, #8b4513);
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          color: #fff; 
+          font-weight: bold; 
+          border-radius: 50px; 
+          text-align: center; 
+          font-size: 1.1rem; 
+          padding: 12px 40px 12px 20px; 
+          width: 100%; 
+          border: 2px solid #e0d5c8; 
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+          cursor: pointer;">
+          <option value="all">All Courses</option>
+          <option value="Crash Course">Crash Course</option>
+          <option value="Diploma">Diploma</option>
+          <option value="Bachelor">Bachelor</option>
+          <option value="Master">Master</option>
+        </select>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="category-filter-container">
+        <button class="filter-tab active" data-filter="all">All Courses</button>
+        <button class="filter-tab" data-filter="Crash Course">Crash Course</button>
+        <button class="filter-tab" data-filter="Diploma">Diploma</button>
+        <button class="filter-tab" data-filter="Bachelor">Bachelor</button>
+        <button class="filter-tab" data-filter="Master">Master</button>
+        <button class="filter-tab" data-filter="Grand Master">Grand Master</button>
+      </div>
+
+
+
+
+      <div class="grid-responsive grid-gap-2 all-courses-active" id="courseGrid">
+        <!-- 15 CRASH COURSES (Grouped at top) -->
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course" data-course-id="plrt">
+          <span class="discount-tag" data-discount="25% Discount"></span>
           <div class="card-image-container">
-            <img src="assets/images/vedic-astrology-new.jpg" alt="Vedic Astrology" class="card-image">
+            <img src="assets/images/past-life.jpg" alt="Past Life Regression Theory (PLRT)" class="card-image">
           </div>
           <div class="card-body">
             <div class="card-header">
-              <div class="card-header-icon">♈</div>
-              <h3 class="card-title">Vedic Astrology</h3>
+              <div class="card-header-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+              <h3 class="card-title">Past Life Regression Theory (PLRT)</h3>
             </div>
-            <p>Enroll in the Vedic Astrology program to master the concepts and gain deep insights.</p>
+            <p class="course-desc-text">Uncover unresolved past karma to heal current life blocks. Empower yourself to live with greater clarity, purpose, and emotional freedom.</p>
             <div class="mb-1">
               <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
               <span class="certification-badge">✓ Certification</span>
             </div>
             <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹7,999</del><strong
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹3,999</del><strong
                 style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+            <div class="course-footer">
+              <a href="plrt.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course" data-course-id="vastu">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/vastu-new.jpg" alt="Bhoomi Vastu & Prasada Vastu" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-house-chimney"></i></div>
+              <h3 class="card-title">Bhoomi Vastu & Prasada Vastu</h3>
+            </div>
+            <p class="course-desc-text">Master the ancient science of architecture. Transform spaces to attract positive energy, prosperity, and lasting harmony into your life.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹3,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+            <div class="course-footer">
+              <a href="vastu.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course" data-course-id="palmistry">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/palmistry-new.jpg" alt="Modern Western Palmistry" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-hand-sparkles"></i></div>
+              <h3 class="card-title">Modern Western Palmistry</h3>
+            </div>
+            <p class="course-desc-text">Decode the lines of destiny hidden in your hands. Master this art to confidently guide yourself and others through life's defining moments.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹3,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+            <div class="course-footer">
+              <a href="palmistry.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course" data-course-id="numerology-mobile">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/mobile numerology.png" alt="Mobile Numerology" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+              <h3 class="card-title">Mobile Numerology</h3>
+            </div>
+            <p class="course-desc-text">Unlock the hidden meaning behind numbers. Use this powerful knowledge to attract success, improve relationships, and align with your potential.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹3,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+            <div class="course-footer">
+              <a href="numerology.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course" data-course-id="face-reading">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/(Face Reading) Western Physiognomy (Character Analysis.png" alt="(Face Reading) Western Physiognomy" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-user"></i></div>
+              <h3 class="card-title">(Face Reading) Western Physiognomy</h3>
+            </div>
+            <p class="course-desc-text">Read facial features to reveal hidden personality traits. Enhance your relationships and negotiation skills by truly understanding anyone.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹3,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+            <div class="course-footer">
+              <a href="face-reading.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course" data-course-id="astrology-financial">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/Financial Astrology (Artha).png" alt="Financial Astrology (Artha)" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-chart-line"></i></div>
+              <h3 class="card-title">Financial Astrology (Artha)</h3>
+            </div>
+            <p class="course-desc-text">Discover the profound secrets of astrology. Learn practical techniques to guide life choices, anticipate events, and help others find their path.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹3,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+            <div class="course-footer">
+              <a href="astrology.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course" data-course-id="lal-kitab-basics">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/Lal Kitab Basics.png" alt="Lal Kitab Basics" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-book-journal-whills"></i></div>
+              <h3 class="card-title">Lal Kitab Basics</h3>
+            </div>
+            <p class="course-desc-text">Discover potent traditional remedies. Learn precise, practical solutions to overcome life's biggest obstacles and manifest your desired outcomes.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹3,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+            <div class="course-footer">
+              <a href="lal-kitab.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course" data-course-id="medical-astrology">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/Medical Astrology.png" alt="Medical Astrology" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-staff-snake"></i></div>
+              <h3 class="card-title">Medical Astrology</h3>
+            </div>
+            <p class="course-desc-text">Discover the profound secrets of astrology. Learn practical techniques to guide life choices, anticipate events, and help others find their path.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹3,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+            <div class="course-footer">
+              <a href="medical-astrology.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course" data-course-id="bnn-intensive">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/The BNN Intensive A 14-Day Mastery of Bhrigu Nandi Nadi.png" alt="BNN Intensive Mastery" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+              <h3 class="card-title">The BNN Intensive: A 14-Day Mastery</h3>
+            </div>
+            <p class="course-desc-text">Dive into advanced predictive techniques. Gain mastery over specialized systems that offer pinpoint accuracy and clarity for the future.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹3,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+            <div class="course-footer">
+              <a href="bnn-astrology.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course" data-course-id="astrology-career">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/Modern Career Astrology.png" alt="Modern Career Astrology" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-briefcase"></i></div>
+              <h3 class="card-title">Modern Career Astrology</h3>
+            </div>
+            <p class="course-desc-text">Discover the profound secrets of astrology. Learn practical techniques to guide life choices, anticipate events, and help others find their path.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹3,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+            <div class="course-footer">
+              <a href="astrology.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course" data-course-id="numerology-business">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/Business Numerology.png" alt="Business Numerology" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-building"></i></div>
+              <h3 class="card-title">Business Numerology</h3>
+            </div>
+            <p class="course-desc-text">Unlock the hidden meaning behind numbers. Use this powerful knowledge to attract success, improve relationships, and align with your potential.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹3,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+            <div class="course-footer">
+              <a href="numerology.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course" data-course-id="numerology-vedic">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/Vedic Numerology.png" alt="Vedic Numerology" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-hashtag"></i></div>
+              <h3 class="card-title">Vedic Numerology</h3>
+            </div>
+            <p class="course-desc-text">Unlock the hidden meaning behind numbers. Use this powerful knowledge to attract success, improve relationships, and align with your potential.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹3,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+            <div class="course-footer">
+              <a href="numerology.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course" data-course-id="nadi-jyotish">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/Nadi Jyotish.png" alt="Nadi Jyotish" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-scroll"></i></div>
+              <h3 class="card-title">Nadi Jyotish</h3>
+            </div>
+            <p class="course-desc-text">Dive into advanced predictive techniques. Gain mastery over specialized systems that offer pinpoint accuracy and clarity for the future.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹3,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+            <div class="course-footer">
+              <a href="nadi-jyotish.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course" data-course-id="reiki">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/Healing.png" alt="Healing" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-hands-holding-circle"></i></div>
+              <h3 class="card-title">Healing</h3>
+            </div>
+            <p class="course-desc-text">Harness universal energy for profound healing. Learn to clear energetic blocks, restore vitality, and bring deep peace to the mind and body.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹3,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+            <div class="course-footer">
+              <a href="reiki.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course" data-course-id="feng-shui">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/feng-shui-astrology.jpg" alt="Feng Shui" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-torii-gate"></i></div>
+              <h3 class="card-title">Feng Shui</h3>
+            </div>
+            <p class="course-desc-text">Deepen your understanding of Feng Shui. Gain unique insights and practical skills that will empower you to create positive change in your life.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹3,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+            <div class="course-footer">
+              <a href="feng-shui.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow"></span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- END OF CRASH COURSES -->
+
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma" data-course-id="astrology">
+          <span class="discount-tag" data-discount="24% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/vedic-astrology-new.jpg" alt="Vedic Astrology" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-om"></i></div>
+              <h3 class="card-title">Vedic Astrology (Jyotish)</h3>
+            </div>
+            <p class="course-desc-text">Discover the profound secrets of astrology. Learn practical techniques to guide life choices, anticipate events, and help others find their path.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#2196F3">Diploma · Popular</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹5,499</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹4,199</strong></h4>
             <div class="course-footer">
               <a href="astrology.html" class="learn-more">
                 <span class="circle" aria-hidden="true">
@@ -262,24 +857,24 @@
             </div>
           </div>
         </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor">
-          <span class="discount-tag" data-discount="41% Discount"></span>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma" data-course-id="numerology">
+          <span class="discount-tag" data-discount="24% Discount"></span>
           <div class="card-image-container">
             <img src="assets/images/numerology-new.jpg" alt="Numerology" class="card-image">
           </div>
           <div class="card-body">
             <div class="card-header">
-              <div class="card-header-icon">🔢</div>
-              <h3 class="card-title">Numerology</h3>
+              <div class="card-header-icon"><i class="fa-solid fa-hashtag"></i></div>
+              <h3 class="card-title">Numerology (Pythagorean & Chaldean)</h3>
             </div>
-            <p>Enroll in the Numerology program to master the concepts and gain deep insights.</p>
+            <p class="course-desc-text">Unlock the hidden meaning behind numbers. Use this powerful knowledge to attract success, improve relationships, and align with your potential.</p>
             <div class="mb-1">
-              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="category-badge" style="background:#2196F3">Diploma · Popular</span>
               <span class="certification-badge">✓ Certification</span>
             </div>
             <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹17,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹9,999</strong></h4>
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹5,499</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹4,199</strong></h4>
             <div class="course-footer">
               <a href="numerology.html" class="learn-more">
                 <span class="circle" aria-hidden="true">
@@ -291,24 +886,24 @@
             </div>
           </div>
         </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor">
-          <span class="discount-tag" data-discount="41% Discount"></span>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma" data-course-id="kp-astrology">
+          <span class="discount-tag" data-discount="24% Discount"></span>
           <div class="card-image-container">
             <img src="assets/images/kp-astrology-new.jpg" alt="KP Astrology" class="card-image">
           </div>
           <div class="card-body">
             <div class="card-header">
-              <div class="card-header-icon">⭐</div>
-              <h3 class="card-title">KP Astrology</h3>
+              <div class="card-header-icon"><i class="fa-solid fa-star"></i></div>
+              <h3 class="card-title">KP Astrology (Krishnamurti Padhdhati)</h3>
             </div>
-            <p>Enroll in the KP Astrology program to master the concepts and gain deep insights.</p>
+            <p class="course-desc-text">Dive into advanced predictive techniques. Gain mastery over specialized systems that offer pinpoint accuracy and clarity for the future.</p>
             <div class="mb-1">
-              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="category-badge" style="background:#2196F3">Diploma · Popular</span>
               <span class="certification-badge">✓ Certification</span>
             </div>
             <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹17,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹9,999</strong></h4>
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹5,499</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹4,199</strong></h4>
             <div class="course-footer">
               <a href="kp-astrology.html" class="learn-more">
                 <span class="circle" aria-hidden="true">
@@ -320,24 +915,24 @@
             </div>
           </div>
         </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma">
-          <span class="discount-tag" data-discount="50% Discount"></span>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma" data-course-id="gemstone">
+          <span class="discount-tag" data-discount="24% Discount"></span>
           <div class="card-image-container">
             <img src="assets/images/gemstone.jpg" alt="Gemstone Science" class="card-image">
           </div>
           <div class="card-body">
             <div class="card-header">
-              <div class="card-header-icon">💎</div>
-              <h3 class="card-title">Gemstone Science</h3>
+              <div class="card-header-icon"><i class="fa-regular fa-gem"></i></div>
+              <h3 class="card-title">Gemstone Science (Ratna Vigyan)</h3>
             </div>
-            <p>Enroll in the Gemstone Science program to master the concepts and gain deep insights.</p>
+            <p class="course-desc-text">Discover potent traditional remedies. Learn precise, practical solutions to overcome life's biggest obstacles and manifest your desired outcomes.</p>
             <div class="mb-1">
               <span class="category-badge" style="background:#2196F3">Diploma · Popular</span>
               <span class="certification-badge">✓ Certification</span>
             </div>
             <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹10,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹4,999</strong></h4>
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹5,499</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹4,199</strong></h4>
             <div class="course-footer">
               <a href="gemstone.html" class="learn-more">
                 <span class="circle" aria-hidden="true">
@@ -349,24 +944,24 @@
             </div>
           </div>
         </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor">
-          <span class="discount-tag" data-discount="41% Discount"></span>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma" data-course-id="vastu">
+          <span class="discount-tag" data-discount="24% Discount"></span>
           <div class="card-image-container">
             <img src="assets/images/vastu-new.jpg" alt="Vastu Shastra" class="card-image">
           </div>
           <div class="card-body">
             <div class="card-header">
-              <div class="card-header-icon">🏠</div>
+              <div class="card-header-icon"><i class="fa-solid fa-house-chimney"></i></div>
               <h3 class="card-title">Vastu Shastra</h3>
             </div>
-            <p>Enroll in the Vastu Shastra program to master the concepts and gain deep insights.</p>
+            <p class="course-desc-text">Master the ancient science of architecture. Transform spaces to attract positive energy, prosperity, and lasting harmony into your life.</p>
             <div class="mb-1">
-              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="category-badge" style="background:#2196F3">Diploma · Popular</span>
               <span class="certification-badge">✓ Certification</span>
             </div>
             <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹17,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹9,999</strong></h4>
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹5,499</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹4,199</strong></h4>
             <div class="course-footer">
               <a href="vastu.html" class="learn-more">
                 <span class="circle" aria-hidden="true">
@@ -378,24 +973,24 @@
             </div>
           </div>
         </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma">
-          <span class="discount-tag" data-discount="50% Discount"></span>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma" data-course-id="lal-kitab">
+          <span class="discount-tag" data-discount="24% Discount"></span>
           <div class="card-image-container">
             <img src="assets/images/lal-kitab-new.jpg" alt="Lal Kitab" class="card-image">
           </div>
           <div class="card-body">
             <div class="card-header">
-              <div class="card-header-icon">📕</div>
+              <div class="card-header-icon"><i class="fa-solid fa-book-journal-whills"></i></div>
               <h3 class="card-title">Lal Kitab</h3>
             </div>
-            <p>Enroll in the Lal Kitab program to master the concepts and gain deep insights.</p>
+            <p class="course-desc-text">Discover potent traditional remedies. Learn precise, practical solutions to overcome life's biggest obstacles and manifest your desired outcomes.</p>
             <div class="mb-1">
               <span class="category-badge" style="background:#2196F3">Diploma · Popular</span>
               <span class="certification-badge">✓ Certification</span>
             </div>
             <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹10,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹4,999</strong></h4>
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹5,499</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹4,199</strong></h4>
             <div class="course-footer">
               <a href="lal-kitab.html" class="learn-more">
                 <span class="circle" aria-hidden="true">
@@ -407,24 +1002,24 @@
             </div>
           </div>
         </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master">
-          <span class="discount-tag" data-discount="33% Discount"></span>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma" data-course-id="face-reading">
+          <span class="discount-tag" data-discount="24% Discount"></span>
           <div class="card-image-container">
             <img src="assets/images/face-reading-new.jpg" alt="Face Reading" class="card-image">
           </div>
           <div class="card-body">
             <div class="card-header">
-              <div class="card-header-icon">👤</div>
-              <h3 class="card-title">Face Reading</h3>
+              <div class="card-header-icon"><i class="fa-solid fa-user"></i></div>
+              <h3 class="card-title">Face Reading (Physiognomy)</h3>
             </div>
-            <p>Enroll in the Face Reading program to master the concepts and gain deep insights.</p>
+            <p class="course-desc-text">Read facial features to reveal hidden personality traits. Enhance your relationships and negotiation skills by truly understanding anyone.</p>
             <div class="mb-1">
-              <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
+              <span class="category-badge" style="background:#2196F3">Diploma · Popular</span>
               <span class="certification-badge">✓ Certification</span>
             </div>
             <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹30,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹19,999</strong></h4>
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹5,499</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹4,199</strong></h4>
             <div class="course-footer">
               <a href="face-reading.html" class="learn-more">
                 <span class="circle" aria-hidden="true">
@@ -436,24 +1031,24 @@
             </div>
           </div>
         </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma">
-          <span class="discount-tag" data-discount="50% Discount"></span>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma" data-course-id="reiki">
+          <span class="discount-tag" data-discount="24% Discount"></span>
           <div class="card-image-container">
             <img src="assets/images/healing.jpg" alt="Reiki Healing" class="card-image">
           </div>
           <div class="card-body">
             <div class="card-header">
-              <div class="card-header-icon">🙌</div>
+              <div class="card-header-icon"><i class="fa-solid fa-hands-holding-circle"></i></div>
               <h3 class="card-title">Reiki Healing</h3>
             </div>
-            <p>Enroll in the Reiki Healing program to master the concepts and gain deep insights.</p>
+            <p class="course-desc-text">Harness universal energy for profound healing. Learn to clear energetic blocks, restore vitality, and bring deep peace to the mind and body.</p>
             <div class="mb-1">
               <span class="category-badge" style="background:#2196F3">Diploma · Popular</span>
               <span class="certification-badge">✓ Certification</span>
             </div>
             <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹10,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹4,999</strong></h4>
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹5,499</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹4,199</strong></h4>
             <div class="course-footer">
               <a href="reiki.html" class="learn-more">
                 <span class="circle" aria-hidden="true">
@@ -465,24 +1060,24 @@
             </div>
           </div>
         </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma">
-          <span class="discount-tag" data-discount="50% Discount"></span>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma" data-course-id="tarot">
+          <span class="discount-tag" data-discount="24% Discount"></span>
           <div class="card-image-container">
             <img src="assets/images/tarot-new.jpg" alt="Tarot Reading" class="card-image">
           </div>
           <div class="card-body">
             <div class="card-header">
-              <div class="card-header-icon">🃏</div>
+              <div class="card-header-icon"><i class="fa-solid fa-layer-group"></i></div>
               <h3 class="card-title">Tarot Reading</h3>
             </div>
-            <p>Enroll in the Tarot Reading program to master the concepts and gain deep insights.</p>
+            <p class="course-desc-text">Connect with your intuition through Tarot. Learn how to interpret the cards accurately to provide deep insights and empowering guidance.</p>
             <div class="mb-1">
               <span class="category-badge" style="background:#2196F3">Diploma · Popular</span>
               <span class="certification-badge">✓ Certification</span>
             </div>
             <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹10,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹4,999</strong></h4>
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹5,499</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹4,199</strong></h4>
             <div class="course-footer">
               <a href="tarot.html" class="learn-more">
                 <span class="circle" aria-hidden="true">
@@ -494,24 +1089,24 @@
             </div>
           </div>
         </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor">
-          <span class="discount-tag" data-discount="41% Discount"></span>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma" data-course-id="nakshatra">
+          <span class="discount-tag" data-discount="24% Discount"></span>
           <div class="card-image-container">
             <img src="assets/images/gold_zodiac_wheel.png" alt="Nakshatra" class="card-image">
           </div>
           <div class="card-body">
             <div class="card-header">
-              <div class="card-header-icon">✨</div>
-              <h3 class="card-title">Nakshatra</h3>
+              <div class="card-header-icon"><i class="fa-solid fa-star-half-stroke"></i></div>
+              <h3 class="card-title">Nakshatra (Lunar Mansions)</h3>
             </div>
-            <p>Enroll in the Nakshatra program to master the concepts and gain deep insights.</p>
+            <p class="course-desc-text">Dive into advanced predictive techniques. Gain mastery over specialized systems that offer pinpoint accuracy and clarity for the future.</p>
             <div class="mb-1">
-              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="category-badge" style="background:#2196F3">Diploma · Popular</span>
               <span class="certification-badge">✓ Certification</span>
             </div>
             <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹17,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹9,999</strong></h4>
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹5,499</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹4,199</strong></h4>
             <div class="course-footer">
               <a href="nakshatra.html" class="learn-more">
                 <span class="circle" aria-hidden="true">
@@ -523,24 +1118,24 @@
             </div>
           </div>
         </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma">
-          <span class="discount-tag" data-discount="50% Discount"></span>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma" data-course-id="crystal-healing">
+          <span class="discount-tag" data-discount="24% Discount"></span>
           <div class="card-image-container">
-            <img src="assets/images/crystal-healing-new.jpg" alt="Crystal" class="card-image">
+            <img src="assets/images/crystal-healing-new.jpg" alt="Crystal Healing" class="card-image">
           </div>
           <div class="card-body">
             <div class="card-header">
-              <div class="card-header-icon">🔮</div>
-              <h3 class="card-title">Crystal</h3>
+              <div class="card-header-icon"><i class="fa-solid fa-gem"></i></div>
+              <h3 class="card-title">Crystal Healing</h3>
             </div>
-            <p>Enroll in the Crystal program to master the concepts and gain deep insights.</p>
+            <p class="course-desc-text">Harness universal energy for profound healing. Learn to clear energetic blocks, restore vitality, and bring deep peace to the mind and body.</p>
             <div class="mb-1">
               <span class="category-badge" style="background:#2196F3">Diploma · Popular</span>
               <span class="certification-badge">✓ Certification</span>
             </div>
             <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹10,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹4,999</strong></h4>
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹5,499</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹4,199</strong></h4>
             <div class="course-footer">
               <a href="crystal-healing.html" class="learn-more">
                 <span class="circle" aria-hidden="true">
@@ -552,24 +1147,24 @@
             </div>
           </div>
         </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Grand Master">
-          <span class="discount-tag" data-discount="20% Discount"></span>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma" data-course-id="rudraksha">
+          <span class="discount-tag" data-discount="24% Discount"></span>
           <div class="card-image-container">
             <img src="assets/images/rudraksha-new.jpg" alt="Rudraksha" class="card-image">
           </div>
           <div class="card-body">
             <div class="card-header">
-              <div class="card-header-icon">📿</div>
+              <div class="card-header-icon"><i class="fa-solid fa-om"></i></div>
               <h3 class="card-title">Rudraksha</h3>
             </div>
-            <p>Enroll in the Rudraksha program to master the concepts and gain deep insights.</p>
+            <p class="course-desc-text">Discover potent traditional remedies. Learn precise, practical solutions to overcome life's biggest obstacles and manifest your desired outcomes.</p>
             <div class="mb-1">
-              <span class="category-badge" style="background:#c8960c">Grand Master · Elite</span>
+              <span class="category-badge" style="background:#2196F3">Diploma · Popular</span>
               <span class="certification-badge">✓ Certification</span>
             </div>
             <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹50,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹39,999</strong></h4>
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹5,499</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹4,199</strong></h4>
             <div class="course-footer">
               <a href="rudraksha.html" class="learn-more">
                 <span class="circle" aria-hidden="true">
@@ -581,24 +1176,53 @@
             </div>
           </div>
         </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course">
-          <span class="discount-tag" data-discount="63% Discount"></span>
+        <div class="premium-gold-card" style="display: none !important; padding: 0 !important;" data-animate data-category="Grand Master" data-course-id="rudraksha">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/rudraksha-new.jpg" alt="Rudraksha" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-om"></i></div>
+              <h3 class="card-title">Rudraksha</h3>
+            </div>
+            <p class="course-desc-text">Discover potent traditional remedies. Learn precise, practical solutions to overcome life's biggest obstacles and manifest your desired outcomes.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#c8960c">Grand Master · Elite</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹34,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹24,999</strong></h4>
+            <div class="course-footer">
+              <a href="rudraksha.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Diploma" data-course-id="palmistry">
+          <span class="discount-tag" data-discount="24% Discount"></span>
           <div class="card-image-container">
             <img src="assets/images/palmistry-new.jpg" alt="Palmistry" class="card-image">
           </div>
           <div class="card-body">
             <div class="card-header">
-              <div class="card-header-icon">✋</div>
-              <h3 class="card-title">Palmistry</h3>
+              <div class="card-header-icon"><i class="fa-solid fa-hand-sparkles"></i></div>
+              <h3 class="card-title">Palmistry (Chirognomy & Chiromancy)</h3>
             </div>
-            <p>Enroll in the Palmistry program to master the concepts and gain deep insights.</p>
+            <p class="course-desc-text">Decode the lines of destiny hidden in your hands. Master this art to confidently guide yourself and others through life's defining moments.</p>
             <div class="mb-1">
-              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
+              <span class="category-badge" style="background:#2196F3">Diploma · Popular</span>
               <span class="certification-badge">✓ Certification</span>
             </div>
             <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹7,999</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹5,499</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹4,199</strong></h4>
             <div class="course-footer">
               <a href="palmistry.html" class="learn-more">
                 <span class="circle" aria-hidden="true">
@@ -610,111 +1234,25 @@
             </div>
           </div>
         </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course">
-          <span class="discount-tag" data-discount="63% Discount"></span>
-          <div class="card-image-container">
-            <img src="assets/images/taurus-card.png" alt="Nadi Jyotish" class="card-image">
-          </div>
-          <div class="card-body">
-            <div class="card-header">
-              <div class="card-header-icon">📜</div>
-              <h3 class="card-title">Nadi Jyotish</h3>
-            </div>
-            <p>Enroll in the Nadi Jyotish program to master the concepts and gain deep insights.</p>
-            <div class="mb-1">
-              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
-              <span class="certification-badge">✓ Certification</span>
-            </div>
-            <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹7,999</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
-            <div class="course-footer">
-              <a href="nadi-jyotish.html" class="learn-more">
-                <span class="circle" aria-hidden="true">
-                  <span class="icon arrow">
-                  </span>
-                </span>
-                <span class="button-text">Learn More</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master">
-          <span class="discount-tag" data-discount="33% Discount"></span>
-          <div class="card-image-container">
-            <img src="assets/images/cancer-card.png" alt="Remedy Course" class="card-image">
-          </div>
-          <div class="card-body">
-            <div class="card-header">
-              <div class="card-header-icon">🕉️</div>
-              <h3 class="card-title">Remedy Course</h3>
-            </div>
-            <p>Enroll in the Remedy Course program to master the concepts and gain deep insights.</p>
-            <div class="mb-1">
-              <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
-              <span class="certification-badge">✓ Certification</span>
-            </div>
-            <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹30,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹19,999</strong></h4>
-            <div class="course-footer">
-              <a href="remedy-course.html" class="learn-more">
-                <span class="circle" aria-hidden="true">
-                  <span class="icon arrow">
-                  </span>
-                </span>
-                <span class="button-text">Learn More</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master">
-          <span class="discount-tag" data-discount="33% Discount"></span>
-          <div class="card-image-container">
-            <img src="assets/images/scorpio-card.png" alt="Medical Astrology" class="card-image">
-          </div>
-          <div class="card-body">
-            <div class="card-header">
-              <div class="card-header-icon">⚕️</div>
-              <h3 class="card-title">Medical Astrology</h3>
-            </div>
-            <p>Enroll in the Medical Astrology program to master the concepts and gain deep insights.</p>
-            <div class="mb-1">
-              <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
-              <span class="certification-badge">✓ Certification</span>
-            </div>
-            <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹30,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹19,999</strong></h4>
-            <div class="course-footer">
-              <a href="medical-astrology.html" class="learn-more">
-                <span class="circle" aria-hidden="true">
-                  <span class="icon arrow">
-                  </span>
-                </span>
-                <span class="button-text">Learn More</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Grand Master">
-          <span class="discount-tag" data-discount="20% Discount"></span>
+
+        <div class="premium-gold-card" style="display: none !important; padding: 0 !important;" data-animate data-category="Grand Master" data-course-id="bnn-astrology">
+          <span class="discount-tag" data-discount="25% Discount"></span>
           <div class="card-image-container">
             <img src="assets/images/virgo-card.jpg" alt="BNN Advance" class="card-image">
           </div>
           <div class="card-body">
             <div class="card-header">
-              <div class="card-header-icon">🔍</div>
+              <div class="card-header-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
               <h3 class="card-title">BNN Advance</h3>
             </div>
-            <p>Enroll in the BNN Advance program to master the concepts and gain deep insights.</p>
+            <p class="course-desc-text">Dive into advanced predictive techniques. Gain mastery over specialized systems that offer pinpoint accuracy and clarity for the future.</p>
             <div class="mb-1">
               <span class="category-badge" style="background:#c8960c">Grand Master · Elite</span>
               <span class="certification-badge">✓ Certification</span>
             </div>
             <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹50,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹39,999</strong></h4>
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹34,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹24,999</strong></h4>
             <div class="course-footer">
               <a href="bnn-astrology.html" class="learn-more">
                 <span class="circle" aria-hidden="true">
@@ -726,82 +1264,25 @@
             </div>
           </div>
         </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master">
-          <span class="discount-tag" data-discount="33% Discount"></span>
-          <div class="card-image-container">
-            <img src="assets/images/chakra-balancing.jpg" alt="Healing" class="card-image">
-          </div>
-          <div class="card-body">
-            <div class="card-header">
-              <div class="card-header-icon">💆</div>
-              <h3 class="card-title">Healing</h3>
-            </div>
-            <p>Enroll in the Healing program to master the concepts and gain deep insights.</p>
-            <div class="mb-1">
-              <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
-              <span class="certification-badge">✓ Certification</span>
-            </div>
-            <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹30,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹19,999</strong></h4>
-            <div class="course-footer">
-              <a href="healing.html" class="learn-more">
-                <span class="circle" aria-hidden="true">
-                  <span class="icon arrow">
-                  </span>
-                </span>
-                <span class="button-text">Learn More</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor">
-          <span class="discount-tag" data-discount="41% Discount"></span>
-          <div class="card-image-container">
-            <img src="assets/images/institute-building-modern.jpg" alt="Feng Shui" class="card-image">
-          </div>
-          <div class="card-body">
-            <div class="card-header">
-              <div class="card-header-icon">⛩️</div>
-              <h3 class="card-title">Feng Shui</h3>
-            </div>
-            <p>Enroll in the Feng Shui program to master the concepts and gain deep insights.</p>
-            <div class="mb-1">
-              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
-              <span class="certification-badge">✓ Certification</span>
-            </div>
-            <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹17,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹9,999</strong></h4>
-            <div class="course-footer">
-              <a href="feng-shui.html" class="learn-more">
-                <span class="circle" aria-hidden="true">
-                  <span class="icon arrow">
-                  </span>
-                </span>
-                <span class="button-text">Learn More</span>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Grand Master">
-          <span class="discount-tag" data-discount="20% Discount"></span>
+
+        <div class="premium-gold-card" style="display: none !important; padding: 0 !important;" data-animate data-category="Grand Master" data-course-id="plrt">
+          <span class="discount-tag" data-discount="25% Discount"></span>
           <div class="card-image-container">
             <img src="assets/images/past-life.jpg" alt="Past Life Prediction" class="card-image">
           </div>
           <div class="card-body">
             <div class="card-header">
-              <div class="card-header-icon">🕰️</div>
+              <div class="card-header-icon"><i class="fa-solid fa-hourglass-half"></i></div>
               <h3 class="card-title">Past Life Prediction</h3>
             </div>
-            <p>Enroll in the Past Life Prediction program to master the concepts and gain deep insights.</p>
+            <p class="course-desc-text">Uncover unresolved past karma to heal current life blocks. Empower yourself to live with greater clarity, purpose, and emotional freedom.</p>
             <div class="mb-1">
               <span class="category-badge" style="background:#c8960c">Grand Master · Elite</span>
               <span class="certification-badge">✓ Certification</span>
             </div>
             <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹50,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹39,999</strong></h4>
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹34,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹24,999</strong></h4>
             <div class="course-footer">
               <a href="plrt.html" class="learn-more">
                 <span class="circle" aria-hidden="true">
@@ -813,26 +1294,809 @@
             </div>
           </div>
         </div>
-        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master">
-          <span class="discount-tag" data-discount="33% Discount"></span>
+        <div class="premium-gold-card" style="display: none !important; padding: 0 !important;" data-animate data-category="Grand Master" data-course-id="remedy-course">
+          <span class="discount-tag" data-discount="25% Discount"></span>
           <div class="card-image-container">
-            <img src="assets/images/gemini-card.png" alt="Gemini Jyotish" class="card-image">
+            <img src="assets/images/cancer-card.png" alt="Remedy Course" class="card-image">
           </div>
           <div class="card-body">
             <div class="card-header">
-              <div class="card-header-icon">♊</div>
+              <div class="card-header-icon"><i class="fa-solid fa-om"></i></div>
+              <h3 class="card-title">Remedy Course</h3>
+            </div>
+            <p class="course-desc-text">Discover potent traditional remedies. Learn precise, practical solutions to overcome life's biggest obstacles and manifest your desired outcomes.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#c8960c">Grand Master · Elite</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹34,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹24,999</strong></h4>
+            <div class="course-footer">
+              <a href="remedy-course.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Crash Course" data-course-id="gemini-jyotish">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/gemini jyotishi.png" alt="Gemini Jyotish" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-user-group"></i></div>
               <h3 class="card-title">Gemini Jyotish</h3>
             </div>
-            <p>Enroll in the Gemini Jyotish program to master the concepts and gain deep insights.</p>
+            <p class="course-desc-text">Discover the profound secrets of astrology. Learn practical techniques to guide life choices, anticipate events, and help others find their path.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#4CAF50">Crash Course · Beginner</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹3,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹2,999</strong></h4>
+            <div class="course-footer">
+              <a href="gemini-jyotish.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor" data-course-id="astrology">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/vedic-astrology-new.jpg" alt="Vedic Astrology" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-om"></i></div>
+              <h3 class="card-title">Vedic Astrology (Jyotish)</h3>
+            </div>
+            <p class="course-desc-text">Discover the profound secrets of astrology. Learn practical techniques to guide life choices, anticipate events, and help others find their path.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹11,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹8,999</strong></h4>
+            <div class="course-footer">
+              <a href="astrology.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor" data-course-id="numerology">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/numerology-new.jpg" alt="Numerology" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-hashtag"></i></div>
+              <h3 class="card-title">Numerology (Pythagorean & Chaldean)</h3>
+            </div>
+            <p class="course-desc-text">Unlock the hidden meaning behind numbers. Use this powerful knowledge to attract success, improve relationships, and align with your potential.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹11,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹8,999</strong></h4>
+            <div class="course-footer">
+              <a href="numerology.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor" data-course-id="kp-astrology">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/kp-astrology-new.jpg" alt="KP Astrology" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-star"></i></div>
+              <h3 class="card-title">KP Astrology (Krishnamurti Padhdhati)</h3>
+            </div>
+            <p class="course-desc-text">Dive into advanced predictive techniques. Gain mastery over specialized systems that offer pinpoint accuracy and clarity for the future.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹11,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹8,999</strong></h4>
+            <div class="course-footer">
+              <a href="kp-astrology.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor" data-course-id="gemstone">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/gemstone.jpg" alt="Gemstone Science" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-regular fa-gem"></i></div>
+              <h3 class="card-title">Gemstone Science (Ratna Vigyan)</h3>
+            </div>
+            <p class="course-desc-text">Discover potent traditional remedies. Learn precise, practical solutions to overcome life's biggest obstacles and manifest your desired outcomes.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹11,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹8,999</strong></h4>
+            <div class="course-footer">
+              <a href="gemstone.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor" data-course-id="vastu">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/vastu-new.jpg" alt="Vastu Shastra" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-house-chimney"></i></div>
+              <h3 class="card-title">Vastu Shastra</h3>
+            </div>
+            <p class="course-desc-text">Master the ancient science of architecture. Transform spaces to attract positive energy, prosperity, and lasting harmony into your life.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹11,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹8,999</strong></h4>
+            <div class="course-footer">
+              <a href="vastu.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor" data-course-id="lal-kitab">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/lal-kitab-new.jpg" alt="Lal Kitab" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-book-journal-whills"></i></div>
+              <h3 class="card-title">Lal Kitab</h3>
+            </div>
+            <p class="course-desc-text">Discover potent traditional remedies. Learn precise, practical solutions to overcome life's biggest obstacles and manifest your desired outcomes.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹11,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹8,999</strong></h4>
+            <div class="course-footer">
+              <a href="lal-kitab.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor" data-course-id="face-reading">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/face-reading-new.jpg" alt="Face Reading" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-user"></i></div>
+              <h3 class="card-title">Face Reading (Physiognomy)</h3>
+            </div>
+            <p class="course-desc-text">Read facial features to reveal hidden personality traits. Enhance your relationships and negotiation skills by truly understanding anyone.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹11,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹8,999</strong></h4>
+            <div class="course-footer">
+              <a href="face-reading.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor" data-course-id="reiki">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/healing.jpg" alt="Reiki Healing" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-hands-holding-circle"></i></div>
+              <h3 class="card-title">Reiki Healing</h3>
+            </div>
+            <p class="course-desc-text">Harness universal energy for profound healing. Learn to clear energetic blocks, restore vitality, and bring deep peace to the mind and body.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹11,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹8,999</strong></h4>
+            <div class="course-footer">
+              <a href="reiki.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor" data-course-id="tarot">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/tarot-new.jpg" alt="Tarot Reading" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-layer-group"></i></div>
+              <h3 class="card-title">Tarot Reading</h3>
+            </div>
+            <p class="course-desc-text">Connect with your intuition through Tarot. Learn how to interpret the cards accurately to provide deep insights and empowering guidance.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹11,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹8,999</strong></h4>
+            <div class="course-footer">
+              <a href="tarot.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor" data-course-id="nakshatra">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/gold_zodiac_wheel.png" alt="Nakshatra" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-star-half-stroke"></i></div>
+              <h3 class="card-title">Nakshatra (Lunar Mansions) 1</h3>
+            </div>
+            <p class="course-desc-text">Dive into advanced predictive techniques. Gain mastery over specialized systems that offer pinpoint accuracy and clarity for the future.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹11,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹8,999</strong></h4>
+            <div class="course-footer">
+              <a href="nakshatra.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor" data-course-id="crystal-healing">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/crystal-healing-new.jpg" alt="Crystal Healing" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-gem"></i></div>
+              <h3 class="card-title">Crystal Healing</h3>
+            </div>
+            <p class="course-desc-text">Harness universal energy for profound healing. Learn to clear energetic blocks, restore vitality, and bring deep peace to the mind and body.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹11,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹8,999</strong></h4>
+            <div class="course-footer">
+              <a href="crystal-healing.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor" data-course-id="rudraksha">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/rudraksha-new.jpg" alt="Rudraksha" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-om"></i></div>
+              <h3 class="card-title">Rudraksha</h3>
+            </div>
+            <p class="course-desc-text">Discover potent traditional remedies. Learn precise, practical solutions to overcome life's biggest obstacles and manifest your desired outcomes.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹11,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹8,999</strong></h4>
+            <div class="course-footer">
+              <a href="rudraksha.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Bachelor" data-course-id="palmistry">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/palmistry-new.jpg" alt="Palmistry" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-hand-sparkles"></i></div>
+              <h3 class="card-title">Palmistry (Chirognomy & Chiromancy)</h3>
+            </div>
+            <p class="course-desc-text">Decode the lines of destiny hidden in your hands. Master this art to confidently guide yourself and others through life's defining moments.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#9C27B0">Bachelor · Pro</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹11,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹8,999</strong></h4>
+            <div class="course-footer">
+              <a href="palmistry.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master" data-course-id="numerology">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/numerology-new.jpg" alt="Numerology" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-hashtag"></i></div>
+              <h3 class="card-title">Numerology (Pythagorean & Chaldean)</h3>
+            </div>
+            <p class="course-desc-text">Unlock the hidden meaning behind numbers. Use this powerful knowledge to attract success, improve relationships, and align with your potential.</p>
             <div class="mb-1">
               <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
               <span class="certification-badge">✓ Certification</span>
             </div>
             <h4 class="color-secondary mb-1 text-center"><del
-                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹30,000</del><strong
-                style="color:#FFD700;font-size:1.1em;">₹19,999</strong></h4>
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹24,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹18,699</strong></h4>
             <div class="course-footer">
-              <a href="gemini-jyotish.html" class="learn-more">
+              <a href="numerology.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master" data-course-id="astrology">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/vedic-astrology-new.jpg" alt="Vedic Astrology" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-om"></i></div>
+              <h3 class="card-title">Vedic Astrology (Jyotish)</h3>
+            </div>
+            <p class="course-desc-text">Discover the profound secrets of astrology. Learn practical techniques to guide life choices, anticipate events, and help others find their path.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹24,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹18,699</strong></h4>
+            <div class="course-footer">
+              <a href="astrology.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master" data-course-id="kp-astrology">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/kp-astrology-new.jpg" alt="KP Astrology" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-star"></i></div>
+              <h3 class="card-title">KP Astrology (Krishnamurti Padhdhati)</h3>
+            </div>
+            <p class="course-desc-text">Dive into advanced predictive techniques. Gain mastery over specialized systems that offer pinpoint accuracy and clarity for the future.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹24,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹18,699</strong></h4>
+            <div class="course-footer">
+              <a href="kp-astrology.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master" data-course-id="gemstone">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/gemstone.jpg" alt="Gemstone Science" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-regular fa-gem"></i></div>
+              <h3 class="card-title">Gemstone Science (Ratna Vigyan)</h3>
+            </div>
+            <p class="course-desc-text">Discover potent traditional remedies. Learn precise, practical solutions to overcome life's biggest obstacles and manifest your desired outcomes.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹24,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹18,699</strong></h4>
+            <div class="course-footer">
+              <a href="gemstone.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master" data-course-id="vastu">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/vastu-new.jpg" alt="Vastu Shastra" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-house-chimney"></i></div>
+              <h3 class="card-title">Vastu Shastra</h3>
+            </div>
+            <p class="course-desc-text">Master the ancient science of architecture. Transform spaces to attract positive energy, prosperity, and lasting harmony into your life.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹24,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹18,699</strong></h4>
+            <div class="course-footer">
+              <a href="vastu.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master" data-course-id="lal-kitab">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/lal-kitab-new.jpg" alt="Lal Kitab" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-book-journal-whills"></i></div>
+              <h3 class="card-title">Lal Kitab</h3>
+            </div>
+            <p class="course-desc-text">Discover potent traditional remedies. Learn precise, practical solutions to overcome life's biggest obstacles and manifest your desired outcomes.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹24,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹18,699</strong></h4>
+            <div class="course-footer">
+              <a href="lal-kitab.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master" data-course-id="face-reading">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/face-reading-new.jpg" alt="Face Reading" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-user"></i></div>
+              <h3 class="card-title">Face Reading (Physiognomy)</h3>
+            </div>
+            <p class="course-desc-text">Read facial features to reveal hidden personality traits. Enhance your relationships and negotiation skills by truly understanding anyone.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹24,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹18,699</strong></h4>
+            <div class="course-footer">
+              <a href="face-reading.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master" data-course-id="reiki">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/healing.jpg" alt="Reiki Healing" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-hands-holding-circle"></i></div>
+              <h3 class="card-title">Reiki Healing</h3>
+            </div>
+            <p class="course-desc-text">Harness universal energy for profound healing. Learn to clear energetic blocks, restore vitality, and bring deep peace to the mind and body.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹24,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹18,699</strong></h4>
+            <div class="course-footer">
+              <a href="reiki.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master" data-course-id="tarot">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/tarot-new.jpg" alt="Tarot Reading" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-layer-group"></i></div>
+              <h3 class="card-title">Tarot Reading</h3>
+            </div>
+            <p class="course-desc-text">Connect with your intuition through Tarot. Learn how to interpret the cards accurately to provide deep insights and empowering guidance.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹24,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹18,699</strong></h4>
+            <div class="course-footer">
+              <a href="tarot.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master" data-course-id="nakshatra">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/gold_zodiac_wheel.png" alt="Nakshatra" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-star-half-stroke"></i></div>
+              <h3 class="card-title">Nakshatra (Lunar Mansions)</h3>
+            </div>
+            <p class="course-desc-text">Dive into advanced predictive techniques. Gain mastery over specialized systems that offer pinpoint accuracy and clarity for the future.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹24,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹18,699</strong></h4>
+            <div class="course-footer">
+              <a href="nakshatra.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master" data-course-id="crystal-healing">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/crystal-healing-new.jpg" alt="Crystal Healing" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-gem"></i></div>
+              <h3 class="card-title">Crystal Healing</h3>
+            </div>
+            <p class="course-desc-text">Harness universal energy for profound healing. Learn to clear energetic blocks, restore vitality, and bring deep peace to the mind and body.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹24,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹18,699</strong></h4>
+            <div class="course-footer">
+              <a href="crystal-healing.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master" data-course-id="rudraksha">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/rudraksha-new.jpg" alt="Rudraksha" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-om"></i></div>
+              <h3 class="card-title">Rudraksha</h3>
+            </div>
+            <p class="course-desc-text">Discover potent traditional remedies. Learn precise, practical solutions to overcome life's biggest obstacles and manifest your desired outcomes.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹24,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹18,699</strong></h4>
+            <div class="course-footer">
+              <a href="rudraksha.html" class="learn-more">
+                <span class="circle" aria-hidden="true">
+                  <span class="icon arrow">
+                  </span>
+                </span>
+                <span class="button-text">Learn More</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="premium-gold-card" style="padding: 0 !important;" data-animate data-category="Master" data-course-id="palmistry">
+          <span class="discount-tag" data-discount="25% Discount"></span>
+          <div class="card-image-container">
+            <img src="assets/images/palmistry-new.jpg" alt="Palmistry" class="card-image">
+          </div>
+          <div class="card-body">
+            <div class="card-header">
+              <div class="card-header-icon"><i class="fa-solid fa-hand-sparkles"></i></div>
+              <h3 class="card-title">Palmistry (Chirognomy & Chiromancy)</h3>
+            </div>
+            <p class="course-desc-text">Decode the lines of destiny hidden in your hands. Master this art to confidently guide yourself and others through life's defining moments.</p>
+            <div class="mb-1">
+              <span class="category-badge" style="background:#FF9800">Master · Advanced</span>
+              <span class="certification-badge">✓ Certification</span>
+            </div>
+            <h4 class="color-secondary mb-1 text-center"><del
+                style="color:#999;font-size:0.65em;margin-right:8px;vertical-align:middle;">₹24,999</del><strong
+                style="color:#FFD700;font-size:1.1em;">₹18,699</strong></h4>
+            <div class="course-footer">
+              <a href="palmistry.html" class="learn-more">
                 <span class="circle" aria-hidden="true">
                   <span class="icon arrow">
                   </span>
@@ -889,7 +2153,7 @@
             style="object-fit:cover; width:100%; height:100%; border-radius: 12px;" alt="Flexible">
           <div class="highlights-overlay">
             <h4>Flexible Learning</h4>
-            <p>Online and offline classes available to suit your schedule and preferences.</p>
+            <p>Online classes available to suit your schedule and preferences.</p>
           </div>
         </div>
 
@@ -904,10 +2168,10 @@
 
         <div class="highlights-card" data-animate style="height: 350px;">
           <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=600&fit=crop"
-            style="object-fit:cover; width:100%; height:100%; border-radius: 12px;" alt="Lifetime">
+            style="object-fit:cover; width:100%; height:100%; border-radius: 12px;" alt="Course Access">
           <div class="highlights-overlay">
-            <h4>Lifetime Access</h4>
-            <p>Access course materials and community for continuous learning after graduation.</p>
+            <h4>Course Materials Access</h4>
+            <p>Enjoy continuous access to all materials and updates for the duration of your course.</p>
           </div>
         </div>
       </div>
@@ -921,7 +2185,9 @@
         <div class="premium-gold-card card-auto p-4" data-animate>
           <div class="font-3xl color-secondary mb-1">🇮🇳</div>
           <h3 class="color-primary">Indian Students</h3>
-
+          <p class="card-small-text">
+            <strong>Payment Options:</strong> EMI available | Scholarships for merit | Group discounts
+          </p>
           <p class="card-small-text mt-1rem">
             <strong>Benefits:</strong> Local language support | Hostel facilities | Local scholarship programs
           </p>
@@ -930,7 +2196,9 @@
         <div class="premium-gold-card card-auto p-4" data-animate>
           <div class="font-3xl color-secondary mb-1">🌐</div>
           <h3 class="color-primary">International Students</h3>
-
+          <p class="card-small-text">
+            <strong>Payment Options:</strong> Monthly payments | Flexible terms | Currency conversion support
+          </p>
           <p class="card-small-text mt-1rem">
             <strong>Benefits:</strong> Visa guidance | Airport pickup | English medium classes
           </p>
@@ -960,7 +2228,7 @@
         <a href="courses.html" class="marquee-btn">View Courses</a>
       </div>
       <div class="marquee-item">
-        <span class="marquee-icon">⭐</span> Join Parashari Institute Today — Scholarship Available for Top Performers!
+        <span class="marquee-icon"><i class="fa-solid fa-star"></i></span> Join Parashari Institute Today — Scholarship Available for Top Performers!
         <a href="register.html" class="marquee-btn">Apply Now</a>
       </div>
       <!-- Duplicate for seamless scrolling -->
@@ -974,7 +2242,7 @@
         <a href="courses.html" class="marquee-btn">View Courses</a>
       </div>
       <div class="marquee-item">
-        <span class="marquee-icon">⭐</span> Join Parashari Institute Today — Scholarship Available for Top Performers!
+        <span class="marquee-icon"><i class="fa-solid fa-star"></i></span> Join Parashari Institute Today — Scholarship Available for Top Performers!
         <a href="register.html" class="marquee-btn">Apply Now</a>
       </div>
     </div>
@@ -1027,7 +2295,7 @@
           <li><a href="courses.html">Diploma</a></li>
           <li><a href="courses.html">Bachelor</a></li>
           <li><a href="courses.html">Master</a></li>
-          <li><a href="courses.html">Grand Master</a></li>
+          <!-- <li><a href="courses.html">Grand Master</a></li> -->
           <li><a href="6-stairs.html">6 Stairs</a></li>
         </ul>
       </div>
@@ -1044,7 +2312,7 @@
           <div class="contact-icon">📞</div>
           <div class="contact-text">
             <p class="p-reset">
-              <a href="tel:+919999999999">+91 9999-999-999</a>
+              <a href="tel:+919621051159">+91 962 105 1159</a>
             </p>
           </div>
         </div>
@@ -1119,6 +2387,151 @@
 
 
 
+  <!-- FILTER LOGIC -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const filterButtons = document.querySelectorAll('.filter-tab');
+      const courseCards = document.querySelectorAll('.premium-gold-card');
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Remove active class from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          // Add active class to clicked button
+          button.classList.add('active');
+
+          const filterValue = button.getAttribute('data-filter');
+          const grid = document.getElementById('courseGrid');
+          
+          if (filterValue === 'all') {
+            grid.classList.add('all-courses-active');
+          } else {
+            grid.classList.remove('all-courses-active');
+          }
+
+          const shownIds = new Set();
+          courseCards.forEach(card => {
+            const cardCategory = card.getAttribute('data-category');
+            const courseId = card.getAttribute('data-course-id');
+
+            if (filterValue === 'all') {
+              // De-duplication logic for "All Courses"
+              if (courseId && shownIds.has(courseId)) {
+                card.classList.add('hidden');
+              } else {
+                card.classList.remove('hidden');
+                if (courseId) shownIds.add(courseId);
+              }
+            } else if (filterValue === cardCategory) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          });
+
+          // Optional: Smooth scroll to grid top if user is far down
+          /*
+          const grid = document.getElementById('courseGrid');
+          if (window.scrollY > grid.offsetTop) {
+            window.scrollTo({
+              top: grid.offsetTop - 100,
+              behavior: 'smooth'
+            });
+          }
+          */
+      });
+    });
+  </script>
+
+  <!-- QUICK VIEW MODAL STRUCTURE -->
+  <div id="quickViewOverlay" class="quick-view-overlay">
+    <div class="quick-view-modal">
+      <div class="qv-close" id="qvClose"><i class="fa-solid fa-xmark"></i></div>
+      <img src="" id="qvImage" class="qv-image" alt="Course Image">
+      <div class="qv-body">
+        <h3 id="qvTitle" class="qv-title">Course Title</h3>
+        <p id="qvDesc" class="qv-desc">Course Description</p>
+      </div>
+      <div class="qv-landscape-bar">
+        <div class="qv-prices">
+          <span id="qvOldPrice" class="qv-old-price">₹3,999</span>
+          <span id="qvNewPrice" class="qv-new-price">₹2,999</span>
+        </div>
+        <a href="#" id="qvEnrollBtn" class="qv-enroll-btn">Enroll Now</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const overlay = document.getElementById('quickViewOverlay');
+      if (!overlay) return;
+      
+      const closeBtn = document.getElementById('qvClose');
+      const qvImage = document.getElementById('qvImage');
+      const qvTitle = document.getElementById('qvTitle');
+      const qvDesc = document.getElementById('qvDesc');
+      const qvOldPrice = document.getElementById('qvOldPrice');
+      const qvNewPrice = document.getElementById('qvNewPrice');
+      const qvEnrollBtn = document.getElementById('qvEnrollBtn');
+
+      closeBtn.addEventListener('click', () => {
+        overlay.classList.remove('show');
+      });
+
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.classList.remove('show');
+      });
+
+      document.body.addEventListener('click', function(e) {
+        const btn = e.target.closest('.learn-more');
+        if (!btn) return;
+
+        // Try standard card first
+        let card = btn.closest('.premium-gold-card');
+        if (!card) card = btn.closest('.card'); // For index.html
+        if (!card) return;
+
+        const category = card.getAttribute('data-category');
+        if (category === 'Crash Course') {
+          e.preventDefault(); 
+          
+          let imgEl = card.querySelector('.card-image');
+          let titleEl = card.querySelector('.card-title');
+          let descEl = card.querySelector('p'); // Fallback to 'p' tag if '.course-desc-text' not found
+          let descElSpecific = card.querySelector('.course-desc-text');
+          let delEl = card.querySelector('del');
+          let strongEl = card.querySelector('strong');
+
+          if (imgEl && titleEl && (descElSpecific || descEl) && delEl && strongEl) {
+            qvImage.src = imgEl.src;
+            qvTitle.innerText = titleEl.innerText;
+            qvDesc.innerText = descElSpecific ? descElSpecific.innerText : descEl.innerText;
+            qvOldPrice.innerText = delEl.innerText;
+            qvNewPrice.innerText = strongEl.innerText;
+            
+            qvEnrollBtn.href = btn.getAttribute('href');
+            overlay.classList.add('show');
+          }
+        }
+      });
+    });
+  </script>
+
+<script>
+    // Mobile Dropdown Logic
+    const mobileSelect = document.getElementById('mobileCategorySelect');
+    if(mobileSelect) {
+      mobileSelect.addEventListener('change', function() {
+        const selectedFilter = this.value;
+        // Trigger the existing tab logic
+        const targetTab = document.querySelector(`.filter-tab[data-filter="${selectedFilter}"]`);
+        if (targetTab) {
+          targetTab.click();
+        }
+      });
+    }
+</script>
 </body>
 
 </html>

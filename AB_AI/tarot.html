@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,6 +14,221 @@
     <link rel="stylesheet" href="assets/css/search.css">
     <link rel="stylesheet" href="assets/css/chatbot.css">
     <link rel="stylesheet" href="assets/css/urgency.css">
+    <style>
+        .category-filter-container {
+            margin: 20px 0 40px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .filter-tab {
+            padding: 12px 24px;
+            border-radius: 50px;
+            background: #fff;
+            border: 2px solid #e0d5c8;
+            color: #5a1e1e;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .filter-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #c8960c, #8b4513);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+        .filter-tab:hover {
+            border-color: #c8960c;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(200, 150, 12, 0.2);
+        }
+        .filter-tab.active {
+            background: linear-gradient(135deg, #c8960c, #8b4513);
+            border-color: transparent;
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.3);
+        }
+        .filter-tab.active::before {
+            opacity: 1;
+        }
+        .program-tab-content {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+            .category-filter-container {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                flex-wrap: nowrap;
+                -webkit-overflow-scrolling: touch;
+                gap: 10px;
+                scrollbar-width: none;
+            }
+            .category-filter-container::-webkit-scrollbar {
+                display: none;
+            }
+            .filter-tab {
+                flex: 0 0 auto;
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+        }
+        
+        .landscape-pricing-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #ffffff, #fdfbf7);
+            border: 1px solid rgba(200, 150, 12, 0.3);
+            border-left: 6px solid #c8960c;
+            border-radius: 12px;
+            padding: 25px 40px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            flex-wrap: nowrap;
+            gap: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .landscape-pricing-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(200, 150, 12, 0.12);
+        }
+        .landscape-pricing-card .pricing-info-left {
+            flex: 1;
+        }
+        .landscape-pricing-card .pricing-block {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: center;
+            padding: 0 30px;
+            border-right: 1px solid #e0d5c8;
+        }
+        .landscape-pricing-card .enroll-block {
+            padding-left: 10px;
+        }
+        .landscape-pricing-card .save-badge {
+            display: inline-block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            border: 1px solid #c8e6c9;
+        }
+        @media (max-width: 768px) {
+            .landscape-pricing-card {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 20px;
+                gap: 15px;
+            }
+            .landscape-pricing-card .pricing-block {
+                align-items: flex-start;
+                padding: 15px 0;
+                border-right: none;
+                border-top: 1px solid #e0d5c8;
+                border-bottom: 1px solid #e0d5c8;
+                width: 100%;
+            }
+            .landscape-pricing-card .enroll-block {
+                width: 100%;
+                padding-left: 0;
+            }
+            .landscape-pricing-card .enroll-block .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+        /* Comparison Chart Styles */
+        .comparison-section {
+            padding: 60px 0;
+            background: #fff;
+        }
+        .comparison-table-wrapper {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-top: 30px;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            min-width: 800px;
+            background: #fff;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 18px 24px;
+            text-align: center;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .comparison-table th:first-child, .comparison-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+            color: #5a1e1e;
+            width: 40%;
+            border-right: 2px solid #f0f0f0;
+        }
+        .comparison-table thead th {
+            background: #fdfbf7;
+            padding: 24px;
+            border-bottom: none;
+        }
+        .comparison-table thead th:not(:first-child) {
+            border-radius: 12px 12px 0 0;
+        }
+        .comparison-table th.tier-diploma { background: #fdfbf7; }
+        .comparison-table th.tier-bachelors { background: #f5eedc; }
+        .comparison-table th.tier-masters { background: #e0d5c8; }
+        
+        .tier-title {
+            display: block;
+            font-size: 1.3rem;
+            color: #5a1e1e;
+            margin-bottom: 5px;
+        }
+        .tier-price {
+            display: block;
+            font-size: 1.1rem;
+            color: #c8960c;
+            font-weight: 700;
+        }
+        .comparison-table tbody tr:nth-child(even) td {
+            background: #fafafa;
+        }
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .col-diploma { background: #fdfbf7 !important; }
+        .col-bachelors { background: #f5eedc !important; }
+        .col-masters { background: #e0d5c8 !important; }
+        
+        .c-icon.check { color: #4CAF50; font-size: 1.2rem; }
+        .c-icon.cross { color: #f44336; font-size: 1.1rem; opacity: 0.6; }
+
+    </style>
 </head>
 
 <body>
@@ -21,10 +236,9 @@
     <div class="header-top">
         <div class="header-top-content">
             <div class="header-top-left">
-                <div class="header-top-item"><span class="header-top-icon">📞</span><a href="tel:+919999999999">+91
-                        9999-999-999</a></div>
+                <div class="header-top-item"><span class="header-top-icon">📞</span><a href="tel:+919621051159">+91 962 105 1159</a></div>
                 <div class="header-top-item"><span class="header-top-icon">✉️</span><a
-                        href="mailto:info@parashari.com">info@parashari.com</a></div>
+                        href="mailto:info@astrobharatai.com">info@astrobharatai.com</a></div>
             </div>
             <div class="header-top-right">Online Classes | ISO Certified</div>
         </div>
@@ -72,6 +286,7 @@
                         <li class="dropdown-item"><a href="tarot.html">Tarot Reading</a></li>
                         <li class="dropdown-item"><a href="numerology.html">Numerology</a></li>
                         <li class="dropdown-item"><a href="mentorship.html">1-on-1 Mentorship</a></li>
+            <li class="dropdown-item"><a href="gemini-jyotish.html">Gemini Jyotish</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a href="fee-structure.html">Fee Structure</a></li>
@@ -87,7 +302,8 @@
                 <a href="login.html" class="btn btn-outline btn-sm">Login</a>
                 <a href="register.html" class="btn btn-primary btn-sm">Register</a>
             </div>
-            <button class="hamburger" title="Toggle navigation menu" aria-label="Toggle navigation menu">
+            
+<button class="hamburger" title="Toggle navigation menu" aria-label="Toggle navigation menu">
                 <span></span><span></span><span></span>
             </button>
         </nav>
@@ -133,105 +349,287 @@
 
 
 
-    <section class="hero-section hero-gradient">
-        <div class="container">
-            <h1 class="color-secondary">🃏 Tarot Reading</h1>
-            <p>Divine Guidance Through Sacred Cards of Wisdom</p>
-        </div>
-    </section>
+    
 
-    <section>
-        <div class="container">
-            <div class="grid grid-2 grid-gap-3">
-                <div data-animate>
-                    <h2>What is Tarot Reading?</h2>
-                    <p>Tarot is a powerful divination tool using 78 symbolic cards to provide guidance, insights, and
-                        answers to life's questions. Each card carries deep archetypal meanings that reveal hidden
-                        truths, future possibilities, and spiritual guidance.</p>
-                    <p>Learn to read Major Arcana, Minor Arcana, and Court Cards, master various spreads, and develop
-                        your intuition to provide accurate, meaningful readings.</p>
-                    <ul class="list-reset">
-                        <li class="mb-0-75">✓ 78 card meanings & symbolism</li>
-                        <li class="mb-0-75">✓ Multiple spread techniques</li>
-                        <li class="mb-0-75">✓ Intuitive development</li>
-                        <li>✓ Past, present, future guidance</li>
-                    </ul>
-                </div>
-                <div data-animate>
-                    <img src="assets/images/tarot-new.jpg" alt="Tarot Reading" class="rounded-lg">
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- HERO & INTRO -->
+    <section style="padding-top: 60px;">
+    <div class="container text-center">
+      <h1 class="color-primary" style="font-size: 2.5rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-layer-group"></i> Tarot Reading</h1>
+      <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem; font-weight: 500;">Divine Guidance Through Sacred Cards of Wisdom</p>
+    </div>
+    <div class="container" data-animate>
+      <img src="assets/images/Picture10.png" alt="Tarot Reading" class="rounded-lg" style="width: 85%; max-width: 1000px; height: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 0 auto; display: block; margin-bottom: 2rem;">
+    </div>
+    <div class="container" data-animate>
+      <h2>What is Tarot Reading?</h2>
+      <p>Tarot Reading is a practice that involves using a deck of symbolic cards to gain insights into personal situations, emotions, and possible life directions. Each tarot card contains imagery and symbolism that readers interpret to explore questions related to life, relationships, career, and personal development.</p>
+      <p>The modern tarot system is commonly associated with decks such as the Rider–Waite Tarot Deck, which includes 78 cards divided into the Major Arcana and Minor Arcana. Tarot reading is often used as a reflective tool to help individuals think about their circumstances from new perspectives and consider different possibilities for decision-making and personal growth.</p>
+      
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Why Should You Study Tarot Reading?</h3>
+      <p>Studying tarot reading helps individuals understand the symbolism and structure of tarot cards and how they are traditionally interpreted during readings.</p>
+      <p>Learners explore the meanings of different cards, how cards interact within spreads, and how interpretations are developed based on the context of a question. The study of tarot also encourages intuition, observation, and thoughtful interpretation of symbolic imagery.</p>
+      <p>Many students choose to learn tarot as a way to enhance self-reflection, develop intuitive thinking, and understand symbolic storytelling.</p>
 
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem;">What Are the Benefits of Studying Tarot Reading?</h3>
+      <p>Learning tarot reading can provide several intellectual and personal development benefits:</p>
+      <ul class="list-reset">
+        <li class="mb-0-75"><strong>1. Improved Intuitive Thinking:</strong> Tarot encourages learners to interpret symbolic images and patterns, which can strengthen intuitive thinking.</li>
+        <li class="mb-0-75"><strong>2. Greater Self-Reflection:</strong> Tarot readings often prompt individuals to reflect on their thoughts, emotions, and life situations.</li>
+        <li class="mb-0-75"><strong>3. Understanding Symbolism and Archetypes:</strong> Students learn about symbolic imagery and archetypal themes represented in tarot cards.</li>
+        <li class="mb-0-75"><strong>4. Enhanced Communication Skills:</strong> Interpreting tarot for others requires clear explanation and thoughtful communication.</li>
+        <li><strong>5. Personal Development Tool:</strong> Many learners use tarot as a reflective practice to explore goals, challenges, and life decisions.</li>
+      </ul>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Can Someone Build a Career in Tarot Reading?</h3>
+      <p>Yes, individuals who study tarot seriously and gain practical experience may develop professional opportunities related to tarot reading. Possible career paths include:</p>
+      <ul class="list-reset">
+        <li class="mb-0-75">✓ Tarot reader offering consultations</li>
+        <li class="mb-0-75">✓ Tarot instructor or workshop facilitator</li>
+        <li class="mb-0-75">✓ Author or content creator on tarot and symbolism</li>
+        <li class="mb-0-75">✓ Online tarot consultant</li>
+        <li>✓ Personal guidance or self-development advisor</li>
+      </ul>
+      <p style="margin-top: 1rem;">However, building credibility in this field requires practice, ethical responsibility, and continuous learning when offering readings to others.</p>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem;">Five Key Reasons to Study Tarot Reading</h3>
+      <ul class="list-reset">
+        <li class="mb-0-75">✓ Learn the rich symbolic imagery and archetypal meanings of the cards</li>
+        <li class="mb-0-75">✓ Develop intuitive interpretation skills and pattern recognition</li>
+        <li class="mb-0-75">✓ Improve self-reflection and awareness through reflective card study</li>
+        <li class="mb-0-75">✓ Explore a traditional divination practice studied across cultures for centuries</li>
+        <li>✓ Build a skill for personal guidance, reflection sessions, or educational purposes</li>
+      </ul>
+    </div>
+  </section>
+
+    <!-- TABBED PROGRAM SECTION -->
     <section class="light-bg">
         <div class="container">
-            <h2 class="card-section-title">Our Tarot Reading Diploma Program</h2>
-            <div class="grid grid-2 grid-gap-3">
-                <div class="card card-auto p-4" data-animate>
-                    <span class="discount-tag" data-discount="50% Discount"></span>
-                    <h3 class="color-primary mb-1 text-center">Program Details</h3>
-                    <table class="program-table">
-                        <tr class="table-row">
-                            <td class="table-cell-bold">Duration</td>
-                            <td class="table-cell-right">3 Months</td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-cell-bold">Mode</td>
-                            <td class="table-cell-right">Online & Offline</td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-cell-bold">Classes</td>
-                            <td class="table-cell-right">12 + Practical</td>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-cell-bold">Fee</td>
-                            <td class="table-cell-right"><del
-                                    style="color:#999;font-size:0.85em;margin-right:8px;">₹10,000</del> <strong
-                                    style="color:#d32f2f;font-size:1.1em;">₹4,999</strong> <span
-                                    class="discount-text">(with 50% discount)</span></td>
-                        </tr>
-                        <tr>
-                            <td class="table-cell-bold">Certificate</td>
-                            <td class="table-cell-right">Government Recognized</td>
-                        </tr>
-                    </table>
-                    <a href="register.html" class="btn btn-primary btn-full mt-1-5">Enroll Now</a>
+            <h2 class="card-section-title">Our Tarot Reading Program</h2>
+            
+            <div class="category-filter-container">
+                <button class="filter-tab active" data-program="diploma">Diploma</button>
+                <button class="filter-tab" data-program="bachelors">Bachelors</button>
+                <button class="filter-tab" data-program="masters">Masters</button>
+            </div>
+
+            <!-- DIPLOMA TAB -->
+            <div id="diploma" class="program-tab-content" style="display: block;">
+                <div class="grid grid-2 grid-gap-3">
+                    <div class="card card-auto p-4" data-animate>
+                        <h3 class="color-primary mb-1 text-center" style="font-size: 1.5rem;">Certification Modules (Part 1)</h3>
+                        <ul class="list-reset" style="text-align: left;">
+                            <li class="mb-2"><strong>Module 1: The Fool's Journey</strong><br>An in-depth study of the 22 Major Arcana cards, representing significant life lessons and the soul's path toward spiritual enlightenment.</li>
+                            <li class="mb-0-75"><strong>Module 2: The Minor Arcana</strong><br>Explores the four suited elements—Cups (Water), Wands (Fire), Swords (Air), and Pentacles (Earth)—to decode daily life events and emotions.</li>
+                        </ul>
+                    </div>
+                    <div class="card card-auto p-4" data-animate>
+                        <h3 class="color-primary mb-1 text-center" style="font-size: 1.5rem;">Certification Modules (Part 2)</h3>
+                        <ul class="list-reset" style="text-align: left;">
+                            <li class="mb-2"><strong>Module 3: Spread Mastery</strong><br>Mastering diverse layouts, ranging from simple Three-Card Spreads for quick insights to the complex, detailed Celtic Cross for deep analysis.</li>
+                            <li class="mb-0-75"><strong>Module 4: Intuitive Development</strong><br>Enhancing psychic skills through symbology and color meanings, while establishing a professional foundation rooted in strict reading ethics and boundaries.</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="card card-auto p-4" data-animate>
-                    <h3 class="color-primary mb-1 text-center">What You'll Learn</h3>
-                    <ul class="list-reset">
-                        <li class="mb-0-75"><strong>Module 1:</strong> Tarot History & Structure</li>
-                        <li class="mb-0-75"><strong>Module 2:</strong> Major Arcana Cards (0-21)</li>
-                        <li class="mb-0-75"><strong>Module 3:</strong> Minor Arcana & Suits</li>
-                        <li class="mb-0-75"><strong>Module 4:</strong> Court Cards & Personalities</li>
-                        <li class="mb-0-75"><strong>Module 5:</strong> Spreads & Reading Techniques</li>
-                        <li class="mb-0-75"><strong>Module 6:</strong> Professional Tarot Practice</li>
-                    </ul>
+                
+                <div class="landscape-pricing-card" data-animate>
+                    <div class="pricing-info-left">
+                        <span class="save-badge"><i class="fas fa-tag" style="margin-right: 4px;"></i> Save 24% Today</span>
+                        <h3 class="color-primary" style="font-size: 1.8rem; margin: 5px 0 10px 0;">Diploma in Tarot Reading</h3>
+                        <p class="mb-0" style="font-size: 1rem; color: #555; display: flex; align-items: center; gap: 8px;">
+                            <i class="far fa-clock" style="color: #c8960c; font-size: 1.1rem;"></i> <strong>Duration:</strong> 8 WEEKS comprehensive training
+                        </p>
+                    </div>
+                    <div class="pricing-block">
+                        <div style="text-decoration: line-through; color: #999; font-size: 1.1rem; margin-bottom: 2px;">Regular Price: ₹5,499</div>
+                        <strong style="color: #c8960c; font-size: 2.5rem; line-height: 1; font-weight: 800;">₹4,199</strong>
+                    </div>
+                    <div class="enroll-block">
+                        <a href="register.html" class="btn btn-primary" style="padding: 14px 35px; border-radius: 50px; font-weight: 700; letter-spacing: 0.5px; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(200, 150, 12, 0.3);">Enroll Now</a>
+                    </div>
                 </div>
             </div>
+
+            <!-- BACHELORS TAB -->
+            <div id="bachelors" class="program-tab-content" style="display: none;">
+                <div class="grid grid-3 grid-gap-2">
+                    <div class="card card-auto p-4" data-animate>
+                        <h3 class="color-primary mb-1 text-center" style="font-size: 1.3rem;">Foundations (Part 1)</h3>
+                        <ul class="list-reset" style="text-align: left;">
+                            <li class="mb-2"><strong>Module 1: Esoteric Origins</strong><br>Explores the mystical intersections of Tarot, the Kabbalistic Tree of Life, and Astrology, revealing the hidden planetary and elemental correspondences.</li>
+                            <li class="mb-0-75"><strong>Module 2: Major Arcana</strong><br>A deep dive into archetypal psychology and the 22 life-path lessons, analysing the soul's evolution through the Fool's Journey.</li>
+                        </ul>
+                    </div>
+                    <div class="card card-auto p-4" data-animate>
+                        <h3 class="color-primary mb-1 text-center" style="font-size: 1.3rem;">Spreads & Intuition (Part 2)</h3>
+                        <ul class="list-reset" style="text-align: left;">
+                            <li class="mb-2"><strong>Module 3: Minor Arcana</strong><br>Analyses the numerical progression (1–10) and the four court cards, focusing on Elemental Dignities to interpret situational energy shifts.</li>
+                            <li class="mb-0-75"><strong>Module 4: Advanced Spreads</strong><br>Mastering complex layouts like the Wheel of the Year, Zodiac Spread, and Relationship Tree for comprehensive, long-term life path forecasting.</li>
+                        </ul>
+                    </div>
+                    <div class="card card-auto p-4" data-animate>
+                        <h3 class="color-primary mb-1 text-center" style="font-size: 1.3rem;">Professional (Part 3)</h3>
+                        <ul class="list-reset" style="text-align: left;">
+                            <li class="mb-2"><strong>Module 5: Intuition &amp; Mediumship</strong><br>Developing psychic sensitivity to connect with the "Higher Self", using meditation and channelling to receive messages beyond the card symbols.</li>
+                            <li class="mb-0-75"><strong>Module 6: Professional Reading</strong><br>Focuses on the ethics of professional practice, covering psychological boundaries, managing client expectations, and handling sensitive or high-stakes topics safely.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="landscape-pricing-card" data-animate>
+                   <div class="pricing-info-left">
+                        <span class="save-badge"><i class="fas fa-tag" style="margin-right: 4px;"></i> Save 25% Today</span>
+                        <h3 class="color-primary" style="font-size: 1.8rem; margin: 5px 0 10px 0;">Bachelors in Tarot Reading</h3>
+                        <p class="mb-0" style="font-size: 1rem; color: #555; display: flex; align-items: center; gap: 8px;">
+                            <i class="far fa-clock" style="color: #c8960c; font-size: 1.1rem;"></i> <strong>Duration:</strong> 12 WEEKS advanced program
+                        </p>
+                    </div>
+                    <div class="pricing-block">
+                        <div style="text-decoration: line-through; color: #999; font-size: 1.1rem; margin-bottom: 2px;">Regular Price: ₹11,999</div>
+                        <strong style="color: #c8960c; font-size: 2.5rem; line-height: 1; font-weight: 800;">₹8,999</strong>
+                    </div>
+                    <div class="enroll-block">
+                        <a href="register.html" class="btn btn-primary" style="padding: 14px 35px; border-radius: 50px; font-weight: 700; letter-spacing: 0.5px; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(200, 150, 12, 0.3);">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MASTERS TAB -->
+            <div id="masters" class="program-tab-content" style="display: none;">
+                <div class="grid grid-2 grid-gap-3">
+                    <div class="card card-auto p-4" data-animate>
+                        <h3 class="color-primary mb-1 text-center" style="font-size: 1.4rem;">Foundation (Part 1)</h3>
+                        <ul class="list-reset" style="text-align: left;">
+                            <li class="mb-2"><strong>Module 1: Esoteric Origins</strong><br>Explores the mystical intersections of Tarot, the Kabbalistic Tree of Life, and Astrology, revealing hidden planetary and elemental correspondences.</li>
+                            <li class="mb-0-75"><strong>Module 2: Major Arcana</strong><br>A deep dive into archetypal psychology and the 22 life-path lessons, analysing the soul's evolution through the Fool's Journey.</li>
+                        </ul>
+                    </div>
+                    <div class="card card-auto p-4" data-animate>
+                        <h3 class="color-primary mb-1 text-center" style="font-size: 1.4rem;">Arcana & Spreads (Part 2)</h3>
+                        <ul class="list-reset" style="text-align: left;">
+                            <li class="mb-2"><strong>Module 3: Minor Arcana</strong><br>Analyses the numerical progression (1–10) and the four court cards, focusing on Elemental Dignities to interpret energy shifts.</li>
+                            <li class="mb-0-75"><strong>Module 4: Advanced Spreads</strong><br>Mastering complex layouts like the Celtic Cross, Zodiac Spread, and Wheel of the Year for comprehensive, long-term life forecasting.</li>
+                        </ul>
+                    </div>
+                    <div class="card card-auto p-4" data-animate>
+                        <h3 class="color-primary mb-1 text-center" style="font-size: 1.4rem;">Intuition & Comparative (Part 3)</h3>
+                        <ul class="list-reset" style="text-align: left;">
+                            <li class="mb-2"><strong>Module 5: Intuition &amp; Mediumship</strong><br>Developing psychic sensitivity to connect with the "Higher Self", using meditation and channelling to receive messages beyond card symbols.</li>
+                            <li class="mb-0-75"><strong>Module 6: Comparative Tarot</strong><br>Studies different decks like Rider-Waite, Thoth, and Marseille, understanding how artistic variations alter the symbolic and energetic interpretations.</li>
+                        </ul>
+                    </div>
+                    <div class="card card-auto p-4" data-animate>
+                        <h3 class="color-primary mb-1 text-center" style="font-size: 1.4rem;">Shadow Work & Ethics (Part 4)</h3>
+                        <ul class="list-reset" style="text-align: left;">
+                            <li class="mb-2"><strong>Module 7: Reversals &amp; Shadow Work</strong><br>Interpreting reversed cards to identify internal blockages, repressed emotions, and the "shadow" aspects of a querent's current situation.</li>
+                            <li class="mb-0-75"><strong>Module 8: Professional Reading</strong><br>Focuses on the ethics of professional practice, covering psychological boundaries, client management, and handling sensitive, high-stakes topics safely.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="landscape-pricing-card" data-animate>
+                   <div class="pricing-info-left">
+                        <span class="save-badge"><i class="fas fa-tag" style="margin-right: 4px;"></i> Save 25% Today</span>
+                        <h3 class="color-primary" style="font-size: 1.8rem; margin: 5px 0 10px 0;">Masters in Tarot Reading</h3>
+                        <p class="mb-0" style="font-size: 1rem; color: #555; display: flex; align-items: center; gap: 8px;">
+                            <i class="far fa-clock" style="color: #c8960c; font-size: 1.1rem;"></i> <strong>Duration:</strong> 16 WEEKS ultimate mastery
+                        </p>
+                    </div>
+                    <div class="pricing-block">
+                        <div style="text-decoration: line-through; color: #999; font-size: 1.1rem; margin-bottom: 2px;">Regular Price: ₹24,999</div>
+                        <strong style="color: #c8960c; font-size: 2.5rem; line-height: 1; font-weight: 800;">₹18,699</strong>
+                    </div>
+                    <div class="enroll-block">
+                        <a href="register.html" class="btn btn-primary" style="padding: 14px 35px; border-radius: 50px; font-weight: 700; letter-spacing: 0.5px; font-size: 1.05rem; box-shadow: 0 4px 15px rgba(200, 150, 12, 0.3);">Enroll Now</a>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </section>
 
-    <section>
-        <div class="container">
-            <h2 class="card-section-title">Why Study Tarot?</h2>
-            <div class="grid grid-3 grid-gap-2">
-                <div class="card text-center card-auto p-3" data-animate>
-                    <div class="font-3xl mb-1">💼</div>
-                    <h4>Career Advancement</h4>
-                    <p>Become a professional tarot reader with a growing client base.</p>
-                </div>
-                <div class="card text-center card-auto p-3" data-animate>
-                    <div class="font-3xl mb-1">🧘</div>
-                    <h4>Personal Growth</h4>
-                    <p>Develop deep intuition and spiritual connection through cards.</p>
-                </div>
-                <div class="card text-center card-auto p-3" data-animate>
-                    <div class="font-3xl mb-1">✨</div>
-                    <h4>Help Others</h4>
-                    <p>Guide people through life challenges with divine wisdom.</p>
-                </div>
+    <!-- COMPARISON TABLE SECTION -->
+    <section class="comparison-section">
+        <div class="container text-center">
+            <h2 class="card-section-title" style="margin-bottom: 10px;">Program Comparison</h2>
+            <p class="color-light-text mb-2">Find the right Tarot Reading certification path for your goals.</p>
+            
+            <div class="comparison-table-wrapper">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th style="background: #fff; border-right: 2px solid #f0f0f0;"></th>
+                            <th class="tier-diploma">
+                                <span class="tier-title">Diploma</span>
+                                <span class="tier-price">₹4,199</span>
+                            </th>
+                            <th class="tier-bachelors">
+                                <span class="tier-title">Bachelors</span>
+                                <span class="tier-price">₹8,999</span>
+                            </th>
+                            <th class="tier-masters">
+                                <span class="tier-title">Masters</span>
+                                <span class="tier-price">₹18,699</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>The Fool's Journey / Esoteric Origins</td>
+                            <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                            <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                            <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Major Arcana</td>
+                            <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                            <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                            <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Minor Arcana</td>
+                            <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                            <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                            <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Spread Mastery / Advanced Spreads</td>
+                            <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                            <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                            <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Intuition &amp; Mediumship</td>
+                            <td class="col-diploma"><i class="fas fa-times c-icon cross"></i></td>
+                            <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                            <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Professional Reading &amp; Ethics</td>
+                            <td class="col-diploma"><i class="fas fa-times c-icon cross"></i></td>
+                            <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                            <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Comparative Tarot (Rider-Waite, Thoth, Marseille)</td>
+                            <td class="col-diploma"><i class="fas fa-times c-icon cross"></i></td>
+                            <td class="col-bachelors"><i class="fas fa-times c-icon cross"></i></td>
+                            <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Reversals &amp; Shadow Work</td>
+                            <td class="col-diploma"><i class="fas fa-times c-icon cross"></i></td>
+                            <td class="col-bachelors"><i class="fas fa-times c-icon cross"></i></td>
+                            <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Digital Badge / E-Certificate</strong></td>
+                            <td class="col-diploma"><i class="fas fa-check c-icon check"></i></td>
+                            <td class="col-bachelors"><i class="fas fa-check c-icon check"></i></td>
+                            <td class="col-masters"><i class="fas fa-check c-icon check"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
@@ -239,7 +637,7 @@
     <section class="light-bg">
         <div class="container text-center">
             <h2 class="mb-1-5">Ready to Master Tarot Reading?</h2>
-            <p class="mb-2">Join our Tarot program and unlock the mysteries of the cards.</p>
+            <p class="mb-2">Join our Tarot program and unlock the mysteries of the 78 sacred cards.</p>
             <a href="register.html" class="btn btn-primary btn-lg">Start Learning Today</a>
         </div>
     </section>
@@ -258,7 +656,7 @@
                 <a href="courses.html" class="marquee-btn">View Courses</a>
             </div>
             <div class="marquee-item">
-                <span class="marquee-icon">⭐</span> Join Parashari Institute Today — Scholarship Available for Top
+                <span class="marquee-icon"><i class="fa-solid fa-star"></i></span> Join Parashari Institute Today — Scholarship Available for Top
                 Performers!
                 <a href="register.html" class="marquee-btn">Apply Now</a>
             </div>
@@ -274,7 +672,7 @@
                 <a href="courses.html" class="marquee-btn">View Courses</a>
             </div>
             <div class="marquee-item">
-                <span class="marquee-icon">⭐</span> Join Parashari Institute Today — Scholarship Available for Top
+                <span class="marquee-icon"><i class="fa-solid fa-star"></i></span> Join Parashari Institute Today — Scholarship Available for Top
                 Performers!
                 <a href="register.html" class="marquee-btn">Apply Now</a>
             </div>
@@ -329,7 +727,7 @@
                     <li><a href="courses.html">Diploma</a></li>
                     <li><a href="courses.html">Bachelor</a></li>
                     <li><a href="courses.html">Master</a></li>
-                    <li><a href="courses.html">Grand Master</a></li>
+                    <!-- <li><a href="courses.html">Grand Master</a></li> -->
                     <li><a href="6-stairs.html">6 Stairs</a></li>
                 </ul>
             </div>
@@ -344,7 +742,7 @@
                 <div class="contact-info">
                     <div class="contact-icon">📞</div>
                     <div class="contact-text">
-                        <p class="p-reset"><a href="tel:+919005703159">+91 9005703159</a></p>
+                        <p class="p-reset"><a href="tel:+919621051159">+91 962 105 1159</a></p>
                     </div>
                 </div>
             </div>
@@ -408,6 +806,35 @@
     </script>
 
 
+
+    <!-- PROGRAM TABS JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.filter-tab[data-program]');
+            const contents = document.querySelectorAll('.program-tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+
+                    // Hide all contents
+                    contents.forEach(content => {
+                        content.style.display = 'none';
+                    });
+
+                    // Show corresponding content
+                    const targetId = tab.getAttribute('data-program');
+                    const targetContent = document.getElementById(targetId);
+                    if (targetContent) {
+                        targetContent.style.display = 'block';
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 
