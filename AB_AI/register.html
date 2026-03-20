@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -376,8 +376,140 @@
     });
   </script>
 
-  <!-- Authentication Logic -->
-  <script src="assets/js/auth.js"></script>
+  <!-- BEAUTIFUL MOBILE POPUP HTML -->
+  <div class="mobile-popup-overlay" id="mobilePopupOverlay">
+    <div class="mobile-device">
+      <div class="mobile-notch"></div>
+      <div class="mobile-content">
+        <div class="mobile-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+        <h3>Coming Soon!</h3>
+        <p>This feature will be live soon.</p>
+        <p>Still if you wish to explore the dashboard,</p>
+        <p><strong>Feel free to contact us!</strong></p>
+        <p>We would love to assist you.</p>
+        <a href="contact.html" class="btn btn-primary" style="margin-top: 20px;"><i class="fa-solid fa-phone"></i> Contact Support</a>
+        <button type="button" class="btn btn-outline" style="margin-top: 10px;" onclick="closeMobilePopup()">Dismiss</button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .mobile-popup-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    .mobile-popup-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .mobile-device {
+      width: 320px;
+      height: 520px;
+      background: #fff;
+      border-radius: 35px;
+      border: 10px solid #222;
+      position: relative;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5), inset 0 0 10px rgba(0,0,0,0.1);
+      transform: translateY(50px);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .mobile-popup-overlay.active .mobile-device {
+      transform: translateY(0);
+    }
+    .mobile-notch {
+      width: 120px;
+      height: 25px;
+      background: #222;
+      position: absolute;
+      top: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      z-index: 10;
+    }
+    .mobile-content {
+      padding: 50px 20px 30px;
+      text-align: center;
+      background: linear-gradient(135deg, #FFFDF8 0%, #FFE8D1 100%);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .mobile-icon {
+      font-size: 50px;
+      color: #8B0000;
+      margin-bottom: 20px;
+      animation: float 3s ease-in-out infinite;
+    }
+    .mobile-content h3 {
+      color: #8B0000;
+      font-size: 24px;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+    .mobile-content p {
+      color: #444;
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 5px;
+    }
+    .mobile-content .btn {
+      width: 100%;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+  </style>
+
+  <script>
+    function openMobilePopup(e) {
+      if(e) e.preventDefault();
+      document.getElementById('mobilePopupOverlay').classList.add('active');
+    }
+    function closeMobilePopup() {
+      document.getElementById('mobilePopupOverlay').classList.remove('active');
+    }
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      // Intercept the OTP button and input field
+      const otpInput = document.getElementById('otpInput');
+      const sendOtpBtn = document.getElementById('sendOtpBtn');
+      const registerForm = document.getElementById('registerForm');
+      
+      if (sendOtpBtn) {
+        sendOtpBtn.addEventListener('click', openMobilePopup);
+      }
+      
+      if (otpInput) {
+        otpInput.disabled = false; // Allow them to click it
+        otpInput.readOnly = true;  // But not type
+        otpInput.style.cursor = 'pointer';
+        otpInput.removeAttribute('required');
+        otpInput.addEventListener('click', openMobilePopup);
+        otpInput.addEventListener('focus', openMobilePopup);
+      }
+      
+      if(registerForm) {
+        registerForm.addEventListener('submit', openMobilePopup);
+      }
+    });
+  </script>
 
   <script src="assets/js/navbar.js"></script>
   <script src="assets/js/main.js"></script>
