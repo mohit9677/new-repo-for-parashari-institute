@@ -335,9 +335,9 @@ Add these when deploying:
 ## 📞 Contact & Support
 
 **Institute Details**
-- Phone: +91 9999-999-999
-- Email: info@parashari.com
-- Address: 123 Vedic Street, Delhi 110001
+- Phone: +91 962 105 1159
+- Email: info@astrobharatai.com
+- Address: 1/344, near Kathauta Chauraha Road, Vinamra Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010
 
 **Developer Support**
 - See [contact.html](contact.html) page
