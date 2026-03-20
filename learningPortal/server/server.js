@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import compression from 'compression';
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ process.on('uncaughtException', (err) => {
 const app = express();
 
 // Middleware
+app.use(compression());
 // Middleware
 app.use(cors({
     origin: [

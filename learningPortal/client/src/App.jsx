@@ -1,17 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import Categories from './pages/Categories';
-import CourseModules from './pages/CourseModules';
-import CourseDetail from './pages/CourseDetail';
-import CoursePlayer from './pages/CoursePlayer';
-import Courses from './pages/Courses';
-import Pricing from './pages/Pricing';
-import AboutUs from './pages/AboutUs';
 import MainLayout from './layout/MainLayout';
-import Profile from './pages/Profile';
+import './App.css';
+
+// Lazy loaded pages
+const Login = lazy(() => import('./pages/Login'));
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Categories = lazy(() => import('./pages/Categories'));
+const CourseModules = lazy(() => import('./pages/CourseModules'));
+const CourseDetail = lazy(() => import('./pages/CourseDetail'));
+const CoursePlayer = lazy(() => import('./pages/CoursePlayer'));
+const Courses = lazy(() => import('./pages/Courses'));
+const Pricing = lazy(() => import('./pages/Pricing'));
+const AboutUs = lazy(() => import('./pages/AboutUs'));
+const Profile = lazy(() => import('./pages/Profile'));
 import './App.css';
 
 // Strict Protected Route - requires session flag from auto-login
@@ -84,69 +87,71 @@ function App() {
     <Router basename="/learning-portal">
       <AuthProvider>
         <ErrorBoundary>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={
-              <StrictProtectedRoute>
-                <Dashboard />
-              </StrictProtectedRoute>
-            } />
-            <Route path="/landing" element={
-              <StrictProtectedRoute>
-                <Navigate to="/dashboard" replace />
-              </StrictProtectedRoute>
-            } />
-            <Route path="/categories" element={
-              <StrictProtectedRoute>
-                <Categories />
-              </StrictProtectedRoute>
-            } />
-            <Route path="/courses" element={
-              <StrictProtectedRoute>
-                <Courses />
-              </StrictProtectedRoute>
-            } />
-            <Route path="/course/:id" element={
-              <StrictProtectedRoute>
-                <CourseModules />
-              </StrictProtectedRoute>
-            } />
-            <Route path="/course-v1/:id" element={
-              <StrictProtectedRoute>
-                <CourseDetail />
-              </StrictProtectedRoute>
-            } />
-            <Route path="/course-player/:courseId" element={
-              <StrictProtectedRoute>
-                <CoursePlayer />
-              </StrictProtectedRoute>
-            } />
-            <Route path="/pricing" element={
-              <StrictProtectedRoute>
-                <Pricing />
-              </StrictProtectedRoute>
-            } />
-            <Route path="/about-us" element={
-              <StrictProtectedRoute>
-                <AboutUs />
-              </StrictProtectedRoute>
-            } />
-            <Route path="/profile" element={
-              <StrictProtectedRoute>
-                <Profile />
-              </StrictProtectedRoute>
-            } />
-            <Route path="/" element={
-              <StrictProtectedRoute>
-                <Navigate to="/dashboard" replace />
-              </StrictProtectedRoute>
-            } />
-            <Route path="*" element={
-              <StrictProtectedRoute>
-                <Navigate to="/landing" replace />
-              </StrictProtectedRoute>
-            } />
-          </Routes>
+          <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '1.2rem', color: '#D4AF37' }}>Loading Parashari Learning Portal...</div>}>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={
+                <StrictProtectedRoute>
+                  <Dashboard />
+                </StrictProtectedRoute>
+              } />
+              <Route path="/landing" element={
+                <StrictProtectedRoute>
+                  <Navigate to="/dashboard" replace />
+                </StrictProtectedRoute>
+              } />
+              <Route path="/categories" element={
+                <StrictProtectedRoute>
+                  <Categories />
+                </StrictProtectedRoute>
+              } />
+              <Route path="/courses" element={
+                <StrictProtectedRoute>
+                  <Courses />
+                </StrictProtectedRoute>
+              } />
+              <Route path="/course/:id" element={
+                <StrictProtectedRoute>
+                  <CourseModules />
+                </StrictProtectedRoute>
+              } />
+              <Route path="/course-v1/:id" element={
+                <StrictProtectedRoute>
+                  <CourseDetail />
+                </StrictProtectedRoute>
+              } />
+              <Route path="/course-player/:courseId" element={
+                <StrictProtectedRoute>
+                  <CoursePlayer />
+                </StrictProtectedRoute>
+              } />
+              <Route path="/pricing" element={
+                <StrictProtectedRoute>
+                  <Pricing />
+                </StrictProtectedRoute>
+              } />
+              <Route path="/about-us" element={
+                <StrictProtectedRoute>
+                  <AboutUs />
+                </StrictProtectedRoute>
+              } />
+              <Route path="/profile" element={
+                <StrictProtectedRoute>
+                  <Profile />
+                </StrictProtectedRoute>
+              } />
+              <Route path="/" element={
+                <StrictProtectedRoute>
+                  <Navigate to="/dashboard" replace />
+                </StrictProtectedRoute>
+              } />
+              <Route path="*" element={
+                <StrictProtectedRoute>
+                  <Navigate to="/landing" replace />
+                </StrictProtectedRoute>
+              } />
+            </Routes>
+          </Suspense>
         </ErrorBoundary>
       </AuthProvider>
     </Router>

@@ -50,5 +50,6 @@ const progressV2Schema = new mongoose.Schema({
 
 // Compound index to quickly find a user's progress for a specific course
 progressV2Schema.index({ userId: 1, courseId: 1 }, { unique: true });
+progressV2Schema.index({ userId: 1, moduleId: 1 });
 
 export default mongoose.model('ProgressV2', progressV2Schema);

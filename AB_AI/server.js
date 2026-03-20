@@ -5,6 +5,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 const { createProxyMiddleware } = require('http-proxy-middleware');
+const compression = require('compression');
 
 const authRoutes = require('./routes/auth'); // Placeholder
 const videoRoutes = require('./routes/video');
@@ -12,6 +13,7 @@ const videoRoutes = require('./routes/video');
 const app = express();
 
 // Middleware
+app.use(compression());
 app.use(cors({
     origin: [
         'http://localhost:3000',

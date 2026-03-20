@@ -12,7 +12,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try {
         console.log('📚 GET /api/courses - Fetching all courses...');
-        const courses = await Course.find({ active: true }).select('-videoKey');
+        const courses = await Course.find({ active: true }).select('-videoKey').lean();
         console.log(`✅ Found ${courses.length} courses`);
         res.json({ courses });
     } catch (error) {
@@ -84,7 +84,7 @@ router.get('/:courseId', authMiddleware, async (req, res) => {
         }
 
         // 1. Fetch Course
-        const course = await Course.findById(courseId);
+        const course = await Course.findById(courseId).lean();
         if (!course) {
             console.warn(`Course not found: ${courseId}`);
             return res.status(404).json({ error: 'Course not found' });
@@ -106,17 +106,17 @@ router.get('/:courseId', authMiddleware, async (req, res) => {
 
         // 4. Content Retrieval & Hierarchy Assembly
         // Fetch Modules
-        const modules = await Module.find({ courseId: course._id, active: true }).sort('orderIndex');
+        const modules = await Module.find({ courseId: course._id, active: true }).sort('orderIndex').lean();
 
         // Fetch Videos for those modules
         const moduleIds = modules.map(m => m._id);
-        const videos = await Video.find({ moduleId: { $in: moduleIds }, active: true }).sort('orderIndex');
+        const videos = await Video.find({ moduleId: { $in: moduleIds }, active: true }).sort('orderIndex').lean();
 
         // Nest videos under modules
         const courseContent = modules.map(module => {
             const moduleVideos = videos.filter(v => v.moduleId.toString() === module._id.toString());
             return {
-                ...module.toObject(),
+                ...module,
                 videos: moduleVideos
             };
         });
@@ -125,7 +125,7 @@ router.get('/:courseId', authMiddleware, async (req, res) => {
 
         res.json({
             course: {
-                ...course.toObject(),
+                ...course,
                 modules: courseContent
             }
         });

@@ -126,7 +126,7 @@ export default {
             // 8. Headers
             const headers = new Headers();
             object.writeHttpMetadata(headers);
-            headers.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+            headers.set("Cache-Control", "public, max-age=3600, s-maxage=2592000");
             headers.set("Pragma", "no-cache");
             headers.set("Expires", "0");
             Object.keys(corsHeaders).forEach(k => headers.set(k, corsHeaders[k]));
