@@ -36,6 +36,8 @@ services:
         value: 5002
       - key: MONGODB_URI
         sync: false
+      - key: USER_DB_URI
+        sync: false
       - key: JWT_SECRET
         sync: false
       # Video Streaming & CORS Configurations
