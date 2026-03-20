@@ -43,7 +43,8 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 });
 
-const userDbUri = process.env.USER_DB_URI;
+// Fallback to MONGODB_URI if USER_DB_URI is not set (useful for Render deployments where only base URI is set)
+const userDbUri = process.env.USER_DB_URI || (process.env.MONGODB_URI ? process.env.MONGODB_URI.replace('learning_portal_parashari', 'webapp_parashari') : '');
 
 console.log('Connecting to User DB...');
 console.log('User DB URI:', userDbUri); // DEBUG
