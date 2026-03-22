@@ -560,7 +560,7 @@
     justify-content: center;
     position: relative;
     overflow: hidden;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('../images/gallery-hero-image.png') center/cover no-repeat fixed;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url('../images-optimized/gallery-hero-image.webp') center/cover no-repeat fixed;
     margin-bottom: 4rem;
     z-index: 1;
 }

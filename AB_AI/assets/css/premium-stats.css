@@ -18,7 +18,7 @@
     width: 200%;
     height: 200%;
     transform: translate(-50%, -50%);
-    background-image: url('../images/gold_zodiac_wheel.png');
+    background-image: url('../images-optimized/gold_zodiac_wheel.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

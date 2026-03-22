@@ -1936,7 +1936,7 @@ textarea.form-control {
 
 /* ============ HERO WITH BACKGROUND IMAGE ============ */
 .hero-with-bg {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/zodiac-wheel.jpg') no-repeat center/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images-optimized/zodiac-wheel.webp') no-repeat center/cover;
   min-height: 700px;
   display: flex;
   align-items: center;
@@ -1994,7 +1994,7 @@ textarea.form-control {
   position: relative;
   min-height: 600px;
   /* Ensure height for background */
-  background-image: url('../images/institute-building-modern.jpg');
+  background-image: url('../images-optimized/institute-building-modern.webp');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -2601,7 +2601,7 @@ textarea.form-control {
   transform: translateY(-10px);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
   background: linear-gradient(rgba(18, 5, 20, 0.7), rgba(18, 5, 20, 0.7)),
-    url('../images/about-hero-bg.jpg') no-repeat center center/cover;
+    url('../images-optimized/about-hero-bg.webp') no-repeat center center/cover;
   height: 60vh;
   overflow: hidden;
   flex-shrink: 0;
