@@ -273,7 +273,7 @@ const coursesData = [
         title: "Reiki Healing",
         isCategory: "Bachelor",
         icon: '<i class="fa-solid fa-hands-holding-circle"></i>',
-        image: "assets/images-optimized/Healing.webp",
+        image: "assets/images-optimized/healing.webp",
         description: "Professional level Reiki certification for advanced practitioners.",
         price: "₹8,999",
         badges: ["✓ Certification", "Pro Level"],
