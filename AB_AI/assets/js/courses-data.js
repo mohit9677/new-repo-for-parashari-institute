@@ -546,7 +546,7 @@ const coursesData = [
     },
     {
         id: 48,
-        title: "BNN Intensive (14-Day Mastery)",
+        title: "The BNN Intensive",
         isCategory: "Crash Course",
         icon: '<i class="fa-solid fa-magnifying-glass"></i>',
         image: "assets/images-optimized/The BNN Intensive A 14-Day Mastery of Bhrigu Nandi Nadi.webp",
