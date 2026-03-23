@@ -836,7 +836,7 @@ header {
 
   .mobile-bottom-nav-item:hover,
   .mobile-bottom-nav-item.active {
-    color: var(--primary-color, #591C21);
+    color: var(--secondary-color, #D4AF37);
   }
 
   .mobile-bottom-nav-item.active i {
@@ -900,8 +900,9 @@ header {
 
   .mobile-compact-links a:hover,
   .mobile-compact-links a.active {
-    color: var(--primary-color, #591C21);
-    background: rgba(89, 28, 33, 0.06);
+    color: var(--secondary-color, #D4AF37) !important;
+    background: rgba(212, 175, 55, 0.1);
+    font-weight: 700;
   }
 
   .mobile-compact-links a::after {

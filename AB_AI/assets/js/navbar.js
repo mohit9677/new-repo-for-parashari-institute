@@ -37,11 +37,18 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+  // Helper to check if a link is active based on current page
+  function isPageActive(href, currentPage) {
+    if (!href || href === 'javascript:void(0)') return false;
+    const cleanHref = href.split('/').pop().replace('.html', '').toLowerCase();
+    const cleanCurrent = currentPage.replace('.html', '').toLowerCase();
+    return cleanHref === cleanCurrent || (cleanCurrent === '' && cleanHref === 'index');
+  }
+
   // Set active nav link based on current page
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   navLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+    if (isPageActive(link.getAttribute('href'), currentPage)) {
       link.classList.add('active');
     }
   });
@@ -600,7 +607,7 @@ function initMobileBottomNav() {
     link.className = 'mobile-bottom-nav-item';
 
     // Mark active based on current page
-    if (currentPage === item.href || (currentPage === '' && item.href === 'index.html')) {
+    if (isPageActive(item.href, currentPage)) {
       link.classList.add('active');
     }
 
@@ -645,7 +652,7 @@ function initMobileBottomNav() {
       }
 
       // Mark active
-      if (currentPage === item.href) {
+      if (isPageActive(item.href, currentPage)) {
         link.classList.add('active');
       }
 
