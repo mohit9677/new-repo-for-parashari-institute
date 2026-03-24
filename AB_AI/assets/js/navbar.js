@@ -2,6 +2,14 @@
    NAVBAR JAVASCRIPT
    ============================================ */
 
+// Helper to check if a link is active based on current page
+function isPageActive(href, currentPage) {
+  if (!href || href === 'javascript:void(0)') return false;
+  const cleanHref = href.split('/').pop().replace('.html', '').toLowerCase();
+  const cleanCurrent = currentPage.replace('.html', '').toLowerCase();
+  return cleanHref === cleanCurrent || (cleanCurrent === '' && cleanHref === 'index');
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   const hamburger = document.querySelector('.hamburger');
   const mobileMenu = document.querySelector('.mobile-menu');
@@ -37,11 +45,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+
+
   // Set active nav link based on current page
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   navLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (href === currentPage || (currentPage === '' && href === 'index.html')) {
+    if (isPageActive(link.getAttribute('href'), currentPage)) {
       link.classList.add('active');
     }
   });
@@ -69,7 +78,7 @@ const crashCourseList = [
   { name: 'Financial Astrology (Artha)', meta: 'Financial', url: 'courses.html?quickview=astrology-financial', icon: 'fas fa-om' },
   { name: 'Lal Kitab Basics', meta: 'Lal', url: 'courses.html?quickview=lal-kitab-basics', icon: 'fas fa-book' },
   { name: 'Medical Astrology', meta: 'Medical', url: 'courses.html?quickview=medical-astrology', icon: 'fas fa-heartbeat' },
-  { name: 'The BNN Intensive: A 14-Day Mastery', meta: 'The', url: 'courses.html?quickview=bnn-intensive', icon: 'fas fa-code-branch' },
+  { name: 'The BNN Intensive', meta: 'The', url: 'courses.html?quickview=bnn-intensive', icon: 'fas fa-code-branch' },
   { name: 'Modern Career Astrology', meta: 'Modern', url: 'courses.html?quickview=astrology-career', icon: 'fas fa-om' },
   { name: 'Business Numerology', meta: 'Business', url: 'courses.html?quickview=numerology-business', icon: 'fas fa-sort-numeric-up' },
   { name: 'Vedic Numerology', meta: 'Vedic', url: 'courses.html?quickview=numerology-vedic', icon: 'fas fa-sort-numeric-up' },
@@ -600,7 +609,7 @@ function initMobileBottomNav() {
     link.className = 'mobile-bottom-nav-item';
 
     // Mark active based on current page
-    if (currentPage === item.href || (currentPage === '' && item.href === 'index.html')) {
+    if (isPageActive(item.href, currentPage)) {
       link.classList.add('active');
     }
 
@@ -645,7 +654,7 @@ function initMobileBottomNav() {
       }
 
       // Mark active
-      if (currentPage === item.href) {
+      if (isPageActive(item.href, currentPage)) {
         link.classList.add('active');
       }
 

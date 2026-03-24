@@ -21,7 +21,7 @@
     left: -15%;
     width: 130%;
     height: 130%;
-    background-image: url('../images/vedic_cinematic_bg.png');
+    background-image: url('../images-optimized/vedic_cinematic_bg.webp');
     background-size: cover;
     background-position: center;
     opacity: 0.85;
@@ -59,7 +59,7 @@
 .zodiac-wheel {
     width: 100%;
     height: 100%;
-    background-image: url('../images/gold_zodiac_wheel.png');
+    background-image: url('../images-optimized/gold_zodiac_wheel.webp');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
